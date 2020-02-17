@@ -23,7 +23,6 @@ function App() {
   useEffect(fetchIndirizzi, []);
   return (
     <React.Fragment>
-      <BrowserRouter basename="/node" />
       <Router>
         <Switch>
           <Route path="/mostraMateria/:id">
