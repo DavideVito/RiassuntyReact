@@ -22,22 +22,25 @@ function App() {
   };
   useEffect(fetchIndirizzi, []);
   return (
-    <Router>
-      <Switch>
-        <Route path="/mostraMateria/:id">
-          <MostraMaterie />
-        </Route>
-        <Route path="/">
-          <header>
-            <FullNavBar indirizzi={indirzzi} />{" "}
-          </header>{" "}
-          <Link to="/Login">
-            <Bottone TestoBottone="Per caricare un riassunto" />
-          </Link>{" "}
-          <Indirizzi key="Indirizzi" data={indirzzi} />{" "}
-        </Route>
-      </Switch>
-    </Router>
+    <React.Fragment>
+      <BrowserRouter basename="/node" />
+      <Router>
+        <Switch>
+          <Route path="/mostraMateria/:id">
+            <MostraMaterie />
+          </Route>
+          <Route path="/">
+            <header>
+              <FullNavBar indirizzi={indirzzi} />{" "}
+            </header>{" "}
+            <Link to="/Login">
+              <Bottone TestoBottone="Per caricare un riassunto" />
+            </Link>{" "}
+            <Indirizzi key="Indirizzi" data={indirzzi} />{" "}
+          </Route>
+        </Switch>
+      </Router>
+    </React.Fragment>
   );
 }
 
