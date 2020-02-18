@@ -11,16 +11,18 @@ function Titolo(props) {
     marginBottom: "80px"
   };
 
+  let oggetto = props.dati;
+  console.log("Titolo", oggetto);
   return (
     <React.Fragment>
       <div id="heading" className="row" style={stile}>
         <div className="col-md" style={stileTitolo}>
           {" "}
-          {props.Tilolo}{" "}
+          {props.dati.nome}{" "}
         </div>{" "}
       </div>{" "}
       <div className="row justify-content-center">
-        <Bottoni indirizzo={props.Tilolo} />{" "}
+        <Bottoni dati={props.dati.dati} />{" "}
       </div>{" "}
     </React.Fragment>
   );

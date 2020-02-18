@@ -5,17 +5,19 @@ import Indirizzo from "./Indirizzo";
 import "../App.css";
 
 function Indirizzi(props) {
-  return props.data.map((indirizzo, indice) => {
-    return (
-      <div>
-        <Indirizzo
-          key={indirizzo.Indirizzo}
-          Titolo={indirizzo.Indirizzo}
-          id={indice}
-        />
-      </div>
-    );
-  });
+  console.log("Indirizzi", props.dati);
+  let oggetto = props.dati;
+  return (
+    <React.Fragment>
+      /
+      <Indirizzo
+        key={oggetto.nome}
+        nome={oggetto.nome}
+        id={oggetto.id}
+        dati={props.dati}
+      />
+    </React.Fragment>
+  );
 }
 
 export default Indirizzi;

@@ -7,7 +7,7 @@ import "../App.css";
 function Sezione(props) {
   return (
     <React.Fragment>
-      <Contenitore Tilolo={props.indirizzo} />
+      <Contenitore dati={props.dati} />{" "}
     </React.Fragment>
   );
 }

@@ -13,13 +13,15 @@ function Bottone(props) {
     }
     return;
   };
+
   return (
     <Link to={`/mostraMateria/${props.idMateria}`}>
-      <div class="row justify-content-center" onClick={mostraMateria}>
-        <div class="button bottonaccio" id="button-3">
-          <div id="circle"> </div> <a> {props.TestoBottone} </a>{" "}
+      <div className="row justify-content-center">
+        <div className="button bottonaccio" id="button-3">
+          <div id="circle"> </div> <div> {props.TestoBottone} </div>{" "}
+          <div> </div>{" "}
         </div>{" "}
-      </div>
+      </div>{" "}
     </Link>
   );
 }

@@ -5,31 +5,16 @@ import "../App.css";
 import Bottone from "./../Util/Bottone";
 
 function Bottoni(props) {
-  const [materie, cambiaMaterie] = useState([]);
+  let oggetto = props.dati;
+  console.log("Bottoni", oggetto);
 
-  const fetchMaterie = async () => {
-    let indirizzo = props.indirizzo;
-    console.log(indirizzo);
-    let materie = await fetch(
-      `https://vps.lellovitiello.tk/Riassunty/API/materie.php?indirizzo=${indirizzo}`
-    );
-    materie = await materie.json();
-
-    cambiaMaterie(materie);
-    console.log(materie);
-  };
-
-  useEffect(fetchMaterie, []);
-
-  return materie.map((materia, indice) => {
+  return oggetto.map((contenutoBottone, indice) => {
     return (
-      <div>
-        <Bottone
-          TestoBottone={materia.Materia}
-          idMateria={materia.IDMateria}
-          key={materia.IDMateria}
-        />
-      </div>
+      <Bottone
+        TestoBottone={contenutoBottone.nome}
+        idMateria={contenutoBottone.id}
+        key={contenutoBottone.id}
+      />
     );
   });
 }
