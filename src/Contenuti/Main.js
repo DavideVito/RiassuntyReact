@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Indirizzi from "./Indirizzi";
 import Bottone from "../Util/Bottone";
-import MostraMaterie from "./MostraMaterie";
+import histroy from "../Util/history";
 import "../App.css";
 import FullNavBar from "../NavBar/FullNavBar";
 
-function Main() {
+function Main(props) {
   const [indirizzi, cambiaIndirizzi] = useState([]);
 
   const fetchIndirizzi = () => {
@@ -46,18 +46,23 @@ function Main() {
             Object.getOwnPropertyDescriptor(ind[i], "Indirizzo")
           );
           delete ind[i]["Indirizzo"];
-          Object.assign(ind[i], { dati: materie });
-          Object.assign(ind[i], { id: i });
+          Object.assign(ind[i], {
+            dati: materie
+          });
+          Object.assign(ind[i], {
+            id: i
+          });
         }
 
         await prendiMaterie();
       }
       console.log("Main.js", ind);
       cambiaIndirizzi(ind);
+      console.log("props: ", props.location.pathname);
     }
     prendiIndirizzi();
   };
-  useEffect(fetchIndirizzi, []);
+  useEffect(fetchIndirizzi, [props.location.pathname]);
 
   return (
     <React.Fragment>
@@ -68,7 +73,7 @@ function Main() {
       {indirizzi.map(indirizzo => {
         console.log(indirizzo);
         return <Indirizzi dati={indirizzo} />;
-      })}
+      })}{" "}
     </React.Fragment>
   );
 }

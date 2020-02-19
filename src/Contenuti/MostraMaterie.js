@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import history from "../Util/history";
+import Brand from "../NavBar/Foto/Brand";
+import MenuIcon from "../NavBar/Elementi/MenuIcon";
 import { Link } from "react-router-dom";
-import FullNavBar from "../NavBar/FullNavBar";
+import NavBarItem from "../NavBar/Elementi/NavBarItem";
 import Indirizzi from "./Indirizzi";
 import Bottone from "../Util/Bottone";
 
@@ -43,35 +45,54 @@ function MostraMaterie(props) {
 
           let annoOggetto = {
             nome: anno + "",
-            anteprime: anteprimeFetch
+            dati: anteprimeFetch,
+            id: anno
           };
           ann.push(annoOggetto);
         }
 
         await prendiAnteprime();
       }
-      debugger;
       cambiaAnni(ann);
     }
     console.log("Vengo eseguito");
     prendiAnni();
   };
 
-  useEffect(fetchAnni, [history.location]);
-  console.log(history.location);
+  useEffect(fetchAnni, [props.location.pathname]);
+  console.log(props.location.pathname);
 
   return (
-    <React.Fragment>
-      <FullNavBar indirizzi={anni} />{" "}
+    <div>
+      <header>
+        <nav>
+          <Brand />
+          <div id="menu">
+            <div id="menu-toggle">
+              <MenuIcon />
+            </div>{" "}
+            <ul>
+              {anni.map((anno, indice) => {
+                return (
+                  <NavBarItem
+                    key={indice}
+                    nome={anno.nome}
+                    indice={indice + 1}
+                  />
+                );
+              })}
+            </ul>{" "}
+          </div>{" "}
+        </nav>{" "}
+      </header>
       <Link to="/Login">
         <Bottone TestoBottone="Per caricare un riassunto" />
       </Link>{" "}
-      <h1> CIao CIAO CIAO CIAOC </h1>{" "}
-      {/*anni.map(anno => {
-              console.log("Ciao");
-              return <Indirizzi dati={anno} />;
-            })*/}{" "}
-    </React.Fragment>
+      {anni.map(anno => {
+        console.log("Ciao");
+        return <Indirizzi dati={anno} />;
+      })}{" "}
+    </div>
   );
 }
 
