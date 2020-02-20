@@ -4,9 +4,10 @@ import Sezione from "./Sezione";
 import "../App.css";
 
 function Indirizzo(props) {
+  console.log("Props Indirizzo", props);
   return (
     <section id={`section${props.id}`} className={`sezione${props.id}`}>
-      <Sezione dati={props.dati} />{" "}
+      <Sezione dati={props.dati} link={props.link} />{" "}
     </section>
   );
 }

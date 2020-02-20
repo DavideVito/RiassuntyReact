@@ -3,6 +3,7 @@ import Bottoni from "./Bottoni";
 import "../App.css";
 
 function Titolo(props) {
+  console.log("Props Titolo", props);
   const stile = {
     marginTop: "125px"
   };
@@ -22,7 +23,7 @@ function Titolo(props) {
         </div>{" "}
       </div>{" "}
       <div className="row justify-content-center">
-        <Bottoni dati={props.dati.dati} />{" "}
+        <Bottoni dati={props.dati.dati} link={props.link} />{" "}
       </div>{" "}
     </React.Fragment>
   );

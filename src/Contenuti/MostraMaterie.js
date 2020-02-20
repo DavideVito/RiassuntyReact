@@ -10,7 +10,6 @@ import Bottone from "../Util/Bottone";
 
 function MostraMaterie(props) {
   const [anni, cambiaAnni] = useState([]);
-
   const fetchAnni = () => {
     async function prendiAnni() {
       let anniJson = await fetch(
@@ -89,8 +88,8 @@ function MostraMaterie(props) {
         <Bottone TestoBottone="Per caricare un riassunto" />
       </Link>{" "}
       {anni.map(anno => {
-        console.log("Ciao");
-        return <Indirizzi dati={anno} />;
+        console.log("anno", anno);
+        return <Indirizzi dati={anno} link={"/mostraRiassunto/:id"} />;
       })}{" "}
     </div>
   );

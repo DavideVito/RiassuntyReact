@@ -58,7 +58,6 @@ function Main(props) {
       }
       console.log("Main.js", ind);
       cambiaIndirizzi(ind);
-      console.log("props: ", props.location.pathname);
     }
     prendiIndirizzi();
   };
@@ -72,7 +71,7 @@ function Main(props) {
       </Link>{" "}
       {indirizzi.map(indirizzo => {
         console.log(indirizzo);
-        return <Indirizzi dati={indirizzo} />;
+        return <Indirizzi dati={indirizzo} link={"/mostraMateria/:id"} />;
       })}{" "}
     </React.Fragment>
   );

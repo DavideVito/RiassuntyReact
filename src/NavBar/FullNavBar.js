@@ -6,15 +6,13 @@ import "../App.css";
 
 function FullNavBar(props) {
   //console.log(props.indirizzi);
-  let stile = {
-    marginLeft: "-20px"
-  };
+
   return (
     <header>
       <nav>
         <Brand />
         <div id="menu">
-          <div id="menu-toggle" style={stile}>
+          <div id="menu-toggle">
             <MenuIcon />
           </div>{" "}
           <ul>

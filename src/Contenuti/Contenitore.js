@@ -13,10 +13,17 @@ function Contenitore(props) {
     textAlign: "center"
   };
 
+  console.log("Props Contenitore", props);
+
   return (
     <React.Fragment>
       <div className="container-fluid" style={stileContenitore}>
-        <Titolo key="Titolo" dati={props.dati} style={stileHeading} />{" "}
+        <Titolo
+          key="Titolo"
+          dati={props.dati}
+          style={stileHeading}
+          link={props.link}
+        />{" "}
       </div>{" "}
     </React.Fragment>
   );

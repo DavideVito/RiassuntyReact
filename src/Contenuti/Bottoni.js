@@ -12,8 +12,9 @@ function Bottoni(props) {
     return (
       <Bottone
         TestoBottone={contenutoBottone.nome}
-        idMateria={contenutoBottone.id}
+        id={contenutoBottone.id}
         key={contenutoBottone.id}
+        link={props.link}
       />
     );
   });

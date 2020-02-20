@@ -5,9 +5,10 @@ import Bottoni from "./Bottoni";
 import "../App.css";
 
 function Sezione(props) {
+  console.log("Props Sezione", props);
   return (
     <React.Fragment>
-      <Contenitore dati={props.dati} />{" "}
+      <Contenitore dati={props.dati} link={props.link} />{" "}
     </React.Fragment>
   );
 }
