@@ -14,19 +14,6 @@ function Login() {
         {" "}
         <h1> CIAO </h1>
       </div>
-      <GoogleLogin
-        clientId="757171675502-tn1k2bjmh123u729uqufjhg0nr8d1br1.apps.googleusercontent.com"
-        render={renderProps => (
-          <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
-            This is my custom Google button
-          </button>
-        )}
-        buttonText="Login"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={"single_host_origin"}
-      />
-    </React.Fragment>
   );
 }
 
