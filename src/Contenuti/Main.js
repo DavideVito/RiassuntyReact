@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import $ from "jquery";
 import Indirizzi from "./Indirizzi";
 import Bottone from "../Util/Bottone";
-import histroy from "../Util/history";
 import "../App.css";
 import FullNavBar from "../NavBar/FullNavBar";
 
@@ -57,6 +56,7 @@ function Main(props) {
         await prendiMaterie();
       }
       console.log("Main.js", ind);
+      $("#loadingImage").fadeOut(500, "swing");
       cambiaIndirizzi(ind);
     }
     prendiIndirizzi();
@@ -66,7 +66,7 @@ function Main(props) {
   return (
     <React.Fragment>
       <FullNavBar elementi={indirizzi} />{" "}
-      <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />
+      <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />{" "}
       {indirizzi.map(indirizzo => {
         console.log(indirizzo);
         return <Indirizzi dati={indirizzo} link={"/mostraMateria/:id"} />;

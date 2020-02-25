@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
-import history from "../Util/history";
+import $ from "jquery";
 import Brand from "../NavBar/Foto/Brand";
 import MenuIcon from "../NavBar/Elementi/MenuIcon";
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ import Bottone from "../Util/Bottone";
 
 function MostraMaterie(props) {
   const [anni, cambiaAnni] = useState([]);
+
   const fetchAnni = () => {
     async function prendiAnni() {
       let anniJson = await fetch(
@@ -52,9 +53,12 @@ function MostraMaterie(props) {
 
         await prendiAnteprime();
       }
+      $("#loadingImage").fadeOut(500);
       cambiaAnni(ann);
     }
+    $("#loadingImage").fadeIn(500);
     console.log("Vengo eseguito");
+
     prendiAnni();
   };
 
@@ -71,6 +75,7 @@ function MostraMaterie(props) {
               <MenuIcon />
             </div>{" "}
             <ul>
+              {" "}
               {anni.map((anno, indice) => {
                 return (
                   <NavBarItem
@@ -79,11 +84,11 @@ function MostraMaterie(props) {
                     indice={indice + 1}
                   />
                 );
-              })}
+              })}{" "}
             </ul>{" "}
           </div>{" "}
         </nav>{" "}
-      </header>
+      </header>{" "}
       <Link to="/Login">
         <Bottone TestoBottone="Per caricare un riassunto" />
       </Link>{" "}

@@ -2,15 +2,12 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400");
 
-html {
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -268,7 +265,7 @@ section {
 }
 
 /*** Responsive Menu For Smaller Device ***/
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
   #menu-toggle {
     display: flex;
   }
@@ -691,4 +688,9 @@ a {
     left: 100%;
     width: 0;
   }
+}
+
+.progress {
+  justify-content: center;
+  width: 75%;
 }

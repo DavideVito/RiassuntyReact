@@ -8,8 +8,13 @@ function Foto() {
     borderRadius: "45%"
   };
 
-  return (
-    <img src="https://riassunty.altervista.org/logoBIANCO.jpg" style={style} />
+  return ( <
+    img src = "https://riassunty.altervista.org/logoBIANCO.jpg"
+    alt = "Logo ITIS"
+    style = {
+      style
+    }
+    />
   );
 }
 

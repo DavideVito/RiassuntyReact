@@ -6,7 +6,7 @@ import "../App.css";
 
 function FullNavBar(props) {
   //console.log(props.indirizzi);
-
+  console.log(props);
   return (
     <header>
       <nav>
