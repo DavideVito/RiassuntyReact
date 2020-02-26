@@ -11,6 +11,10 @@ import Bottone from "../Util/Bottone";
 function MostraMaterie(props) {
   const [anni, cambiaAnni] = useState([]);
 
+  $(window).on("popstate", () => {
+    $("#loadingImage").fadeIn(0);
+  });
+
   const fetchAnni = () => {
     async function prendiAnni() {
       let anniJson = await fetch(
@@ -56,20 +60,18 @@ function MostraMaterie(props) {
       $("#loadingImage").fadeOut(500);
       cambiaAnni(ann);
     }
-    $("#loadingImage").fadeIn(500);
-    console.log("Vengo eseguito");
+    $("#loadingImage").fadeIn(0);
 
     prendiAnni();
   };
 
   useEffect(fetchAnni, [props.location.pathname]);
-  console.log(props.location.pathname);
 
   return (
     <div>
       <header>
         <nav>
-          <Brand />
+          <Brand link="https://icons-for-free.com/iconfiles/png/512/back+icon-1320184981572570382.png" />
           <div id="menu">
             <div id="menu-toggle">
               <MenuIcon />
@@ -89,9 +91,7 @@ function MostraMaterie(props) {
           </div>{" "}
         </nav>{" "}
       </header>{" "}
-      <Link to="/Login">
-        <Bottone TestoBottone="Per caricare un riassunto" />
-      </Link>{" "}
+      <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />
       {anni.map(anno => {
         console.log("anno", anno);
         return <Indirizzi dati={anno} link={"/mostraRiassunto/:id"} />;

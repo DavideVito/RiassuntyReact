@@ -19,7 +19,6 @@ function MostraRiassunto(props) {
 
       riassuntoJSON = await riassuntoJSON.json();
       riassuntoJSON = riassuntoJSON[0];
-      console.log(riassuntoJSON);
       cambiaRiassunto(riassuntoJSON);
       $("#loadingImage").fadeOut(500);
     }
@@ -28,7 +27,6 @@ function MostraRiassunto(props) {
   };
 
   useEffect(fetchRiassunto, [props.location.pathname]);
-  console.log(props.location.pathname);
 
   return ( <
     React.Fragment >

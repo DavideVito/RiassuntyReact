@@ -1,7 +1,4 @@
-import React, {
-  useEffect,
-  useState
-} from "react";
+import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import Indirizzi from "./Indirizzi";
 import Bottone from "../Util/Bottone";
@@ -59,7 +56,6 @@ function Main(props) {
 
         await prendiMaterie();
       }
-      console.log("Main.js", ind);
       $("#loadingImage").fadeOut(500, "swing");
       cambiaIndirizzi(ind);
     }
@@ -67,33 +63,15 @@ function Main(props) {
   };
   useEffect(fetchIndirizzi, [props.location.pathname]);
 
-  return ( <
-    React.Fragment >
-    <
-    FullNavBar elementi = {
-      indirizzi
-    }
-    />{" "} <
-    Bottone TestoBottone = "Per caricare un riassunto"
-    link = "/Login" / > {
-      " "
-    } {
-      indirizzi.map(indirizzo => {
-        console.log(indirizzo);
-        return <Indirizzi dati = {
-          indirizzo
-        }
-        link = {
-          "/mostraMateria/:id"
-        }
-        />;
-      })
-    } {
-      " "
-    } <
-    Footer / >
-    <
-    /React.Fragment>
+  return (
+    <React.Fragment>
+      <FullNavBar elementi={indirizzi} />{" "}
+      <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />{" "}
+      {indirizzi.map(indirizzo => {
+        return <Indirizzi dati={indirizzo} link={"/mostraMateria/:id"} />;
+      })}{" "}
+      <Footer />
+    </React.Fragment>
   );
 }
 

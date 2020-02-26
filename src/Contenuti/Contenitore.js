@@ -13,8 +13,6 @@ function Contenitore(props) {
     textAlign: "center"
   };
 
-  console.log("Props Contenitore", props);
-
   return (
     <React.Fragment>
       <div className="container-fluid" style={stileContenitore}>

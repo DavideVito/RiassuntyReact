@@ -1,15 +1,25 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 import Contenitore from "./Contenitore";
 import Bottoni from "./Bottoni";
 import "../App.css";
 
 function Sezione(props) {
-  console.log("Props Sezione", props);
-  return (
-    <React.Fragment>
-      <Contenitore dati={props.dati} link={props.link} />{" "}
-    </React.Fragment>
+  return ( <
+    React.Fragment >
+    <
+    Contenitore dati = {
+      props.dati
+    }
+    link = {
+      props.link
+    }
+    />{" "} <
+    /React.Fragment>
   );
 }
 

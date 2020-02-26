@@ -2,12 +2,12 @@ import React from "react";
 import Foto from "./Foto";
 import "../../App.css";
 
-function Brand() {
+function Brand(props) {
   return (
     <div id="brand">
       <div id="logo">
-        <Foto />
-      </div>
+        <Foto link={props.link} />{" "}
+      </div>{" "}
     </div>
   );
 }

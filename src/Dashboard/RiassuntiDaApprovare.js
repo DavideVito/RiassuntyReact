@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState
+} from "react";
 import FullNavBar from "../NavBar/FullNavBar";
 import GoogleLogin from "react-google-login";
 import "../App.css";
@@ -9,8 +12,7 @@ function RiassuntiDaApprovare(props) {
   const prendiRiassunti = () => {
     const getRiassunti = async () => {
       let riassuntiNonApprovati = await fetch(
-        "https://vps.lellovitiello.tk/Riassunty/API/riassuntiNonApprovati.php",
-        {
+        "https://vps.lellovitiello.tk/Riassunty/API/riassuntiNonApprovati.php", {
           //"http://localhost/~davidevitiello/Riassunty/API/riassuntiNonApprovati.php",
           credentials: "include",
           method: "POST"
@@ -32,8 +34,7 @@ function RiassuntiDaApprovare(props) {
 
     data.append("id", evento.currentTarget.id);
     let rispostaFetch = await fetch(
-      "https://vps.lellovitiello.tk/Riassunty/API/eliminaRiassunto.php",
-      {
+      "https://vps.lellovitiello.tk/Riassunty/API/eliminaRiassunto.php", {
         method: "POST",
         body: data,
         credentials: "same-origin"
@@ -52,19 +53,18 @@ function RiassuntiDaApprovare(props) {
     color: "white"
   };
 
-  return (
-    <React.Fragment>
-      {" "}
-      <FullNavBar
-        elementi={[
-          {
-            nome:
-              "Clicca sulla X per scartare un riassunto, sull'altro per approvare, Easy no?",
-            dati: []
-          }
-        ]}
-      />{" "}
-    </React.Fragment>
+  return ( <
+    React.Fragment > {
+      " "
+    } <
+    FullNavBar elementi = {
+      [{
+        nome: "Clicca sulla X per scartare un riassunto, sull'altro per approvare, Easy no?",
+        dati: []
+      }]
+    }
+    />{" "} <
+    /React.Fragment>
   );
 }
 

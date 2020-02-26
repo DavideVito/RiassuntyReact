@@ -3,7 +3,6 @@ import Bottoni from "./Bottoni";
 import "../App.css";
 
 function Titolo(props) {
-  console.log("Props Titolo", props);
   const stile = {
     marginTop: "125px"
   };
@@ -13,7 +12,6 @@ function Titolo(props) {
   };
 
   let oggetto = props.dati;
-  console.log("Titolo", oggetto);
   return (
     <React.Fragment>
       <div id="heading" className="row" style={stile}>
