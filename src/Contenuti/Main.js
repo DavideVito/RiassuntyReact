@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState
+} from "react";
 import $ from "jquery";
 import Indirizzi from "./Indirizzi";
 import Bottone from "../Util/Bottone";
+import Footer from "../Util/Footer";
 import "../App.css";
 import FullNavBar from "../NavBar/FullNavBar";
 
@@ -63,15 +67,33 @@ function Main(props) {
   };
   useEffect(fetchIndirizzi, [props.location.pathname]);
 
-  return (
-    <React.Fragment>
-      <FullNavBar elementi={indirizzi} />{" "}
-      <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />{" "}
-      {indirizzi.map(indirizzo => {
+  return ( <
+    React.Fragment >
+    <
+    FullNavBar elementi = {
+      indirizzi
+    }
+    />{" "} <
+    Bottone TestoBottone = "Per caricare un riassunto"
+    link = "/Login" / > {
+      " "
+    } {
+      indirizzi.map(indirizzo => {
         console.log(indirizzo);
-        return <Indirizzi dati={indirizzo} link={"/mostraMateria/:id"} />;
-      })}{" "}
-    </React.Fragment>
+        return <Indirizzi dati = {
+          indirizzo
+        }
+        link = {
+          "/mostraMateria/:id"
+        }
+        />;
+      })
+    } {
+      " "
+    } <
+    Footer / >
+    <
+    /React.Fragment>
   );
 }
 
