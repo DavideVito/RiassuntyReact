@@ -5,6 +5,7 @@ import FullNavBar from "../NavBar/FullNavBar";
 import axios from "axios";
 import Bottone from "../Util/Bottone";
 import "../App.css";
+import $ from "jquery";
 import MostraRiassunti from "./MostraRiassunti";
 
 function Login(props) {
@@ -17,18 +18,23 @@ function Login(props) {
       let udid = "109232597291200925390";
       let data = new FormData();
       data.append("id", udid);
+      let token = sessionStorage.token;
+      if (token) {
+        data.append("token", token);
+      }
       let risposta = await fetch(
         //"https://vps.lellovitiello.tk/Riassunty/API/Utenti.php",
         "http://localhost/~davidevitiello/Riassunty/API/Utenti.php",
         {
           method: "POST",
-          body: data,
-          credentials: "include"
+          body: data
         }
       );
 
       risposta = await risposta.json();
+      sessionStorage.token = risposta.token;
       console.log(risposta);
+      $("#loadingImage").fadeOut(500, "swing");
     }
 
     controllaCheEsistaGia();

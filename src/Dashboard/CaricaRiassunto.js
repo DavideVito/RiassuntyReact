@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import FileUploadProgress from "react-fileupload-progress";
-import axios from "axios";
+import $ from "jquery";
 import "../App.css";
 import FullNavBar from "../NavBar/FullNavBar";
 
@@ -52,28 +51,44 @@ function CaricaRiassunto() {
   };
 
   const caricaFile = async e => {
-    const fd = new FormData();
+    const data = new FormData();
+    data.append("pdfDaCaricare", file, file.name);
     debugger;
-    fd.append("pdfDaCaricare", file, file.name);
-
     let anno = annoImpostato;
     let materia = materiaImpostata;
     let indirizzo = indirizzoImpostato;
 
-    fd.append("anno", anno);
-    fd.append("materie", materia);
-    fd.append("indirizzi", indirizzo);
+    data.append("anno", anno);
+    data.append("materie", materia);
+    data.append("indirizzi", indirizzo);
+    let token = sessionStorage.token;
+    if (token) {
+      data.append("token", token);
+    }
 
-    await axios.post(
+    $.ajax({
+      url: "http://localhost/~davidevitiello/Riassunty/API/caricaRiassunto.php",
+      method: "POST",
+      data: {
+        anno: anno,
+        materia: materia,
+        indirizzo: indirizzo,
+        pdfDaCaricare: file,
+        token: token
+      },
+      contentType: "multipart/form-data",
+      success: dati => {
+        debugger;
+      }
+    });
+
+    /*await axios.post(
       "http://localhost/~davidevitiello/Riassunty/API/caricaRiassunto.php",
       //"https://vps.lellovitiello.tk/Riassunty/API/caricaRiassunto.php",
-      fd,
+      data,
       {
         method: "POST",
-        credentials: "include",
-        headers: {
-          "content-type": "multipart/form-data"
-        },
+        
         onUploadProgress: function(progressEvent) {
           let percentCompleted = Math.round(
             (progressEvent.loaded * 100) / progressEvent.total
@@ -81,7 +96,7 @@ function CaricaRiassunto() {
           document.getElementById("percentuale").innerText = percentCompleted;
         }
       }
-    );
+    );*/
   };
 
   const stileContenitore = {
