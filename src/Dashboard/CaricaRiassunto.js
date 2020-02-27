@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import "../App.css";
+
 import FullNavBar from "../NavBar/FullNavBar";
 
 function CaricaRiassunto() {
-  let [anni, cambiaAnni] = useState([]);
+  let anni = [];
   let [indirizzi, cambiaIndirizzi] = useState([]);
   let [materie, cambiaMaterie] = useState([]);
-  let [file, cambiaFile] = useState({});
-  let [annoImpostato, cambiaAnno] = useState(0);
-  let [materiaImpostata, cambiaMateria] = useState("");
-  let [indirizzoImpostato, cambiaIndirizzo] = useState("");
 
   for (let i = 0; i < 5; i++) {
     anni.push(i + 1);
@@ -32,7 +29,6 @@ function CaricaRiassunto() {
   const prendiMaterie = event => {
     let indirizzo =
       event.currentTarget.options[event.currentTarget.selectedIndex].value;
-    cambiaIndirizzo(indirizzo);
 
     const getMaterie = async () => {
       let materie = await fetch(
@@ -46,57 +42,45 @@ function CaricaRiassunto() {
     getMaterie();
   };
 
-  const selezioneFile = e => {
-    cambiaFile(e.target.files[0]);
-  };
-
   const caricaFile = async e => {
-    const data = new FormData();
-    data.append("pdfDaCaricare", file, file.name);
+    e.preventDefault();
     debugger;
-    let anno = annoImpostato;
-    let materia = materiaImpostata;
-    let indirizzo = indirizzoImpostato;
+    let file = $("#file").prop("files")[0];
+    let form = new FormData();
+    form.append("pdfDaCaricare", file);
 
-    data.append("anno", anno);
-    data.append("materie", materia);
-    data.append("indirizzi", indirizzo);
+    let annoSelezionato = document.getElementById("anno");
+    annoSelezionato =
+      annoSelezionato.options[annoSelezionato.selectedIndex].value;
+
+    form.append("anno", annoSelezionato);
+
+    let indirizzoSelezionato = document.getElementById("indirizzo");
+    indirizzoSelezionato =
+      indirizzoSelezionato.options[indirizzoSelezionato.selectedIndex].value;
+
+    form.append("indirizzi", indirizzoSelezionato);
+
+    let materiaSelezionata = document.getElementById("materia");
+    materiaSelezionata =
+      materiaSelezionata.options[materiaSelezionata.selectedIndex].value;
+
+    form.append("materie", materiaSelezionata);
+
     let token = sessionStorage.token;
     if (token) {
-      data.append("token", token);
+      form.append("token", token);
     }
 
     $.ajax({
-      url: "http://localhost/~davidevitiello/Riassunty/API/caricaRiassunto.php",
-      method: "POST",
-      data: {
-        anno: anno,
-        materia: materia,
-        indirizzo: indirizzo,
-        pdfDaCaricare: file,
-        token: token
-      },
-      contentType: "multipart/form-data",
-      success: dati => {
-        debugger;
-      }
+      url: "http://localhost/~davidevitiello/Riassunty/API/caricaRiassunto.php", // point to server-side PHP script
+      //url: "https://vps.lellovitiello.tk/Riassunty/API/caricaRiassunto.php",
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: form,
+      type: "POST"
     });
-
-    /*await axios.post(
-      "http://localhost/~davidevitiello/Riassunty/API/caricaRiassunto.php",
-      //"https://vps.lellovitiello.tk/Riassunty/API/caricaRiassunto.php",
-      data,
-      {
-        method: "POST",
-        
-        onUploadProgress: function(progressEvent) {
-          let percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
-          );
-          document.getElementById("percentuale").innerText = percentCompleted;
-        }
-      }
-    );*/
   };
 
   const stileContenitore = {
@@ -118,67 +102,55 @@ function CaricaRiassunto() {
           }
         ]}
       />{" "}
-      <div style={stileContenitore}>
-        <p> Seleziona il file </p>{" "}
-        <input type="file" id="file" name="file" onChange={selezioneFile} />{" "}
-      </div>{" "}
-      <div style={stile}>
-        <p> Seleziona l 'indirizzo</p>{" "}
-        <select onChange={prendiMaterie} id="indirizzo">
-          {" "}
-          {indirizzi.map(indirizzo => {
-            return (
-              <option value={indirizzo.Indirizzo}>
-                {" "}
-                {indirizzo.Indirizzo}{" "}
-              </option>
-            );
-          })}{" "}
-        </select>{" "}
-      </div>{" "}
-      <div style={stile}>
-        <p> Seleziona la materia </p>{" "}
-        <select
-          id="materia"
-          onChange={e => {
-            let materia =
-              e.currentTarget.options[e.currentTarget.selectedIndex].value;
-            cambiaMateria(materia);
-          }}
-        >
-          {materie.map(materia => {
-            return (
-              <option value={materia.IDMateria}> {materia.Materia} </option>
-            );
-          })}{" "}
-        </select>{" "}
-      </div>{" "}
-      <div style={stile}>
-        <p> Seleziona l 'anno</p>{" "}
-        <select
-          id="anno"
-          onChange={e => {
-            let anno =
-              e.currentTarget.options[e.currentTarget.selectedIndex].value;
-            cambiaAnno(anno);
-          }}
-        >
-          {anni.map(anno => {
-            return <option value={anno}> {anno} </option>;
-          })}{" "}
-        </select>{" "}
-      </div>{" "}
-      <div className="row justify-content-center">
-        <button
-          type="submit"
-          value="Carica"
-          className="btn btn-primary mb-2"
-          onClick={caricaFile}
-        >
-          {" "}
-          Carica{" "}
-        </button>{" "}
-      </div>{" "}
+      <form onSubmit={caricaFile}>
+        <div style={stileContenitore}>
+          <p> Seleziona il file </p>{" "}
+          <input type="file" id="file" name="pdfDaCaricare" required />{" "}
+        </div>{" "}
+        <div style={stile}>
+          <p> Seleziona l 'indirizzo</p>{" "}
+          <select onChange={prendiMaterie} id="indirizzo" required>
+            {" "}
+            {indirizzi.map(indirizzo => {
+              return (
+                <option value={indirizzo.Indirizzo}>
+                  {" "}
+                  {indirizzo.Indirizzo}{" "}
+                </option>
+              );
+            })}{" "}
+          </select>{" "}
+        </div>{" "}
+        <div style={stile}>
+          <p> Seleziona la materia </p>{" "}
+          <select required id="materia">
+            {materie.map(materia => {
+              return (
+                <option value={materia.IDMateria}> {materia.Materia} </option>
+              );
+            })}{" "}
+          </select>{" "}
+        </div>{" "}
+        <div style={stile}>
+          <p> Seleziona l 'anno</p>{" "}
+          <select required id="anno">
+            {anni.map(anno => {
+              return <option value={anno}> {anno} </option>;
+            })}{" "}
+          </select>{" "}
+        </div>{" "}
+        <div className="row justify-content-center">
+          <button
+            type="submit"
+            value="Carica"
+            className="btn btn-primary mb-2"
+            //onClick={caricaFile}
+          >
+            {" "}
+            Carica{" "}
+          </button>{" "}
+        </div>{" "}
+      </form>
       <div className="progress">
         <div className="barraCaricamento"> </div>{" "}
         <div id="percentuale" className="percent">
