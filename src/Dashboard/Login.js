@@ -18,8 +18,8 @@ function Login(props) {
       let data = new FormData();
       data.append("id", udid);
       let risposta = await fetch(
-        "https://vps.lellovitiello.tk/Riassunty/API/Utenti.php",
-        //"http://localhost/~davidevitiello/Riassunty/API/Utenti.php",
+        //"https://vps.lellovitiello.tk/Riassunty/API/Utenti.php",
+        "http://localhost/~davidevitiello/Riassunty/API/Utenti.php",
         {
           method: "POST",
           body: data,
@@ -63,7 +63,7 @@ function Login(props) {
         <Bottone TestoBottone="Per approvare" link="/Login/ApprovaRiassunto" />
         <MostraRiassunti />
         <div id="body"> </div>{" "}
-      </div>
+      </div>{" "}
     </React.Fragment>
   );
 }

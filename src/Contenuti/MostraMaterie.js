@@ -67,11 +67,27 @@ function MostraMaterie(props) {
 
   useEffect(fetchAnni, [props.location.pathname]);
 
+  let [linkFoto, cambiaLink] = useState("");
+
+  $(window, document).on("scroll", () => {
+    try {
+      let elemento = document.getElementsByClassName("navShadow");
+      if (elemento.length === 0) {
+        cambiaLink("https://riassunty.altervista.org/FrecciaNera.png");
+      } else {
+        cambiaLink("https://riassunty.altervista.org/FrecciaBianca.png");
+      }
+    } catch (e) {
+      cambiaLink("https://riassunty.altervista.org/FrecciaNera.png");
+      console.log(e);
+    }
+  });
+
   return (
     <div>
       <header>
         <nav>
-          <Brand link="https://icons-for-free.com/iconfiles/png/512/back+icon-1320184981572570382.png" />
+          <Brand link={linkFoto} />
           <div id="menu">
             <div id="menu-toggle">
               <MenuIcon />
@@ -91,7 +107,7 @@ function MostraMaterie(props) {
           </div>{" "}
         </nav>{" "}
       </header>{" "}
-      <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />
+      {/*<Bottone TestoBottone="Per caricare un riassunto" link="/Login" />{" "}*/}{" "}
       {anni.map(anno => {
         console.log("anno", anno);
         return <Indirizzi dati={anno} link={"/mostraRiassunto/:id"} />;

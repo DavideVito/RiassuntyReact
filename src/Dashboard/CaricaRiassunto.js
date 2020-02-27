@@ -53,6 +53,7 @@ function CaricaRiassunto() {
 
   const caricaFile = async e => {
     const fd = new FormData();
+    debugger;
     fd.append("pdfDaCaricare", file, file.name);
 
     let anno = annoImpostato;
@@ -64,12 +65,12 @@ function CaricaRiassunto() {
     fd.append("indirizzi", indirizzo);
 
     await axios.post(
-      "https://vps.lellovitiello.tk/Riassunty/API/caricaRiassunto.php",
+      "http://localhost/~davidevitiello/Riassunty/API/caricaRiassunto.php",
+      //"https://vps.lellovitiello.tk/Riassunty/API/caricaRiassunto.php",
       fd,
       {
         method: "POST",
         credentials: "include",
-        mode: "CORS",
         headers: {
           "content-type": "multipart/form-data"
         },
