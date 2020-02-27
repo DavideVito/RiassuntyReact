@@ -73,8 +73,8 @@ function CaricaRiassunto() {
     }
 
     $.ajax({
-      url: "http://localhost/~davidevitiello/Riassunty/API/caricaRiassunto.php", // point to server-side PHP script
-      //url: "https://vps.lellovitiello.tk/Riassunty/API/caricaRiassunto.php",
+      //url: "http://localhost/~davidevitiello/Riassunty/API/caricaRiassunto.php", // point to server-side PHP script
+      url: "https://vps.lellovitiello.tk/Riassunty/API/caricaRiassunto.php",
       cache: false,
       contentType: false,
       processData: false,
