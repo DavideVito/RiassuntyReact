@@ -11,6 +11,8 @@
   <meta name="description" content="L'applicazione per eccellezza">
   <meta name="theme-color" content="#0e111e" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"
+    integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
   <script>
     $(() => {
 
@@ -33,6 +35,19 @@
       $('#menu-toggle').on('click', () => {
         $('#menu-toggle').toggleClass('closeMenu');
         $('ul').toggleClass('showMenu');
+
+        if ($("#menu-toggle").hasClass("closeMenu")) {
+          $("#main").animate({
+            left: "85%",
+            opacity: "0.7"
+          }, 300)
+        } else {
+          $("#main").animate({
+            left: "0px",
+            opacity: "1"
+          }, 300)
+        }
+
 
         $('li').on('click', () => {
           $('ul').removeClass('showMenu');

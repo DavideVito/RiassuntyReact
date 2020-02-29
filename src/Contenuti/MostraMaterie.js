@@ -107,7 +107,7 @@ function MostraMaterie(props) {
           </div>{" "}
         </nav>{" "}
       </header>{" "}
-      <main>
+      <main id="main">
         <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />{" "}
         {anni.map(anno => {
           console.log("anno", anno);
