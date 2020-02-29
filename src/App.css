@@ -272,11 +272,12 @@ section {
 
   ul {
     display: inline-block;
-    width: 100vw;
-    height: 0;
+    width: 0;
+    height: 100vw;
     background: #000;
     position: absolute;
     top: 160px;
+    left: 0px;
     -webkit-transform: translate();
     transform: translate();
     box-shadow: 0 5px 30px -4px rgba(0, 0, 0, 0.2);
@@ -285,13 +286,13 @@ section {
 
   ul.showMenu {
     background: white;
-    left: 1px;
-    height: 100vh;
+    height: 20000vh;
     width: 100vw;
+    right: 0px;
   }
 
   ul.showMenu li {
-    margin-left: 38%;
+    margin-left: 30%;
     height: 80px;
 
     opacity: 1;
@@ -694,4 +695,3 @@ a {
   justify-content: center;
   width: 75%;
 }
-
