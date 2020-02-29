@@ -559,8 +559,11 @@ a {
   position: absolute;
   transition: all 0.5s ease-Out;
   top: 20px;
+
   left: 70px;
 }
+
+/**/
 
 #button-3:hover #circle {
   width: 200%;
