@@ -3,7 +3,7 @@ import "../App.css";
 import $ from "jquery";
 import Brand from "../NavBar/Foto/Brand";
 import MenuIcon from "../NavBar/Elementi/MenuIcon";
-import { Link } from "react-router-dom";
+import Footer from "../Util/Footer";
 import NavBarItem from "../NavBar/Elementi/NavBarItem";
 import Indirizzi from "./Indirizzi";
 import Bottone from "../Util/Bottone";
@@ -87,7 +87,7 @@ function MostraMaterie(props) {
     <div>
       <header>
         <nav>
-          <Brand link={linkFoto} />
+          <Brand link={linkFoto} />{" "}
           <div id="menu">
             <div id="menu-toggle">
               <MenuIcon />
@@ -107,11 +107,14 @@ function MostraMaterie(props) {
           </div>{" "}
         </nav>{" "}
       </header>{" "}
-      {/*<Bottone TestoBottone="Per caricare un riassunto" link="/Login" />{" "}*/}{" "}
-      {anni.map(anno => {
-        console.log("anno", anno);
-        return <Indirizzi dati={anno} link={"/mostraRiassunto/:id"} />;
-      })}{" "}
+      <main>
+        <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />{" "}
+        {anni.map(anno => {
+          console.log("anno", anno);
+          return <Indirizzi dati={anno} link={"/mostraRiassunto/:id"} />;
+        })}{" "}
+      </main>{" "}
+      <Footer />
     </div>
   );
 }
