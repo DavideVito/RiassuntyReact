@@ -15,7 +15,7 @@ function SearchBar(props) {
     let testoAccettato = /^[0-9a-zA-Z]+$/;
     if (e.target.value.match(testoAccettato) || e.key === "Backspace") {
       let rispostaDB = await fetch(
-        "http://localhost/~davidevitiello/Riassunty/API/anteprima.php?nome=" +
+        "https://vps.lellovitiello.tk/Riassunty/API/anteprima.php?nome=" +
           e.target.value
       );
 
