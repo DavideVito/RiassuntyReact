@@ -25,9 +25,33 @@ function FullNavBar(props) {
   return (
     <header>
       <nav>
-        <Brand link={linkFoto} />
+        <Brand link={linkFoto} />{" "}
         <div id="menu">
-          <div id="menu-toggle">
+          <div
+            id="menu-toggle"
+            onClick={() => {
+              $("#menu-toggle").toggleClass("closeMenu");
+              $("ul").toggleClass("showMenu");
+
+              if ($("#menu-toggle").hasClass("closeMenu")) {
+                $("#main").animate(
+                  {
+                    left: "85%",
+                    opacity: "0.7"
+                  },
+                  300
+                );
+              } else {
+                $("#main").animate(
+                  {
+                    left: "0px",
+                    opacity: "1"
+                  },
+                  300
+                );
+              }
+            }}
+          >
             <MenuIcon />
           </div>{" "}
           <ul>
