@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
+import SearchBar from "../Util/SearchBar/SearchBar";
 import $ from "jquery";
 import Brand from "../NavBar/Foto/Brand";
 import MenuIcon from "../NavBar/Elementi/MenuIcon";
@@ -132,6 +133,7 @@ function MostraMaterie(props) {
         </nav>{" "}
       </header>{" "}
       <main id="main">
+        <SearchBar />
         <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />{" "}
         {anni.map(anno => {
           console.log("anno", anno);
