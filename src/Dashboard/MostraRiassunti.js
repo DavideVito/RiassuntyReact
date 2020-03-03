@@ -2,16 +2,10 @@ import React, {
   useEffect,
   useState
 } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import GoogleLogin from "react-google-login";
+
 import "../App.css";
 
-function MostraRiassunti() {
+function MostraRiassunti(props) {
   let [anteprime, cambiaAnteprime] = useState([]);
   let eliminato = useState(false);
 
@@ -19,6 +13,7 @@ function MostraRiassunti() {
     const getAnteprime = async () => {
       let anteprime = await fetch(
         "https://vps.lellovitiello.tk/Riassunty/API/anteprima.php"
+        //"http://localhost/~davidevitiello/Riassunty/API/anteprima.php"
       );
       anteprime = await anteprime.json();
       cambiaAnteprime(anteprime);
@@ -27,15 +22,16 @@ function MostraRiassunti() {
     getAnteprime();
   };
 
-  useEffect(prendiRiassunti, []);
+  useEffect(prendiRiassunti, [props.account]);
 
   async function eliminaRiassunto(evento) {
-
     let data = new FormData();
 
     data.append("id", evento.currentTarget.id);
     let rispostaFetch = await fetch(
-      "https://vps.lellovitiello.tk/Riassunty/API/eliminaRiassunto.php", {
+      "https://vps.lellovitiello.tk/Riassunty/API/eliminaRiassunto.php",
+      //"http://localhost/~davidevitiello/Riassunty/API/eliminaRiassunto.php",
+      {
         method: "POST",
         body: data,
         mode: "cors"
@@ -46,7 +42,7 @@ function MostraRiassunti() {
   }
 
   function a(arg) {
-    console.log("ARG", arg)
+    console.log("ARG", arg);
   }
 
   let stile = {
@@ -54,9 +50,7 @@ function MostraRiassunti() {
   };
 
   return ( <
-    React.Fragment >
-
-    {
+    React.Fragment > {
       anteprime.map(anteprima => {
         return ( <
           div >
@@ -70,7 +64,7 @@ function MostraRiassunti() {
           <
           p > {
             anteprima.Titolo
-          } < /p> <
+          } < /p>{" "} <
           img src = {
             "https://vps.lellovitiello.tk/Riassunty/" +
             anteprima.URLImmagine
@@ -79,13 +73,13 @@ function MostraRiassunti() {
           height = "300" /
           >
           <
-          /div> <
+          /div>{" "} <
           div style = {
             stile
           }
           className = "col-md" >
           <
-          p > Elimina < /p> <
+          p > Elimina < /p>{" "} <
           img id = {
             anteprima.ID
           }
@@ -98,12 +92,14 @@ function MostraRiassunti() {
           onClick = {
             eliminaRiassunto
           }
-          /> <
-          /div> <
-          /div> <
+          />{" "} <
+          /div>{" "} <
+          /div>{" "} <
           /div>
         );
       })
+    } {
+      " "
     } <
     /React.Fragment>
   );

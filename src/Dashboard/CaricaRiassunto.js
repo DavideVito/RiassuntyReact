@@ -41,10 +41,9 @@ function CaricaRiassunto() {
     };
     getMaterie();
   };
-
+  $("#loadingImage").fadeOut(500, "swing");
   const caricaFile = async e => {
     e.preventDefault();
-    debugger;
     let file = $("#file").prop("files")[0];
     let form = new FormData();
     form.append("pdfDaCaricare", file);
@@ -79,7 +78,12 @@ function CaricaRiassunto() {
       contentType: false,
       processData: false,
       data: form,
-      type: "POST"
+      type: "POST",
+      success: data => {
+        if (data.shouldRedirect === "true") {
+          window.location.href = "/Login";
+        }
+      }
     });
   };
 
@@ -102,10 +106,21 @@ function CaricaRiassunto() {
           }
         ]}
       />{" "}
-      <form onSubmit={caricaFile}>
+      <form onSubmit={caricaFile} style={{ marginLeft: "50%" }}>
         <div style={stileContenitore}>
           <p> Seleziona il file </p>{" "}
-          <input type="file" id="file" name="pdfDaCaricare" required />{" "}
+          <input
+            type="file"
+            id="file"
+            name="pdfDaCaricare"
+            required
+            style={{
+              width: "auto",
+              height: "auto",
+              borderRadius: "0",
+              marginLeft: "50%"
+            }}
+          />{" "}
         </div>{" "}
         <div style={stile}>
           <p> Seleziona l 'indirizzo</p>{" "}
@@ -124,6 +139,7 @@ function CaricaRiassunto() {
         <div style={stile}>
           <p> Seleziona la materia </p>{" "}
           <select required id="materia">
+            {" "}
             {materie.map(materia => {
               return (
                 <option value={materia.IDMateria}> {materia.Materia} </option>
@@ -134,6 +150,7 @@ function CaricaRiassunto() {
         <div style={stile}>
           <p> Seleziona l 'anno</p>{" "}
           <select required id="anno">
+            {" "}
             {anni.map(anno => {
               return <option value={anno}> {anno} </option>;
             })}{" "}
@@ -150,7 +167,7 @@ function CaricaRiassunto() {
             Carica{" "}
           </button>{" "}
         </div>{" "}
-      </form>
+      </form>{" "}
       <div className="progress">
         <div className="barraCaricamento"> </div>{" "}
         <div id="percentuale" className="percent">

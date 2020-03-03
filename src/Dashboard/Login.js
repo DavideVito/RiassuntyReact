@@ -67,7 +67,7 @@ function Login(props) {
       <div style={stile}>
         <Bottone TestoBottone="Per caricare" link="/Login/CaricaRiassunto" />
         <Bottone TestoBottone="Per approvare" link="/Login/ApprovaRiassunto" />
-        <MostraRiassunti />
+        <MostraRiassunti account={account} />
         <div id="body"> </div>{" "}
       </div>{" "}
     </React.Fragment>
