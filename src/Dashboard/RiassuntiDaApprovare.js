@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState
+} from "react";
 import FullNavBar from "../NavBar/FullNavBar";
-import GoogleLogin from "react-google-login";
 import $ from "jquery";
 import "../App.css";
 
@@ -10,8 +12,7 @@ function RiassuntiDaApprovare(props) {
   const prendiRiassunti = () => {
     const getRiassunti = async () => {
       $.ajax({
-        url:
-          "https://vps.lellovitiello.tk/Riassunty/API/riassuntiNonApprovati.php",
+        url: "https://vps.lellovitiello.tk/Riassunty/API/riassuntiNonApprovati.php",
         //"http://localhost/~davidevitiello/Riassunty/API/riassuntiNonApprovati.php",
 
         data: {
@@ -55,8 +56,7 @@ function RiassuntiDaApprovare(props) {
 
     data.append("id", evento.currentTarget.id);
     let rispostaFetch = await fetch(
-      "https://vps.lellovitiello.tk/Riassunty/API/eliminaRiassunto.php",
-      {
+      "https://vps.lellovitiello.tk/Riassunty/API/eliminaRiassunto.php", {
         method: "POST",
         body: data,
         credentials: "same-origin"
@@ -77,65 +77,94 @@ function RiassuntiDaApprovare(props) {
     color: "white"
   };
 
-  return (
-    <React.Fragment>
-      {" "}
-      <FullNavBar
-        elementi={[
-          {
-            nome:
-              "Clicca sulla X per scartare un riassunto, sull'altro per approvare, Easy no?",
-            dati: []
+  return ( <
+    React.Fragment > {
+      " "
+    } <
+    FullNavBar elementi = {
+      [{
+        nome: "Clicca sulla X per scartare un riassunto, sull'altro per approvare, Easy no?",
+        dati: []
+      }]
+    }
+    />{" "} <
+    div > {
+      " "
+    } {
+      riassuntiNonApprovati.map((riassunto, indice) => {
+        return ( <
+          div >
+          <
+          div className = "container-fluid row" >
+          <
+          div style = {
+            stile
           }
-        ]}
-      />{" "}
-      <div>
-        {" "}
-        {riassuntiNonApprovati.map((riassunto, indice) => {
-          return (
-            <div>
-              <div className="container-fluid row">
-                <div style={stile} className="col-md">
-                  <p> {riassunto.Titolo} </p>{" "}
-                  <img
-                    src={
-                      "https://vps.lellovitiello.tk/Riassunty/" +
-                      riassunto.URLImmagine
-                    }
-                    width="300"
-                    height="300"
-                  />
-                </div>{" "}
-                <div style={stile} className="col-md">
-                  <p> Elimina </p>{" "}
-                  <img
-                    id={riassunto.ID}
-                    style={{
-                      cursor: "pointer"
-                    }}
-                    src="https://img.icons8.com/flat_round/64/000000/delete-sign.png"
-                    onClick={eliminaRiassunto}
-                  />{" "}
-                </div>{" "}
-                <div style={stile} className="col-md">
-                  <p> Approva </p>{" "}
-                  <img
-                    id={riassunto.ID}
-                    style={{
-                      cursor: "pointer"
-                    }}
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Green_tick.svg/1024px-Green_tick.svg.png"
-                    width="50"
-                    height="50"
-                    onClick={approvaRiassunto}
-                  />{" "}
-                </div>{" "}
-              </div>{" "}
-            </div>
-          );
-        })}{" "}
-      </div>{" "}
-    </React.Fragment>
+          className = "col-md" >
+          <
+          p > {
+            riassunto.Titolo
+          } < /p>{" "} <
+          img src = {
+            "https://vps.lellovitiello.tk/Riassunty/" +
+            riassunto.URLImmagine
+          }
+          width = "300"
+          height = "300" /
+          >
+          <
+          /div>{" "} <
+          div style = {
+            stile
+          }
+          className = "col-md" >
+          <
+          p > Elimina < /p>{" "} <
+          img id = {
+            riassunto.ID
+          }
+          style = {
+            {
+              cursor: "pointer"
+            }
+          }
+          src = "https://img.icons8.com/flat_round/64/000000/delete-sign.png"
+          onClick = {
+            eliminaRiassunto
+          }
+          />{" "} <
+          /div>{" "} <
+          div style = {
+            stile
+          }
+          className = "col-md" >
+          <
+          p > Approva < /p>{" "} <
+          img id = {
+            riassunto.ID
+          }
+          style = {
+            {
+              cursor: "pointer"
+            }
+          }
+          src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Green_tick.svg/1024px-Green_tick.svg.png"
+          width = "50"
+          height = "50"
+          onClick = {
+            approvaRiassunto
+          }
+          />{" "} <
+          /div>{" "} <
+          /div>{" "} <
+          /div>
+        );
+      })
+    } {
+      " "
+    } <
+    /div>{" "} <
+    /React.Fragment>
   );
 }
 

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import "../../App.css";
 import $ from "jquery";
 import animateScrollTo from "animated-scroll-to";
@@ -12,10 +11,16 @@ function NavBarItem(props) {
     });
   };
 
-  return (
-    <li className="menu-item" onClick={quandoClicca}>
-      <p> {props.nome} </p>{" "}
-    </li>
+  return ( <
+    li className = "menu-item"
+    onClick = {
+      quandoClicca
+    } >
+    <
+    p > {
+      props.nome
+    } < /p>{" "} <
+    /li>
   );
 }
 
