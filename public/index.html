@@ -26,29 +26,7 @@
           'ul').css('top', '160px').css("backgroundColor", "white").css("color", "black");
       });
 
-
       console.log($('a[href*="#"]'))
-
-      //Smooth Scrolling Using Navigation Menu
-
-
-      //Toggle Menu
-      /*$('#menu-toggle').on('click', () => {
-        $('#menu-toggle').toggleClass('closeMenu');
-        $('ul').toggleClass('showMenu');
-
-        if ($("#menu-toggle").hasClass("closeMenu")) {
-          $("#main").animate({
-            left: "85%",
-            opacity: "0.7"
-          }, 300)
-        } else {
-          $("#main").animate({
-            left: "0px",
-            opacity: "1"
-          }, 300)
-        }*/
-
 
       $('li').on('click', () => {
         $('ul').removeClass('showMenu');

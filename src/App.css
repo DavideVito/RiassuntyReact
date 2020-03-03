@@ -698,3 +698,9 @@ a {
   justify-content: center;
   width: 75%;
 }
+
+#primaParte {
+  background-color: #000;
+  min-height: 35%;
+  height: 100vh;
+}

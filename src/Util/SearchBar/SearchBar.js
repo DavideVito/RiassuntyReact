@@ -5,17 +5,14 @@ import $ from "jquery";
 
 function SearchBar() {
   let [riassunti, cambiaRiassunti] = useState([]);
-  let [stile, cambiaStile] = useState({});
 
   const expand = e => {
-    let s = "";
     e.target.classList.toggle("close");
     document.getElementById("search-input").classList.toggle("square");
 
     if (!$("#search-input").hasClass("square")) {
       $("#search-input").blur();
-      s = { marginTop: "0" };
-      cambiaStile(s);
+
       document.getElementById("search-input").value = "";
       return;
     }
@@ -37,8 +34,7 @@ function SearchBar() {
       );
 
       rispostaDB = await rispostaDB.json();
-      let s = { marginTop: "-40%" };
-      cambiaStile(s);
+
       cambiaRiassunti(rispostaDB);
     } else {
       return;
@@ -49,7 +45,13 @@ function SearchBar() {
     <div>
       <div onKeyUp={cercaSulDB}>
         <div id="content">
-          <input type="text" name="input" className="input" id="search-input" />{" "}
+          <input
+            type="text"
+            name="input"
+            className="input"
+            id="search-input"
+            label="Clicca per cercare"
+          />{" "}
           <button
             type="reset"
             className="search"
@@ -57,8 +59,9 @@ function SearchBar() {
             onClick={expand}
           ></button>{" "}
         </div>{" "}
-      </div>
-      <div style={stile}>
+      </div>{" "}
+      <div>
+        {" "}
         {riassunti.map(riassunto => {
           return (
             <React.Fragment>
@@ -66,13 +69,19 @@ function SearchBar() {
                 <Bottone
                   TestoBottone={riassunto.Titolo}
                   link={`/mostraRiassunto/${riassunto.ID}`}
-                />
-              </div>
-              <div style={{ height: "20px" }}></div>
+                />{" "}
+              </div>{" "}
+              <div
+                style={{
+                  height: "20px"
+                }}
+              >
+                {" "}
+              </div>{" "}
             </React.Fragment>
           );
         })}{" "}
-      </div>
+      </div>{" "}
     </div>
   );
 }

@@ -1,7 +1,5 @@
-import React, {
-  useEffect,
-  useState
-} from "react";
+import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 import "../App.css";
 import $ from "jquery";
 import ReactHtmlParser from "react-html-parser";
@@ -28,13 +26,13 @@ function MostraRiassunto(props) {
 
   useEffect(fetchRiassunto, [props.location.pathname]);
 
-  return ( <
-    React.Fragment >
-    <
-    div > {
-      ReactHtmlParser(riassunto.txt)
-    } < /div>{" "} < /
-    React.Fragment >
+  if (typeof riassunto === "undefined") {
+    return <Redirect to="/" />;
+  }
+  return (
+    <React.Fragment>
+      <div> {ReactHtmlParser(riassunto.txt)} </div>{" "}
+    </React.Fragment>
   );
 }
 
