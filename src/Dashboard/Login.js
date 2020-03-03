@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import GoogleLogin from "react-google-login";
+import GoogleLogin, { GoogleLogout } from "react-google-login";
 import FullNavBar from "../NavBar/FullNavBar";
 import Bottone from "../Util/Bottone";
 import "../App.css";
@@ -9,6 +9,7 @@ import MostraRiassunti from "./MostraRiassunti";
 function Login(props) {
   let [ok, cambiaOk] = useState(false);
   let [udid, cambiaUDID] = useState();
+  let [account, cambiaAccount] = useState({});
 
   const esisteGia = () => {
     if (udid === 0 || typeof udid === "undefined") {
@@ -37,18 +38,21 @@ function Login(props) {
 
     controllaCheEsistaGia();
   };
+  console.log(props);
 
-  useEffect(esisteGia, [udid]);
+  useEffect(esisteGia, [props.location.pathname, udid]);
 
   function responseGoogle(risposta) {
-    debugger;
-    console.log(risposta);
+    console.log(risposta.getBasicProfile());
+    cambiaAccount(risposta.getBasicProfile());
     cambiaUDID(risposta.googleId);
     console.log(udid);
   }
 
+  function logout() {}
+
   const stile = {
-    marginTop: "-20%"
+    marginTop: "-50%"
   };
 
   $("#loadingImage").fadeOut(500, "swing");
@@ -66,13 +70,40 @@ function Login(props) {
           ]}
         />{" "}
         <div style={stile}>
-          <Bottone TestoBottone="Per caricare" link="/Login/CaricaRiassunto" />
-          <Bottone
-            TestoBottone="Per approvare"
-            link="/Login/ApprovaRiassunto"
-          />
-          <MostraRiassunti account={udid} />
-          <div id="body"> </div>{" "}
+          <div id="datiUtente" style={{ marginBottom: "20%" }}>
+            <div id="nomePersona" className="row justify-content-center">
+              {<p>Bentornato {account.getName()}</p>}
+            </div>
+            <div id="immaginePersona" className="row justify-content-center">
+              {<img src={account.getImageUrl()} width="150" height="150" />}
+            </div>
+          </div>
+          <div id="bottoni" style={{ marginTop: "20%" }}>
+            <div
+              className="row justify-content-center"
+              style={{ marginBottom: "20%" }}
+            >
+              <GoogleLogout
+                clientId="757171675502-tn1k2bjmh123u729uqufjhg0nr8d1br1.apps.googleusercontent.com"
+                buttonText="Logout"
+                theme="dark"
+                width="260"
+                height="80"
+                onLogoutSuccess={logout}
+              />
+            </div>
+            <Bottone
+              TestoBottone="Per caricare"
+              link="/Login/CaricaRiassunto"
+            />
+            <Bottone
+              TestoBottone="Per approvare"
+              link="/Login/ApprovaRiassunto"
+            />
+          </div>
+          <div id="body" style={{ marginTop: "30%" }}>
+            <MostraRiassunti account={udid} />
+          </div>{" "}
         </div>{" "}
       </React.Fragment>
     );
@@ -88,12 +119,18 @@ function Login(props) {
             }
           ]}
         />{" "}
-        <div style={{ marginTop: "-20%" }}>
+        <div
+          className="row justify-content-center"
+          style={{ marginTop: "-20%" }}
+        >
           <GoogleLogin
             clientId="757171675502-tn1k2bjmh123u729uqufjhg0nr8d1br1.apps.googleusercontent.com"
             buttonText="Login"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
+            theme="dark"
+            width="260"
+            height="80"
             cookiePolicy={"single_host_origin"}
           />
         </div>

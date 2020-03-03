@@ -44,6 +44,9 @@ function RiassuntiDaApprovare(props) {
       },
       method: "POST",
       success: data => {
+        if (data === null) {
+          return;
+        }
         if (data.shouldRedirect === "true") {
           window.location.href = "/Login";
         }
@@ -132,8 +135,10 @@ function RiassuntiDaApprovare(props) {
           onClick = {
             eliminaRiassunto
           }
-          />{" "} <
-          /div>{" "} <
+          />{" "} < /
+          div > {
+            " "
+          } <
           div style = {
             stile
           }
@@ -154,17 +159,19 @@ function RiassuntiDaApprovare(props) {
           onClick = {
             approvaRiassunto
           }
-          />{" "} <
-          /div>{" "} <
-          /div>{" "} <
-          /div>
+          />{" "} < /
+          div > {
+            " "
+          } <
+          /div>{" "} < /
+          div >
         );
       })
     } {
       " "
     } <
-    /div>{" "} <
-    /React.Fragment>
+    /div>{" "} < /
+    React.Fragment >
   );
 }
 
