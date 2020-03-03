@@ -38,15 +38,12 @@ function Login(props) {
 
     controllaCheEsistaGia();
   };
-  console.log(props);
 
   useEffect(esisteGia, [props.location.pathname, udid]);
 
   function responseGoogle(risposta) {
-    console.log(risposta.getBasicProfile());
     cambiaAccount(risposta.getBasicProfile());
     cambiaUDID(risposta.googleId);
-    console.log(udid);
   }
 
   function logout() {}
@@ -70,18 +67,39 @@ function Login(props) {
           ]}
         />{" "}
         <div style={stile}>
-          <div id="datiUtente" style={{ marginBottom: "20%" }}>
+          <div
+            id="datiUtente"
+            style={{
+              marginBottom: "20%"
+            }}
+          >
             <div id="nomePersona" className="row justify-content-center">
-              {<p>Bentornato {account.getName()}</p>}
-            </div>
+              {" "}
+              {<p> Bentornato {account.getName()} </p>}{" "}
+            </div>{" "}
             <div id="immaginePersona" className="row justify-content-center">
-              {<img src={account.getImageUrl()} width="150" height="150" />}
-            </div>
-          </div>
-          <div id="bottoni" style={{ marginTop: "20%" }}>
+              {" "}
+              {
+                <img
+                  src={account.getImageUrl()}
+                  width="150"
+                  height="150"
+                  alt={"Immagine di " + account.getName()}
+                />
+              }{" "}
+            </div>{" "}
+          </div>{" "}
+          <div
+            id="bottoni"
+            style={{
+              marginTop: "20%"
+            }}
+          >
             <div
               className="row justify-content-center"
-              style={{ marginBottom: "20%" }}
+              style={{
+                marginBottom: "20%"
+              }}
             >
               <GoogleLogout
                 clientId="757171675502-tn1k2bjmh123u729uqufjhg0nr8d1br1.apps.googleusercontent.com"
@@ -90,8 +108,8 @@ function Login(props) {
                 width="260"
                 height="80"
                 onLogoutSuccess={logout}
-              />
-            </div>
+              />{" "}
+            </div>{" "}
             <Bottone
               TestoBottone="Per caricare"
               link="/Login/CaricaRiassunto"
@@ -100,9 +118,14 @@ function Login(props) {
               TestoBottone="Per approvare"
               link="/Login/ApprovaRiassunto"
             />
-          </div>
-          <div id="body" style={{ marginTop: "30%" }}>
-            <MostraRiassunti account={udid} />
+          </div>{" "}
+          <div
+            id="body"
+            style={{
+              marginTop: "30%"
+            }}
+          >
+            <MostraRiassunti account={udid} />{" "}
           </div>{" "}
         </div>{" "}
       </React.Fragment>
@@ -121,7 +144,9 @@ function Login(props) {
         />{" "}
         <div
           className="row justify-content-center"
-          style={{ marginTop: "-20%" }}
+          style={{
+            marginTop: "-20%"
+          }}
         >
           <GoogleLogin
             clientId="757171675502-tn1k2bjmh123u729uqufjhg0nr8d1br1.apps.googleusercontent.com"
@@ -132,8 +157,8 @@ function Login(props) {
             width="260"
             height="80"
             cookiePolicy={"single_host_origin"}
-          />
-        </div>
+          />{" "}
+        </div>{" "}
       </React.Fragment>
     );
   }
