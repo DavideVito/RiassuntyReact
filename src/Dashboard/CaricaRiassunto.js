@@ -97,7 +97,6 @@ function CaricaRiassunto() {
 
   return (
     <React.Fragment>
-      {" "}
       <FullNavBar
         elementi={[
           {
@@ -105,10 +104,16 @@ function CaricaRiassunto() {
             dati: []
           }
         ]}
-      />{" "}
-      <form onSubmit={caricaFile} style={{ marginLeft: "50%" }}>
+      />
+      <form
+        onSubmit={caricaFile}
+        style={{
+          marginTop: "-50%",
+          marginLeft: "50%"
+        }}
+      >
         <div style={stileContenitore}>
-          <p> Seleziona il file </p>{" "}
+          <p> Seleziona il file </p>
           <input
             type="file"
             id="file"
@@ -117,45 +122,41 @@ function CaricaRiassunto() {
             style={{
               width: "auto",
               height: "auto",
-              borderRadius: "0",
-              marginLeft: "50%"
+              borderRadius: "0"
+              //marginLeft: "50%"
             }}
-          />{" "}
-        </div>{" "}
+          />
+        </div>
         <div style={stile}>
-          <p> Seleziona l 'indirizzo</p>{" "}
+          <p> Seleziona l 'indirizzo</p>
           <select onChange={prendiMaterie} id="indirizzo" required>
-            {" "}
             {indirizzi.map(indirizzo => {
               return (
                 <option value={indirizzo.Indirizzo}>
-                  {" "}
-                  {indirizzo.Indirizzo}{" "}
+                  {indirizzo.Indirizzo}
                 </option>
               );
-            })}{" "}
-          </select>{" "}
-        </div>{" "}
+            })}
+          </select>
+        </div>
         <div style={stile}>
-          <p> Seleziona la materia </p>{" "}
+          <p> Seleziona la materia </p>
           <select required id="materia">
-            {" "}
             {materie.map(materia => {
               return (
                 <option value={materia.IDMateria}> {materia.Materia} </option>
               );
-            })}{" "}
-          </select>{" "}
-        </div>{" "}
+            })}
+          </select>
+        </div>
         <div style={stile}>
-          <p> Seleziona l 'anno</p>{" "}
+          <p> Seleziona l 'anno</p>
           <select required id="anno">
-            {" "}
             {anni.map(anno => {
               return <option value={anno}> {anno} </option>;
-            })}{" "}
-          </select>{" "}
-        </div>{" "}
+            })}
+          </select>
+        </div>
         <div className="row justify-content-center">
           <button
             type="submit"
@@ -163,17 +164,10 @@ function CaricaRiassunto() {
             className="btn btn-primary mb-2"
             //onClick={caricaFile}
           >
-            {" "}
-            Carica{" "}
-          </button>{" "}
-        </div>{" "}
-      </form>{" "}
-      <div className="progress">
-        <div className="barraCaricamento"> </div>{" "}
-        <div id="percentuale" className="percent">
-          0 %
-        </div>{" "}
-      </div>{" "}
+            Carica
+          </button>
+        </div>
+      </form>
     </React.Fragment>
   );
 }

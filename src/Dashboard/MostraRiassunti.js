@@ -1,13 +1,9 @@
-import React, {
-  useEffect,
-  useState
-} from "react";
+import React, { useEffect, useState } from "react";
 
 import "../App.css";
 
 function MostraRiassunti(props) {
   let [anteprime, cambiaAnteprime] = useState([]);
-  let eliminato = useState(false);
 
   const prendiRiassunti = () => {
     const getAnteprime = async () => {
@@ -41,67 +37,46 @@ function MostraRiassunti(props) {
     console.log(rispostaFetch);
   }
 
-  function a(arg) {
-    console.log("ARG", arg);
-  }
-
   let stile = {
     color: "white"
   };
 
-  return ( <
-    React.Fragment > {
-      anteprime.map(anteprima => {
-        return ( <
-          div >
-          <
-          div className = "container-fluid row" >
-          <
-          div style = {
-            stile
-          }
-          className = "col-md" >
-          <
-          p > {
-            anteprima.Titolo
-          } < /p>{" "} <
-          img src = {
-            "https://vps.lellovitiello.tk/Riassunty/" +
-            anteprima.URLImmagine
-          }
-          width = "300"
-          height = "300" /
-          >
-          <
-          /div>{" "} <
-          div style = {
-            stile
-          }
-          className = "col-md" >
-          <
-          p > Elimina < /p>{" "} <
-          img id = {
-            anteprima.ID
-          }
-          style = {
-            {
-              cursor: "pointer"
-            }
-          }
-          src = "https://img.icons8.com/flat_round/64/000000/delete-sign.png"
-          onClick = {
-            eliminaRiassunto
-          }
-          />{" "} <
-          /div>{" "} <
-          /div>{" "} <
-          /div>
+  return (
+    <React.Fragment>
+      {" "}
+      {anteprime.map(anteprima => {
+        return (
+          <div>
+            <div className="container-fluid row">
+              <div style={stile} className="col-md">
+                <p> {anteprima.Titolo} </p>{" "}
+                <img
+                  src={
+                    "https://vps.lellovitiello.tk/Riassunty/" +
+                    anteprima.URLImmagine
+                  }
+                  alt={anteprima.Titolo}
+                  width="300"
+                  height="300"
+                />
+              </div>{" "}
+              <div style={stile} className="col-md">
+                <p> Elimina </p>{" "}
+                <img
+                  alt={"Elimina"}
+                  id={anteprima.ID}
+                  style={{
+                    cursor: "pointer"
+                  }}
+                  src="https://img.icons8.com/flat_round/64/000000/delete-sign.png"
+                  onClick={eliminaRiassunto}
+                />{" "}
+              </div>{" "}
+            </div>{" "}
+          </div>
         );
-      })
-    } {
-      " "
-    } <
-    /React.Fragment>
+      })}{" "}
+    </React.Fragment>
   );
 }
 

@@ -11,7 +11,6 @@ function Titolo(props) {
     marginBottom: "80px"
   };
 
-  let oggetto = props.dati;
   return (
     <React.Fragment>
       <div id="heading" className="row" style={stile}>

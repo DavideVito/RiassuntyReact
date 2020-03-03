@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState
+} from "react";
 import "../App.css";
-import SearchBar from "../Util/SearchBar/SearchBar";
 import $ from "jquery";
 import Brand from "../NavBar/Foto/Brand";
 import MenuIcon from "../NavBar/Elementi/MenuIcon";
@@ -84,64 +86,97 @@ function MostraMaterie(props) {
     }
   });
 
-  return (
-    <div>
-      <header>
-        <nav>
-          <Brand link={linkFoto} />{" "}
-          <div id="menu">
-            <div
-              id="menu-toggle"
-              onClick={() => {
-                $("#menu-toggle").toggleClass("closeMenu");
-                $("ul").toggleClass("showMenu");
+  return ( <
+    div >
+    <
+    header >
+    <
+    nav >
+    <
+    Brand link = {
+      linkFoto
+    }
+    />{" "} <
+    div id = "menu" >
+    <
+    div id = "menu-toggle"
+    onClick = {
+      () => {
+        $("#menu-toggle").toggleClass("closeMenu");
+        $("ul").toggleClass("showMenu");
 
-                if ($("#menu-toggle").hasClass("closeMenu")) {
-                  $("#main").animate(
-                    {
-                      left: "85%",
-                      opacity: "0.7"
-                    },
-                    300
-                  );
-                } else {
-                  $("#main").animate(
-                    {
-                      left: "0px",
-                      opacity: "1"
-                    },
-                    300
-                  );
-                }
-              }}
-            >
-              <MenuIcon />
-            </div>{" "}
-            <ul>
-              {" "}
-              {anni.map((anno, indice) => {
-                return (
-                  <NavBarItem
-                    key={indice}
-                    nome={anno.nome}
-                    indice={indice + 1}
-                  />
-                );
-              })}{" "}
-            </ul>{" "}
-          </div>{" "}
-        </nav>{" "}
-      </header>{" "}
-      <main id="main">
-        <SearchBar />
-        <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />{" "}
-        {anni.map(anno => {
-          console.log("anno", anno);
-          return <Indirizzi dati={anno} link={"/mostraRiassunto/:id"} />;
-        })}{" "}
-      </main>{" "}
-      <Footer />
-    </div>
+        if ($("#menu-toggle").hasClass("closeMenu")) {
+          $("#main").animate({
+              left: "85%",
+              opacity: "0.7"
+            },
+            300
+          );
+        } else {
+          $("#main").animate({
+              left: "0px",
+              opacity: "1"
+            },
+            300
+          );
+        }
+        $("li").on("click", () => {
+          $("ul").removeClass("showMenu");
+          $("#menu-toggle").removeClass("closeMenu");
+        });
+      }
+    } >
+    <
+    MenuIcon / >
+    <
+    /div>{" "} <
+    ul > {
+      " "
+    } {
+      anni.map((anno, indice) => {
+        return ( <
+          NavBarItem key = {
+            indice
+          }
+          nome = {
+            anno.nome
+          }
+          indice = {
+            indice + 1
+          }
+          />
+        );
+      })
+    } {
+      " "
+    } <
+    /ul>{" "} <
+    /div>{" "} <
+    /nav>{" "} <
+    /header>{" "} <
+    main id = "main" >
+    <
+    Bottone TestoBottone = "Per caricare un riassunto"
+    link = "/Login" / > {
+      " "
+    } {
+      anni.map(anno => {
+        console.log("anno", anno);
+        return <Indirizzi dati = {
+          anno
+        }
+        link = {
+          "/mostraRiassunto/:id"
+        }
+        />;
+      })
+    } {
+      " "
+    } <
+    /main>{" "} <
+    Footer / >
+    <
+    /div>
   );
 }
 

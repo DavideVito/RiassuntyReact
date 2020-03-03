@@ -50,6 +50,10 @@ function FullNavBar(props) {
                   300
                 );
               }
+              $("li").on("click", () => {
+                $("ul").removeClass("showMenu");
+                $("#menu-toggle").removeClass("closeMenu");
+              });
             }}
           >
             <MenuIcon />

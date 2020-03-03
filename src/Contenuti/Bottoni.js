@@ -1,14 +1,10 @@
-import React, {
-  useEffect,
-  useState
-} from "react";
+import React from "react";
 import "../App.css";
 import Bottone from "./../Util/Bottone";
 
 function Bottoni(props) {
-  let oggetto = props.dati;
 
-  return oggetto.map((contenutoBottone, indice) => {
+  return props.dati.map((contenutoBottone, indice) => {
     return ( <
       Bottone TestoBottone = {
         contenutoBottone.nome

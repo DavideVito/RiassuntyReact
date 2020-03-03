@@ -1,9 +1,7 @@
 import React from "react";
 import "./stileFooter.css";
 
-function Footer(props) {
-  let oggethref = props.dati;
-
+function Footer() {
   return (
     <React.Fragment>
       <div id="footer">
@@ -31,28 +29,28 @@ function Footer(props) {
             target="_blank"
           >
             <i className="fab fa-facebook-square"> </i>{" "}
-          </a>
+          </a>{" "}
           <a
             href="mailhref:moriste01@gmail.com"
             rel="noreferrer"
             target="_blank"
           >
             <i className="fa fa-envelope"> </i>{" "}
-          </a>
+          </a>{" "}
           <a
             href="https://www.instagram.com/adeccoitaly/?hl=it"
             rel="noreferrer"
             target="_blank"
           >
             <i className="fab fa-instagram"> </i>{" "}
-          </a>
+          </a>{" "}
           <a
             href="https://twitter.com/adeccogroupita"
             rel="noreferrer"
             target="_blank"
           >
             <i className="fab fa-twitter-square"> </i>{" "}
-          </a>
+          </a>{" "}
           <a
             href="https://www.youtube.com/user/AdeccoItaliaTV"
             rel="noreferrer"
