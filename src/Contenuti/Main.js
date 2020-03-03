@@ -3,6 +3,7 @@ import $ from "jquery";
 import Indirizzi from "./Indirizzi";
 import Bottone from "../Util/Bottone";
 import Footer from "../Util/Footer";
+import SearchBar from "../Util/SearchBar/SearchBar";
 import "../App.css";
 import FullNavBar from "../NavBar/FullNavBar";
 
@@ -67,15 +68,15 @@ function Main(props) {
     <React.Fragment>
       <FullNavBar elementi={indirizzi} />{" "}
       <main id="main">
+        <SearchBar />
         <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />{" "}
         {indirizzi.map((indirizzo, indice) => {
           return (
-            <React.Fragment> 
-                          <Indirizzi dati={indirizzo} link={"/mostraMateria/:id"} />
-                  <div className={"separator"+indice}></div>
-                  </React.Fragment>
- 
-                );
+            <React.Fragment>
+              <Indirizzi dati={indirizzo} link={"/mostraMateria/:id"} />{" "}
+              <div className={"separator" + indice}> </div>{" "}
+            </React.Fragment>
+          );
         })}{" "}
       </main>{" "}
       <Footer />

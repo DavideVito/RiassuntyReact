@@ -82,13 +82,7 @@ input {
     transition: 0.2s ease-in-out;
 }
 
-.close {
-    -webkit-transition: 0.4s ease-in-out;
-    transition: 0.4s ease-in-out;
-    -webkit-transition-delay: 0.4s;
-    transition-delay: 0.4s;
-    justify-content: center;
-}
+
 
 .close:before {
     content: "";
@@ -119,7 +113,18 @@ input {
     transform: rotate(-45deg);
 }
 
+.close {
+
+    -webkit-transition: 0.4s ease-in-out;
+    transition: 0.4s ease-in-out;
+    margin-left: 50%;
+    -webkit-transition-delay: 0.4s;
+    transition-delay: 0.4s;
+    justify-content: center;
+}
+
 .square {
+
     box-sizing: border-box;
     padding: 0 40px 0 10px;
     width: 300px;
@@ -138,6 +143,7 @@ input {
         padding 0.2s;
     -webkit-transition-delay: 0.4s, 0s, 0.4s;
     transition-delay: 0.4s, 0s, 0.4s;
+    margin-left: 50%;
     -webkit-transform: translate(-100%, -50%);
     -ms-transform: translate(-100%, -50%);
     transform: translate(-100%, -50%);
