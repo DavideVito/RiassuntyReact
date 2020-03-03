@@ -7,7 +7,7 @@ function Footer(props) {
   return (
     <React.Fragment>
       <div id="footer">
-        <a href="mailhref:moriste01@gmail.com">
+        <a href="mailto:moriste01@gmail.com">
           {" "}
           <p> Mail: moriste01 @gmail.com </p>{" "}
         </a>{" "}
@@ -45,13 +45,6 @@ function Footer(props) {
             target="_blank"
           >
             <i className="fab fa-instagram"> </i>{" "}
-          </a>
-          <a
-            href="https://www.pinterest.it/adeccousa/"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <i className="fab fa-pinterest-squaree"> </i>{" "}
           </a>
           <a
             href="https://twitter.com/adeccogroupita"

@@ -8,7 +8,7 @@ function Indirizzi(props) {
   let oggetto = props.dati;
   return (
     <React.Fragment>
-      /{" "}
+      {" "}
       <Indirizzo
         key={oggetto.nome}
         nome={oggetto.nome}
