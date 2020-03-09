@@ -11,16 +11,10 @@ function NavBarItem(props) {
     });
   };
 
-  return ( <
-    li className = "menu-item"
-    onClick = {
-      quandoClicca
-    } >
-    <
-    p > {
-      props.nome
-    } < /p>{" "} <
-    /li>
+  return (
+    <li className="menu-item" onClick={quandoClicca}>
+      <p> {props.nome} </p>{" "}
+    </li>
   );
 }
 

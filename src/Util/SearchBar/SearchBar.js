@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import "./stileSearchBar.css";
+import React, {
+  useState
+} from "react";
 import Bottone from "../Bottone";
 import $ from "jquery";
 
@@ -30,7 +31,7 @@ function SearchBar() {
       }
       let rispostaDB = await fetch(
         "https://vps.lellovitiello.tk/Riassunty/API/anteprima.php?nome=" +
-          e.target.value
+        e.target.value
       );
 
       rispostaDB = await rispostaDB.json();
@@ -41,48 +42,69 @@ function SearchBar() {
     }
   };
 
-  return (
-    <div>
-      <div onKeyUp={cercaSulDB}>
-        <div id="content">
-          <input
-            type="text"
-            name="input"
-            className="input"
-            id="search-input"
-            label="Clicca per cercare"
-          />{" "}
-          <button
-            type="reset"
-            className="search"
-            id="search-btn"
-            onClick={expand}
-          ></button>{" "}
-        </div>{" "}
-      </div>{" "}
-      <div>
-        {" "}
-        {riassunti.map(riassunto => {
-          return (
-            <React.Fragment>
-              <div className="row justify-content-center">
-                <Bottone
-                  TestoBottone={riassunto.Titolo}
-                  link={`/mostraRiassunto/${riassunto.ID}`}
-                />{" "}
-              </div>{" "}
-              <div
-                style={{
-                  height: "20px"
-                }}
-              >
-                {" "}
-              </div>{" "}
-            </React.Fragment>
-          );
-        })}{" "}
-      </div>{" "}
-    </div>
+  return ( <
+    div >
+    <
+    link rel = "stylesheet"
+    href = "./stileSearchBar.css" / >
+    <
+    div onKeyUp = {
+      cercaSulDB
+    } >
+    <
+    div id = "content" >
+    <
+    input type = "text"
+    name = "input"
+    className = "input"
+    id = "search-input"
+    label = "Clicca per cercare" /
+    > {
+      " "
+    } <
+    button type = "reset"
+    className = "search"
+    id = "search-btn"
+    onClick = {
+      expand
+    } >
+    < /button>{" "} <
+    /div>{" "} <
+    /div>{" "} <
+    div > {
+      " "
+    } {
+      riassunti.map(riassunto => {
+        return ( <
+          React.Fragment >
+          <
+          div className = "row justify-content-center" >
+          <
+          Bottone TestoBottone = {
+            riassunto.Titolo
+          }
+          link = {
+            `/mostraRiassunto/${riassunto.ID}`
+          }
+          />{" "} <
+          /div>{" "} <
+          div style = {
+            {
+              height: "20px"
+            }
+          } >
+          {
+            " "
+          } <
+          /div>{" "} <
+          /React.Fragment>
+        );
+      })
+    } {
+      " "
+    } <
+    /div>{" "} <
+    /div>
   );
 }
 

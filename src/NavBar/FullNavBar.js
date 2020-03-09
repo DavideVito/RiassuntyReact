@@ -53,6 +53,13 @@ function FullNavBar(props) {
               $("li").on("click", () => {
                 $("ul").removeClass("showMenu");
                 $("#menu-toggle").removeClass("closeMenu");
+                $("#main").animate(
+                  {
+                    left: "0px",
+                    opacity: "1"
+                  },
+                  500
+                );
               });
             }}
           >
