@@ -7,9 +7,14 @@ function MostraRiassunti(props) {
 
   const prendiRiassunti = () => {
     const getAnteprime = async () => {
+      let data = new FormData();
+
+      data.append("prendiProp", 1);
+      data.append("token", sessionStorage.token);
+
       let anteprime = await fetch(
-        "https://vps.lellovitiello.tk/Riassunty/API/anteprima.php"
-        //"http://localhost/~davidevitiello/Riassunty/API/anteprima.php"
+        //"https://vps.lellovitiello.tk/Riassunty/API/anteprima.php"
+        `http://localhost/~davidevitiello/Riassunty/API/anteprima.php?prendiProp=1&token=${sessionStorage.token}`
       );
       anteprime = await anteprime.json();
       cambiaAnteprime(anteprime);

@@ -22,9 +22,13 @@ function Login(props) {
       if (token) {
         data.append("token", token);
       }
+      data.append("username", account.getName());
+      data.append("idGoogle", account.getId());
+      data.append("mail", account.getEmail());
+
       let risposta = await fetch(
-        "https://vps.lellovitiello.tk/Riassunty/API/Utenti.php",
-        //"http://localhost/~davidevitiello/Riassunty/API/Utenti.php",
+        //"https://vps.lellovitiello.tk/Riassunty/API/Utenti.php",
+        "http://localhost/~davidevitiello/Riassunty/API/Utenti.php",
         {
           method: "POST",
           body: data
@@ -46,7 +50,10 @@ function Login(props) {
     cambiaUDID(risposta.googleId);
   }
 
-  function logout() {}
+  function logout() {
+    sessionStorage.removeItem("token");
+    window.location.href = "/Login";
+  }
 
   const stile = {
     marginTop: "-50%"
@@ -125,7 +132,14 @@ function Login(props) {
               marginTop: "30%"
             }}
           >
-            <MostraRiassunti account={udid} />{" "}
+            <section>
+              <div
+                className="container-fluid"
+                style={{ textAlign: "center", marginTop: "100px" }}
+              >
+                <MostraRiassunti account={udid} />{" "}
+              </div>
+            </section>
           </div>{" "}
         </div>{" "}
       </React.Fragment>
@@ -153,6 +167,10 @@ function Login(props) {
             buttonText="Login"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
+            onLogoutSuccess={() => {
+              alert(1);
+              window.location.href = "/Login";
+            }}
             theme="dark"
             width="260"
             height="80"

@@ -10,8 +10,8 @@ function RiassuntiDaApprovare(props) {
     const getRiassunti = async () => {
       $.ajax({
         url:
-          "https://vps.lellovitiello.tk/Riassunty/API/riassuntiNonApprovati.php",
-        //"http://localhost/~davidevitiello/Riassunty/API/riassuntiNonApprovati.php",
+          // "https://vps.lellovitiello.tk/Riassunty/API/riassuntiNonApprovati.php",
+          "http://localhost/~davidevitiello/Riassunty/API/riassuntiNonApprovati.php",
 
         data: {
           token: sessionStorage.token
@@ -22,6 +22,9 @@ function RiassuntiDaApprovare(props) {
             return;
           }
           if (data.shouldRedirect === "true") {
+            if (data.motivo) {
+              alert(data.motivo);
+            }
             window.location.href = "/Login";
           }
           cambiaRiassunti(data);
