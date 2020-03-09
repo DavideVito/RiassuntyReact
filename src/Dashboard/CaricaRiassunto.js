@@ -10,10 +10,16 @@ function CaricaRiassunto() {
   let [materie, cambiaMaterie] = useState([]);
   let [ok, cambiaOK] = useState(false);
 
-  $(window).on("load", () => {
-    document.getElementById("bottoneSubmit").disabled = true;
-    $("#bottoneSubmit").css({ cursor: "default" });
-  });
+  useEffect(() => {
+    if (ok === false) {
+      document.getElementById("bottoneSubmit").disabled = true;
+      $("#bottoneSubmit").css({ cursor: "default" });
+    } else {
+      document.getElementById("bottoneSubmit").disabled = false;
+
+      $("#bottoneSubmit").css({ cursor: "pointer" });
+    }
+  }, [window.location.href, ok]);
 
   const controllaValidita = () => {
     $.ajax({
@@ -235,12 +241,10 @@ function CaricaRiassunto() {
                 badge="bottomright"
                 size="compact"
                 onChange={() => {
-                  document.getElementById("bottoneSubmit").disabled = false;
-                  $("#bottoneSubmit").css({ cursor: "pointer" });
+                  cambiaOK(true);
                 }}
                 onExpired={() => {
-                  document.getElementById("bottoneSubmit").disabled = true;
-                  $("#bottoneSubmit").css({ cursor: "default" });
+                  cambiaOK(false);
                 }}
               />
             </div>{" "}

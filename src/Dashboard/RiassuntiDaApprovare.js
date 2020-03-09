@@ -10,8 +10,8 @@ function RiassuntiDaApprovare(props) {
     const getRiassunti = async () => {
       $.ajax({
         url:
-          // "https://vps.lellovitiello.tk/Riassunty/API/riassuntiNonApprovati.php",
-          "http://localhost/~davidevitiello/Riassunty/API/riassuntiNonApprovati.php",
+          "https://vps.lellovitiello.tk/Riassunty/API/riassuntiNonApprovati.php",
+        //"http://localhost/~davidevitiello/Riassunty/API/riassuntiNonApprovati.php",
 
         data: {
           token: sessionStorage.token
