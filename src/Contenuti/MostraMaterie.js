@@ -28,6 +28,7 @@ function MostraMaterie(props) {
         async function prendiAnteprime() {
           let anteprimeFetch = await fetch(
             `https://vps.lellovitiello.tk/Riassunty/API/anteprima.php?idMateria=${idMateria}&anno=${anno}`
+            //`http://localhost/~davidevitiello/Riassunty/API/anteprima.php?idMateria=${idMateria}&anno=${anno}`
           );
 
           anteprimeFetch = await anteprimeFetch.json();
@@ -136,7 +137,7 @@ function MostraMaterie(props) {
         </nav>{" "}
       </header>{" "}
       <main id="main">
-        <div id="primaParte"></div>{" "}
+        <div id="primaParte"> </div>{" "}
         <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />{" "}
         {anni.map(anno => {
           console.log("anno", anno);
