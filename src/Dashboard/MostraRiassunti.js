@@ -20,6 +20,7 @@ function MostraRiassunti(props) {
         //`http://localhost/~davidevitiello/Riassunty/API/anteprima.php?prendiProp=1&token=${sessionStorage.token}&normale=1`
       );
       anteprime = await anteprime.json();
+
       cambiaAnteprime(anteprime);
       console.log("Anteprime", anteprime);
     };

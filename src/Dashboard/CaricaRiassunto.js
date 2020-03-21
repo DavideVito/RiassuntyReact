@@ -89,6 +89,7 @@ function CaricaRiassunto() {
     if (!ok) {
       alert("Conferma il capthca");
     } else {
+      debugger;
       e.preventDefault();
       let file = $("#file").prop("files")[0];
       let form = new FormData();
@@ -116,7 +117,8 @@ function CaricaRiassunto() {
       if (token) {
         form.append("token", token);
       }
-
+      $("#loadingImage").fadeIn(500, "swing");
+      $("#loadingImage").css({ opacity: "0.8" });
       $.ajax({
         //url: "http://localhost/~davidevitiello/Riassunty/API/caricaRiassunto.php", // point to server-side PHP script
         url: "https://vps.lellovitiello.tk/Riassunty/API/caricaRiassunto.php",
@@ -129,6 +131,10 @@ function CaricaRiassunto() {
           if (data.shouldRedirect === "true") {
             window.location.href = "/Login";
           }
+          alert("ok");
+          debugger;
+          $("#loadingImage").css({ opacity: "0" });
+          $("#loadingImage").fadeOut(500, "swing");
         }
       });
     }
