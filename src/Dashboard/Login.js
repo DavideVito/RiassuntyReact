@@ -74,6 +74,7 @@ function Login(props) {
               dati: []
             }
           ]}
+          noBar={true}
         />{" "}
         <div style={stile}>
           <div
@@ -85,7 +86,12 @@ function Login(props) {
             <div id="nomePersona" className="row justify-content-center">
               {" "}
               {
-                <p style={{ color: "white", fontSize: "xx-large" }}>
+                <p
+                  style={{
+                    color: "white",
+                    fontSize: "xx-large"
+                  }}
+                >
                   {" "}
                   Bentornato {account.getName()}{" "}
                 </p>

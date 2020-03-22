@@ -29,8 +29,10 @@ function Contenitore(props) {
     link = {
       props.link
     }
-    />{" "} <
-    /div>{" "} <
+    />{" "} < /
+    div > {
+      " "
+    } <
     /React.Fragment>
   );
 }

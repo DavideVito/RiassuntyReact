@@ -66,10 +66,9 @@ function Main(props) {
 
   return (
     <React.Fragment>
-      <FullNavBar elementi={indirizzi} />{" "}
+      <FullNavBar elementi={indirizzi} noBar={false} />{" "}
       <main id="main">
-        <SearchBar />
-        <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />{" "}
+        <div id="elementiPrincipali"></div>{" "}
         {indirizzi.map((indirizzo, indice) => {
           return (
             <React.Fragment>

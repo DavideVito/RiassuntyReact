@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Brand from "./Foto/Brand";
+import SearchBar from "../Util/SearchBar/SearchBar";
+import Bottone from "../Util/Bottone";
 import $ from "jquery";
 import NavBarItem from "./Elementi/NavBarItem";
 import MenuIcon from "./Elementi/MenuIcon";
@@ -21,6 +23,8 @@ function FullNavBar(props) {
       console.log(e);
     }
   });
+
+  console.log(props.noBar);
 
   return (
     <header>
@@ -79,6 +83,19 @@ function FullNavBar(props) {
           </ul>{" "}
         </div>{" "}
       </nav>{" "}
+      <div id="hero-section">
+        {props.noBar || typeof props.noBar === "undefined" ? (
+          <div></div>
+        ) : (
+          <div>
+            <SearchBar />
+            <Bottone
+              TestoBottone="Per caricare un riassunto"
+              link="/Login"
+            />{" "}
+          </div>
+        )}
+      </div>{" "}
     </header>
   );
 }
