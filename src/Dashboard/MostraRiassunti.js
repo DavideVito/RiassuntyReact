@@ -13,8 +13,8 @@ function MostraRiassunti(props) {
       data.append("token", sessionStorage.token);
 
       let anteprime = await fetch(
-        //`https://vps.lellovitiello.tk/Riassunty/API/anteprima.php?prendiProp=1&token=${sessionStorage.token}&normale=1`
-        `http://localhost/~davidevitiello/Riassunty/API/anteprima.php?prendiProp=1&token=${sessionStorage.token}&normale=1`
+        `https://vps.lellovitiello.tk/Riassunty/API/anteprima.php?prendiProp=1&token=${sessionStorage.token}&normale=1`
+        //`http://localhost/~davidevitiello/Riassunty/API/anteprima.php?prendiProp=1&token=${sessionStorage.token}&normale=1`
       );
       anteprime = await anteprime.json();
 
