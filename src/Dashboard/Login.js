@@ -28,8 +28,8 @@ function Login(props) {
       data.append("mail", account.getEmail());
 
       let risposta = await fetch(
-        "https://vps.lellovitiello.tk/Riassunty/API/Utenti.php",
-        //"http://localhost/~davidevitiello/Riassunty/API/Utenti.php",
+        //"https://vps.lellovitiello.tk/Riassunty/API/Utenti.php",
+        "http://localhost/~davidevitiello/Riassunty/API/Utenti.php",
         {
           method: "POST",
           body: data
@@ -47,13 +47,13 @@ function Login(props) {
   useEffect(esisteGia, [props.location.pathname, udid]);
 
   function responseGoogle(risposta) {
-    debugger;
+    sessionStorage.clear();
     cambiaAccount(risposta.getBasicProfile());
     cambiaUDID(risposta.googleId);
   }
 
   function logout() {
-    sessionStorage.removeItem("token");
+    sessionStorage.clear();
     window.location.href = "/Login";
   }
 
@@ -84,7 +84,12 @@ function Login(props) {
           >
             <div id="nomePersona" className="row justify-content-center">
               {" "}
-              {<p> Bentornato {account.getName()} </p>}{" "}
+              {
+                <p style={{ color: "white", fontSize: "xx-large" }}>
+                  {" "}
+                  Bentornato {account.getName()}{" "}
+                </p>
+              }{" "}
             </div>{" "}
             <div id="immaginePersona" className="row justify-content-center">
               {" "}
