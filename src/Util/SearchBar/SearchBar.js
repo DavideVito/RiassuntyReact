@@ -21,6 +21,7 @@ function SearchBar() {
 
   const cercaSulDB = async e => {
     let testoAccettato = /^[0-9a-zA-Z]+$/;
+
     if (e.target.value.match(testoAccettato) || e.key === "Backspace") {
       if (e.key === "Backspace" && e.target.value.length === 0) {
         cambiaRiassunti([]);
@@ -37,10 +38,6 @@ function SearchBar() {
       cambiaRiassunti(rispostaDB);
     } else {
     }
-
-    if (document.getElementById("searchBox").value === "") {
-      document.getElementById("rispostaRiassunti").innerHTML = "";
-    }
   };
 
   return (
@@ -51,7 +48,7 @@ function SearchBar() {
           type="search"
           id="searchBox"
           class="search-box"
-          onKeyUp={cercaSulDB}
+          onKeyPress={cercaSulDB}
         />
         <span
           class="search-button"

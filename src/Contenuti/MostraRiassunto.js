@@ -4,6 +4,7 @@ import "../App.css";
 import $ from "jquery";
 import Brand from "../NavBar/Foto/Brand";
 import MenuIcon from "../NavBar/Elementi/MenuIcon";
+import PDFViewer from "pdf-viewer-reactjs";
 
 function MostraRiassunto(props) {
   let [linkFoto, cambiaLink] = useState("");
@@ -35,7 +36,6 @@ function MostraRiassunto(props) {
       riassuntoJSON = await riassuntoJSON.json();
       riassuntoJSON = riassuntoJSON[0];
       cambiaRiassunto(riassuntoJSON);
-
       $("#loadingImage").fadeOut(500);
     }
     $("#loadingImage").fadeIn(500);
@@ -47,7 +47,6 @@ function MostraRiassunto(props) {
   if (typeof riassunto === "undefined") {
     return <Redirect to="/" />;
   }
-  console.log(riassunto.txt);
   return (
     <React.Fragment>
       <header>
@@ -90,7 +89,17 @@ function MostraRiassunto(props) {
         </nav>{" "}
       </header>{" "}
       <section id={`section1`} className={`sezione1`}>
-        <object style={{ width: "75%" }} data={riassunto.txt}></object>
+        {" "}
+        {typeof riassunto.txt === "undefined" ? (
+          <span> Caricamento </span>
+        ) : (
+          <PDFViewer
+            document={{
+              base64: riassunto.txt
+            }}
+            sacle="1.1"
+          />
+        )}{" "}
       </section>{" "}
     </React.Fragment>
   );

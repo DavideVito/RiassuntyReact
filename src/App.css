@@ -516,7 +516,7 @@ section {
 
 /* Button Styles */
 
-.button {
+.nostroButton {
   display: inline-flex;
   height: 60px;
   width: 250px;

@@ -20,7 +20,7 @@ function Bottone(props) {
   return (
     <Link to={link}>
       <div className="row justify-content-center" onClick={mostraMateria}>
-        <div className="button bottonaccio" id="button-3">
+        <div className="nostroButton bottonaccio" id="button-3">
           <div id="circle"> </div> <a> {props.TestoBottone} </a> <div> </div>{" "}
         </div>{" "}
       </div>{" "}
