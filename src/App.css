@@ -256,7 +256,8 @@ section {
   justify-content: center;
 }
 
-#heading {
+#nostroHeading {
+  padding-top: 125px;
   text-align: center;
   font-size: 4em;
   width: 100%;

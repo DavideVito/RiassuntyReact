@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import GoogleLogin, { GoogleLogout, useGoogleLogin } from "react-google-login";
-
+import GoogleLogin, { GoogleLogout } from "react-google-login";
 import FullNavBar from "../NavBar/FullNavBar";
 import Bottone from "../Util/Bottone";
 import "../App.css";
 import $ from "jquery";
 import MostraRiassunti from "./MostraRiassunti";
+import TextEditor from "./TextEditor";
 
 function Login(props) {
   let [ok, cambiaOk] = useState(false);
@@ -145,15 +145,20 @@ function Login(props) {
               marginTop: "30%"
             }}
           >
-            <section>
+            <section id="section1" className="sezione1">
               <div
                 className="container-fluid"
                 style={{
-                  textAlign: "center",
-                  marginTop: "100px"
+                  textAlign: "center"
+                  //marginTop: "100px"
                 }}
               >
                 <MostraRiassunti account={udid} />{" "}
+              </div>{" "}
+            </section>{" "}
+            <section id="section2" className="sezione2">
+              <div>
+                <TextEditor />
               </div>{" "}
             </section>{" "}
           </div>{" "}

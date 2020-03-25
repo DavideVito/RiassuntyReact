@@ -13,7 +13,7 @@ function Titolo(props) {
 
   return (
     <React.Fragment>
-      <div id="heading" className="row" style={stile}>
+      <div id="nostroHeading" className="row">
         <div className="col-md" style={stileTitolo}>
           {" "}
           {props.dati.nome}{" "}
