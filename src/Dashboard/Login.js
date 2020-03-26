@@ -6,6 +6,7 @@ import "../App.css";
 import $ from "jquery";
 import MostraRiassunti from "./MostraRiassunti";
 import TextEditor from "./TextEditor";
+import MostarRiassuntiTemporanei from "./MostraRiassuntiTemporanei";
 
 function Login(props) {
   let [ok, cambiaOk] = useState(false);
@@ -28,8 +29,8 @@ function Login(props) {
       data.append("mail", account.getEmail());
 
       let risposta = await fetch(
-        "https://vps.lellovitiello.tk/Riassunty/API/Utenti.php",
-        //"http://localhost/~davidevitiello/Riassunty/API/Utenti.php",
+        //"https://vps.lellovitiello.tk/Riassunty/API/Utenti.php",
+        "http://localhost/~davidevitiello/Riassunty/API/Utenti.php",
         {
           method: "POST",
           body: data
@@ -157,6 +158,9 @@ function Login(props) {
               </div>{" "}
             </section>{" "}
             <section id="section2" className="sezione2">
+              <MostarRiassuntiTemporanei account={udid} />
+            </section>
+            <section id="section3" className="sezione3">
               <div>
                 <TextEditor />
               </div>{" "}
