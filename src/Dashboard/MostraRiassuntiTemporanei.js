@@ -11,15 +11,22 @@ function MostraRiassuntiTemporanei(props) {
 
   const prendiRiassunti = () => {
     $.ajax({
-      url: `http://localhost/~davidevitiello/Riassunty/API/getRiassuntiTemporanei.php`,
-      // url: `https://vps.lellovitiello.tk/Riassunty/API/getRiassuntiTemporanei.php`,
+      //url: `http://localhost/~davidevitiello/Riassunty/API/getRiassuntiTemporanei.php`,
+      url: `https://vps.lellovitiello.tk/Riassunty/API/getRiassuntiTemporanei.php`,
 
       data: {
         token: sessionStorage.token
       },
       method: "POST",
       success: data => {
+        debugger;
         console.log(data);
+        if (typeof data.shoudRedirect !== "undefined") {
+          if (data.shoudRedirect === true) {
+            window.location.href = "/Login";
+          }
+        }
+
         for (let riassunto of data) {
           riassunto.versioni.unshift({
             UltimaModifica: "Seleziona una versione",
@@ -33,8 +40,8 @@ function MostraRiassuntiTemporanei(props) {
 
   const prendiFile = () => {
     $.ajax({
-      url: `http://localhost/~davidevitiello/Riassunty/API/getFileRiassuntoTemporaneo.php`,
-      // url: `https://vps.lellovitiello.tk/Riassunty/API/getFileRiassuntoTemporaneo.php`,
+      //url: `http://localhost/~davidevitiello/Riassunty/API/getFileRiassuntoTemporaneo.php`,
+      url: `https://vps.lellovitiello.tk/Riassunty/API/getFileRiassuntoTemporaneo.php`,
 
       data: {
         file: fileSezionato,

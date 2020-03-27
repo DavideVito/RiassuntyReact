@@ -13,19 +13,22 @@ function CaricaRiassunto(props) {
   useEffect(() => {
     if (ok === false) {
       document.getElementById("bottoneSubmit").disabled = true;
-      $("#bottoneSubmit").css({ cursor: "default" });
+      $("#bottoneSubmit").css({
+        cursor: "default"
+      });
     } else {
       document.getElementById("bottoneSubmit").disabled = false;
 
-      $("#bottoneSubmit").css({ cursor: "pointer" });
+      $("#bottoneSubmit").css({
+        cursor: "pointer"
+      });
     }
   }, [window.location.href, ok]);
 
   const controllaValidita = () => {
     $.ajax({
-      url:
-        //"http://localhost/~davidevitiello/Riassunty/API/controllaValidita.php",
-        "https://vps.lellovitiello.tk/Riassunty/API/controllaValidita.php",
+      //url: "http://localhost/~davidevitiello/Riassunty/API/controllaValidita.php",
+      url: "https://vps.lellovitiello.tk/Riassunty/API/controllaValidita.php",
       method: "POST",
       data: {
         token: sessionStorage.token
@@ -81,8 +84,6 @@ function CaricaRiassunto(props) {
     getMaterie();
   };
 
-  console.log("props Carica Riassunto", props);
-
   function onChange(value) {
     console.log("Captcha value:", value);
   }
@@ -92,7 +93,13 @@ function CaricaRiassunto(props) {
       alert("Conferma il capthca");
     } else {
       e.preventDefault();
-      let file = $("#file").prop("files")[0];
+      let file = "";
+      if (props.file) {
+        file = props.file;
+      } else {
+        file = $("#file").prop("files")[0];
+      }
+
       let form = new FormData();
       form.append("pdfDaCaricare", file);
 
@@ -119,9 +126,11 @@ function CaricaRiassunto(props) {
         form.append("token", token);
       }
       $("#loadingImage").fadeIn(500, "swing");
-      $("#loadingImage").css({ opacity: "0.8" });
+      $("#loadingImage").css({
+        opacity: "0.8"
+      });
       $.ajax({
-        //url: "http://localhost/~davidevitiello/Riassunty/API/caricaRiassunto.php", // point to server-side PHP script
+        // url:"http://localhost/~davidevitiello/Riassunty/API/caricaRiassunto.php", // point to server-side PHP script
         url: "https://vps.lellovitiello.tk/Riassunty/API/caricaRiassunto.php",
         cache: false,
         contentType: false,
@@ -134,7 +143,9 @@ function CaricaRiassunto(props) {
           }
           alert("ok");
           debugger;
-          $("#loadingImage").css({ opacity: "0" });
+          $("#loadingImage").css({
+            opacity: "0"
+          });
           $("#loadingImage").fadeOut(500, "swing");
         }
       });
@@ -151,6 +162,7 @@ function CaricaRiassunto(props) {
 
   return (
     <React.Fragment>
+      {" "}
       {typeof props.renderNavBar === "undefined" ? (
         <FullNavBar
           elementi={[
@@ -161,7 +173,7 @@ function CaricaRiassunto(props) {
           ]}
         />
       ) : (
-        <div></div>
+        <div> </div>
       )}{" "}
       <section id="section0" className="sezione0">
         <div
@@ -172,11 +184,12 @@ function CaricaRiassunto(props) {
           }}
         >
           <form onSubmit={caricaFile}>
+            {" "}
             {typeof props.renderSelezionaFile === "undefined" ? (
               <React.Fragment>
                 <div className="row justify-content-center">
-                  <p> Seleziona il file </p>
-                </div>
+                  <p> Seleziona il file </p>{" "}
+                </div>{" "}
                 <div className="row justify-content-center">
                   <input
                     className="form-control-file"
@@ -191,11 +204,36 @@ function CaricaRiassunto(props) {
                       borderRadius: "0"
                       //marginLeft: "50%"
                     }}
-                  />
-                </div>
+                  />{" "}
+                </div>{" "}
               </React.Fragment>
             ) : (
-              <div></div>
+              <div
+                style={{
+                  opacity: 0
+                }}
+              >
+                <React.Fragment>
+                  <div className="row justify-content-center">
+                    <p> Seleziona il file </p>{" "}
+                  </div>{" "}
+                  <div className="row justify-content-center">
+                    <input
+                      className="form-control-file"
+                      type="file"
+                      id="file"
+                      name="pdfDaCaricare"
+                      accept=".pdf"
+                      style={{
+                        width: "auto",
+                        height: "auto",
+                        borderRadius: "0"
+                        //marginLeft: "50%"
+                      }}
+                    />{" "}
+                  </div>{" "}
+                </React.Fragment>{" "}
+              </div>
             )}{" "}
             <div style={stileDivisiore}> </div>{" "}
             <div style={stile}>
@@ -263,7 +301,7 @@ function CaricaRiassunto(props) {
                 onExpired={() => {
                   cambiaOK(false);
                 }}
-              />
+              />{" "}
             </div>{" "}
             <div style={stileDivisiore}> </div>{" "}
             <div className="row justify-content-center">

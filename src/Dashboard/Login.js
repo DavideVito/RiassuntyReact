@@ -31,8 +31,8 @@ function Login(props) {
       data.append("mail", account.getEmail());
 
       let risposta = await fetch(
-        //"https://vps.lellovitiello.tk/Riassunty/API/Utenti.php",
-        "http://localhost/~davidevitiello/Riassunty/API/Utenti.php",
+        "https://vps.lellovitiello.tk/Riassunty/API/Utenti.php",
+        //"http://localhost/~davidevitiello/Riassunty/API/Utenti.php",
         {
           method: "POST",
           body: data
@@ -168,7 +168,7 @@ function Login(props) {
                   <TextEditor />
                 </div>{" "}
               </section>{" "}
-            </TestoProvider>
+            </TestoProvider>{" "}
           </div>{" "}
         </div>{" "}
       </React.Fragment>
