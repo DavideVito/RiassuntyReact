@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "../Util/DropDownMenu/DropDownMenu";
 import "../App.css";
 import $ from "jquery";
+import { ContestoTesto } from "../Util/Contesti/ContestoTesto";
 
 function MostraRiassuntiTemporanei(props) {
   let [riassuntiTemporanei, cambiaRiassunti] = useState([]);
+
+  const [testo, cambiaTesto] = useContext(ContestoTesto);
 
   const prendiRiassunti = () => {
     $.ajax({
@@ -17,6 +20,12 @@ function MostraRiassuntiTemporanei(props) {
       method: "POST",
       success: data => {
         console.log(data);
+        for (let riassunto of data) {
+          riassunto.versioni.unshift({
+            UltimaModifica: "Seleziona una versione",
+            IDFile: ""
+          });
+        }
         cambiaRiassunti(data);
       }
     });
@@ -33,17 +42,17 @@ function MostraRiassuntiTemporanei(props) {
       },
       method: "POST",
       success: data => {
+        sessionStorage.idRiassunto = riassuntoSelezionato;
+        sessionStorage.idFile = fileSezionato;
         if (data.txt === false) {
           cambiaTesto("");
           return;
         }
-        console.log(data.txt);
         cambiaTesto(data.txt);
       }
     });
   };
 
-  let [testo, cambiaTesto] = useState("");
   let [riassuntoSelezionato, cambiaRiassuntoSelezionato] = useState("");
   let [fileSezionato, cambiaFileSelezioanto] = useState("");
 
@@ -57,45 +66,68 @@ function MostraRiassuntiTemporanei(props) {
   return (
     <React.Fragment>
       {" "}
-      <div style={{ height: "80px" }}></div>
+      <div
+        style={{
+          height: "80px"
+        }}
+      >
+        {" "}
+      </div>{" "}
       <div className="row">
         <div className="col-md-2"> </div>{" "}
-        <div className="col-md-3">Nome File</div>
-        <div className="col-md-1"></div>
-        <div className="col-md-3">Ultima Modifica</div>
+        <div className="col-md-3"> Nome File </div>{" "}
+        <div className="col-md-1"> </div>{" "}
+        <div className="col-md-3"> Ultima Modifica </div>{" "}
         <div className="col-md-2"> </div>{" "}
-      </div>
-      <div style={{ height: "20px" }}></div>
+      </div>{" "}
+      <div
+        style={{
+          height: "20px"
+        }}
+      >
+        {" "}
+      </div>{" "}
       {riassuntiTemporanei.map(riassuntoTemporaneo => {
         return (
           <React.Fragment>
             <div className="row">
               <div className="col-md-2"> </div>{" "}
-              <div className="col-md-3">{riassuntoTemporaneo.Nome}</div>
-              <div className="col-md-1"></div>
+              <div className="col-md-3"> {riassuntoTemporaneo.Nome} </div>{" "}
+              <div className="col-md-1"> </div>{" "}
               <div className="col-md-3">
                 <select
                   className="form-control"
                   onChange={e => {
                     let idFile = e.currentTarget.value;
+                    if (idFile === "") {
+                      idFile = e.currentTarget.options[1].value;
+                    }
                     let idRiassunto = e.target.name;
                     cambiaRiassuntoSelezionato(idRiassunto);
                     cambiaFileSelezioanto(idFile);
                   }}
                   name={riassuntoTemporaneo.IDRiassunto}
                 >
+                  {" "}
                   {riassuntoTemporaneo.versioni.map(elemento => {
                     return (
                       <option value={elemento.IDFile}>
-                        {elemento.UltimaModifica}
+                        {" "}
+                        {elemento.UltimaModifica}{" "}
                       </option>
                     );
-                  })}
-                </select>
-              </div>
+                  })}{" "}
+                </select>{" "}
+              </div>{" "}
               <div className="col-md-2"> </div>{" "}
-            </div>
-            <div style={{ height: "20px" }}></div>
+            </div>{" "}
+            <div
+              style={{
+                height: "20px"
+              }}
+            >
+              {" "}
+            </div>{" "}
           </React.Fragment>
         );
       })}{" "}

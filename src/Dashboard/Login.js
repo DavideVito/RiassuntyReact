@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import FullNavBar from "../NavBar/FullNavBar";
 import Bottone from "../Util/Bottone";
@@ -7,6 +7,8 @@ import $ from "jquery";
 import MostraRiassunti from "./MostraRiassunti";
 import TextEditor from "./TextEditor";
 import MostarRiassuntiTemporanei from "./MostraRiassuntiTemporanei";
+import { ContestoTesto, TestoProvider } from "../Util/Contesti/ContestoTesto";
+import A from "./A";
 
 function Login(props) {
   let [ok, cambiaOk] = useState(false);
@@ -157,14 +159,16 @@ function Login(props) {
                 <MostraRiassunti account={udid} />{" "}
               </div>{" "}
             </section>{" "}
-            <section id="section2" className="sezione2">
-              <MostarRiassuntiTemporanei account={udid} />
-            </section>
-            <section id="section3" className="sezione3">
-              <div>
-                <TextEditor />
-              </div>{" "}
-            </section>{" "}
+            <TestoProvider>
+              <section id="section2" className="sezione2">
+                <MostarRiassuntiTemporanei account={udid} />{" "}
+              </section>{" "}
+              <section id="section3" className="sezione3">
+                <div>
+                  <TextEditor />
+                </div>{" "}
+              </section>{" "}
+            </TestoProvider>
           </div>{" "}
         </div>{" "}
       </React.Fragment>

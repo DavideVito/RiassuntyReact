@@ -1,15 +1,80 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import $ from "jquery";
+import { Button, ButtonToolbar, Modal } from "react-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
-import "../App.css";
-import FullNavBar from "../NavBar/FullNavBar";
+import { ContestoShowModalMenu } from "./Contesti/ContestoShowModalMenu";
 
-function CaricaRiassunto(props) {
+function MyModal() {
+  let [show, setShow] = useContext(ContestoShowModalMenu);
   let anni = [];
+  $("#loadingImage").fadeOut(500, "swing");
   let [indirizzi, cambiaIndirizzi] = useState([]);
   let [materie, cambiaMaterie] = useState([]);
   let [ok, cambiaOK] = useState(false);
+  const stileDivisiore = {
+    marginBottom: "30px"
+  };
+  function onChange(value) {
+    console.log("Captcha value:", value);
+  }
+  let stile = {
+    color: "white"
+  };
+  const caricaFile = async e => {
+    if (!ok) {
+      alert("Conferma il capthca");
+    } else {
+      debugger;
+      e.preventDefault();
+      let file = $("#file").prop("files")[0];
+      let form = new FormData();
+      form.append("pdfDaCaricare", file);
 
+      let annoSelezionato = document.getElementById("anno");
+      annoSelezionato =
+        annoSelezionato.options[annoSelezionato.selectedIndex].value;
+
+      form.append("anno", annoSelezionato);
+
+      let indirizzoSelezionato = document.getElementById("indirizzo");
+      indirizzoSelezionato =
+        indirizzoSelezionato.options[indirizzoSelezionato.selectedIndex].value;
+
+      form.append("indirizzi", indirizzoSelezionato);
+
+      let materiaSelezionata = document.getElementById("materia");
+      materiaSelezionata =
+        materiaSelezionata.options[materiaSelezionata.selectedIndex].value;
+
+      form.append("materie", materiaSelezionata);
+
+      let token = sessionStorage.token;
+      if (token) {
+        form.append("token", token);
+      }
+      $("#loadingImage").fadeIn(500, "swing");
+      $("#loadingImage").css({ opacity: "0.8" });
+      $.ajax({
+        //url: "http://localhost/~davidevitiello/Riassunty/API/caricaRiassunto.php", // point to server-side PHP script
+        url: "https://vps.lellovitiello.tk/Riassunty/API/caricaRiassunto.php",
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form,
+        type: "POST",
+        success: data => {
+          if (data.shouldRedirect === "true") {
+            window.location.href = "/Login";
+          }
+          alert("ok");
+          debugger;
+          $("#loadingImage").css({ opacity: "0" });
+          $("#loadingImage").fadeOut(500, "swing");
+        }
+      });
+    }
+  };
+  /* *
   useEffect(() => {
     if (ok === false) {
       document.getElementById("bottoneSubmit").disabled = true;
@@ -19,7 +84,7 @@ function CaricaRiassunto(props) {
 
       $("#bottoneSubmit").css({ cursor: "pointer" });
     }
-  }, [window.location.href, ok]);
+  }, [show, ok]);*/
 
   const controllaValidita = () => {
     $.ajax({
@@ -80,123 +145,21 @@ function CaricaRiassunto(props) {
     };
     getMaterie();
   };
-
-  console.log("props Carica Riassunto", props);
-
-  function onChange(value) {
-    console.log("Captcha value:", value);
-  }
-  $("#loadingImage").fadeOut(500, "swing");
-  const caricaFile = async e => {
-    if (!ok) {
-      alert("Conferma il capthca");
-    } else {
-      e.preventDefault();
-      let file = $("#file").prop("files")[0];
-      let form = new FormData();
-      form.append("pdfDaCaricare", file);
-
-      let annoSelezionato = document.getElementById("anno");
-      annoSelezionato =
-        annoSelezionato.options[annoSelezionato.selectedIndex].value;
-
-      form.append("anno", annoSelezionato);
-
-      let indirizzoSelezionato = document.getElementById("indirizzo");
-      indirizzoSelezionato =
-        indirizzoSelezionato.options[indirizzoSelezionato.selectedIndex].value;
-
-      form.append("indirizzi", indirizzoSelezionato);
-
-      let materiaSelezionata = document.getElementById("materia");
-      materiaSelezionata =
-        materiaSelezionata.options[materiaSelezionata.selectedIndex].value;
-
-      form.append("materie", materiaSelezionata);
-
-      let token = sessionStorage.token;
-      if (token) {
-        form.append("token", token);
-      }
-      $("#loadingImage").fadeIn(500, "swing");
-      $("#loadingImage").css({ opacity: "0.8" });
-      $.ajax({
-        //url: "http://localhost/~davidevitiello/Riassunty/API/caricaRiassunto.php", // point to server-side PHP script
-        url: "https://vps.lellovitiello.tk/Riassunty/API/caricaRiassunto.php",
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: form,
-        type: "POST",
-        success: data => {
-          if (data.shouldRedirect === "true") {
-            window.location.href = "/Login";
-          }
-          alert("ok");
-          debugger;
-          $("#loadingImage").css({ opacity: "0" });
-          $("#loadingImage").fadeOut(500, "swing");
-        }
-      });
-    }
-  };
-
-  const stileDivisiore = {
-    marginBottom: "30px"
-  };
-
-  let stile = {
-    color: "white"
-  };
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
-    <React.Fragment>
-      {typeof props.renderNavBar === "undefined" ? (
-        <FullNavBar
-          elementi={[
-            {
-              nome: "Stai attento a quello che carichi, non ti conviene",
-              dati: []
-            }
-          ]}
-        />
-      ) : (
-        <div></div>
-      )}{" "}
-      <section id="section0" className="sezione0">
-        <div
-          className="container-fluid"
-          style={{
-            textAlign: "center",
-            marginTop: "100px"
-          }}
-        >
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        Carica Riassunto
+      </Button>
+
+      <Modal show={show} onHide={handleClose} animation={true}>
+        <Modal.Header closeButton>
+          <Modal.Title>Compila i campi qua sotto</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <form onSubmit={caricaFile}>
-            {typeof props.renderSelezionaFile === "undefined" ? (
-              <React.Fragment>
-                <div className="row justify-content-center">
-                  <p> Seleziona il file </p>
-                </div>
-                <div className="row justify-content-center">
-                  <input
-                    className="form-control-file"
-                    type="file"
-                    id="file"
-                    name="pdfDaCaricare"
-                    accept=".pdf"
-                    required
-                    style={{
-                      width: "auto",
-                      height: "auto",
-                      borderRadius: "0"
-                      //marginLeft: "50%"
-                    }}
-                  />
-                </div>
-              </React.Fragment>
-            ) : (
-              <div></div>
-            )}{" "}
             <div style={stileDivisiore}> </div>{" "}
             <div style={stile}>
               <div className="row justify-content-center">
@@ -278,10 +241,10 @@ function CaricaRiassunto(props) {
               </button>{" "}
             </div>{" "}
           </form>{" "}
-        </div>{" "}
-      </section>{" "}
-    </React.Fragment>
+        </Modal.Body>
+      </Modal>
+    </>
   );
 }
 
-export default CaricaRiassunto;
+export default MyModal;

@@ -93,12 +93,14 @@ function MostraRiassunto(props) {
         {typeof riassunto.txt === "undefined" ? (
           <span> Caricamento </span>
         ) : (
-          <PDFViewer
-            document={{
-              base64: riassunto.txt
-            }}
-            sacle="1.1"
-          />
+          <div>
+            <PDFViewer
+              document={{
+                base64: riassunto.txt
+              }}
+              sacle="1.1"
+            />{" "}
+          </div>
         )}{" "}
       </section>{" "}
     </React.Fragment>

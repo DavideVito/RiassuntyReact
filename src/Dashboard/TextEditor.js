@@ -1,26 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import $ from "jquery";
+import CaricaRiassunto from "./CaricaRiassunto";
 import { Editor } from "@tinymce/tinymce-react";
+
+import { ContestoTesto } from "../Util/Contesti/ContestoTesto";
 
 function MyEditor() {
   let [numeroRighe, cambiaNumeroRighe] = useState(1);
+  const [testo, cambiaTesto] = useContext(ContestoTesto);
+  let [mostra, cambiaMostra] = useState("false");
 
-  let handleEditorChange = (content, editor) => {
+  function caricaRiassuntoTemporaneo(content) {
     let righe = content.split("\n");
     if (numeroRighe === righe.length) {
       return;
     }
     cambiaNumeroRighe(righe.length);
-
     let titolo = $(righe[0]).text();
+    if (titolo === "") {
+      return;
+    }
     let contenuto = content;
     let token = sessionStorage.token;
     let idRiassunto = "";
-    if (typeof sessionStorage.idRiassunto === "undefined") {
+    if (
+      typeof sessionStorage.idRiassunto === "undefined" ||
+      sessionStorage.idRiassunto === ""
+    ) {
       idRiassunto = "no";
     } else {
       idRiassunto = sessionStorage.idRiassunto;
     }
+    let idFile = "";
+    if (
+      typeof sessionStorage.idFile === "undefined" ||
+      sessionStorage.idFile === ""
+    ) {
+      idFile = "no";
+    } else {
+      idFile = sessionStorage.idFile;
+    }
+
     console.log("carico");
     $.ajax({
       url:
@@ -30,20 +50,83 @@ function MyEditor() {
         token: token,
         nome: titolo,
         contenuto: contenuto,
-        idRiassunto: idRiassunto
+        idRiassunto: idRiassunto,
+        idFile: idFile
       },
       method: "POST",
       success: data => {
         sessionStorage.idRiassunto = data.idRiassunto;
       }
     });
+  }
+
+  let handleEditorChange = (content, editor) => {
+    caricaRiassuntoTemporaneo(content);
   };
 
   return (
     <React.Fragment>
       <div
         style={{
-          height: "250px"
+          height: "150px"
+        }}
+      >
+        {" "}
+      </div>{" "}
+      <div className="row">
+        <div className="col-md-2"> </div>
+        <div className="col-md">
+          La prima riga conterrà il titolo del file.
+          <br />
+          Le altre conterranno il contnuto
+          <br />
+          Per salvare il file basta il pulsante invio <br />
+        </div>
+        <div className="col-md-2"> </div>
+      </div>
+      <div
+        style={{
+          height: "50px"
+        }}
+      >
+        {" "}
+      </div>{" "}
+      <div className="row">
+        <div className="col-md-2"> </div>{" "}
+        <div className="col-md-3">
+          <input
+            name=""
+            id=""
+            class="btn btn-primary"
+            type="button"
+            value="Clicca per creare un nuovo riassunto"
+            onClick={() => {
+              sessionStorage.removeItem("idRiassunto");
+              sessionStorage.removeItem("idFile");
+              cambiaTesto("");
+            }}
+          />{" "}
+        </div>{" "}
+        <div className="col-md-2"> </div>{" "}
+        <div className="col-md-3">
+          <input
+            name=""
+            id=""
+            class="btn btn-primary"
+            type="button"
+            value="Clicca caricare questo riassunto"
+            onClick={() => {
+              //caricaRiassuntoTemporaneo(testo + "\n");
+
+              cambiaMostra(mostra === true ? false : true);
+            }}
+          />{" "}
+        </div>
+        <div className="col-md-2"> </div>{" "}
+      </div>{" "}
+      <div
+        style={{
+          height: "50px"
         }}
       >
         {" "}
@@ -52,6 +135,7 @@ function MyEditor() {
         <div className="col-md-2"> </div>{" "}
         <div className="col-md">
           <Editor
+            value={testo}
             textareaName="testoUtente"
             placeholder="Scrivi qua il tuo riassunto, verrà salvato in automatico"
             init={{
@@ -72,6 +156,13 @@ function MyEditor() {
         </div>{" "}
         <div className="col-md-2"> </div>{" "}
       </div>{" "}
+      {mostra === true ? (
+        <div id="caricaRiassunto">
+          <CaricaRiassunto renderNavBar="t" renderSelezionaFile="t" />
+        </div>
+      ) : (
+        <div></div>
+      )}{" "}
     </React.Fragment>
   );
 }
