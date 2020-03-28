@@ -83,7 +83,15 @@ function FullNavBar(props) {
           </ul>{" "}
         </div>{" "}
       </nav>{" "}
-      <div id="hero-section">
+      <div id="hero-section">{props.children}</div>{" "}
+    </header>
+  );
+}
+
+export default FullNavBar;
+
+/*
+
         {props.noBar || typeof props.noBar === "undefined" ? (
           <div></div>
         ) : (
@@ -95,9 +103,5 @@ function FullNavBar(props) {
             />{" "}
           </div>
         )}
-      </div>{" "}
-    </header>
-  );
-}
 
-export default FullNavBar;
+*/

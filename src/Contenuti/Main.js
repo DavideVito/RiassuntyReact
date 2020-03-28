@@ -4,6 +4,7 @@ import Indirizzi from "./Indirizzi";
 import Footer from "../Util/Footer";
 import "../App.css";
 import FullNavBar from "../NavBar/FullNavBar";
+import CaricaAndCerca from "./CaricaAndCerca";
 
 function Main(props) {
   const [indirizzi, cambiaIndirizzi] = useState([]);
@@ -64,7 +65,9 @@ function Main(props) {
 
   return (
     <React.Fragment>
-      <FullNavBar elementi={indirizzi} noBar={false} />{" "}
+      <FullNavBar elementi={indirizzi} noBar={false}>
+        <CaricaAndCerca />
+      </FullNavBar>{" "}
       <main id="main">
         <div id="elementiPrincipali"> </div>{" "}
         {indirizzi.map((indirizzo, indice) => {

@@ -6,6 +6,7 @@ import MenuIcon from "../NavBar/Elementi/MenuIcon";
 import Footer from "../Util/Footer";
 import NavBarItem from "../NavBar/Elementi/NavBarItem";
 import Indirizzi from "./Indirizzi";
+import CaricaAndCerca from "./CaricaAndCerca";
 import Bottone from "../Util/Bottone";
 
 function MostraMaterie(props) {
@@ -135,10 +136,11 @@ function MostraMaterie(props) {
             </ul>{" "}
           </div>{" "}
         </nav>{" "}
+        <div id="hero-section">
+          <CaricaAndCerca />
+        </div>{" "}
       </header>{" "}
       <main id="main">
-        <div id="primaParte"> </div>{" "}
-        <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />{" "}
         {anni.map(anno => {
           console.log("anno", anno);
           return <Indirizzi dati={anno} link={"/mostraRiassunto/:id"} />;

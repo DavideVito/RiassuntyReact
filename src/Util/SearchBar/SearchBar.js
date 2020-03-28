@@ -42,14 +42,15 @@ function SearchBar() {
 
   return (
     <div>
-      <link rel="stylesheet" href="./stileSearchBar.css" />
+      {" "}
+      <link rel="stylesheet" href="/stileSearchBar.css" />
       <div class="search">
         <input
           type="search"
           id="searchBox"
           class="search-box"
           onKeyPress={cercaSulDB}
-        />
+        />{" "}
         <span
           class="search-button"
           onClick={e => {
@@ -58,9 +59,9 @@ function SearchBar() {
               .toggleClass("open");
           }}
         >
-          <span class="search-icon"></span>
-        </span>
-      </div>
+          <span class="search-icon"> </span>{" "}
+        </span>{" "}
+      </div>{" "}
       <div id="rispostaRiassunti">
         {" "}
         {riassunti.map(riassunto => {

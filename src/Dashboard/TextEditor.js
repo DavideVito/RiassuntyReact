@@ -34,6 +34,7 @@ function MyEditor() {
     data.append("idFile", idFile);
 
     let risposta = await fetch(
+      //"http://192.168.1.130/Riassunty/API/convertiHtml2Pdf.php",
       "https://vps.lellovitiello.tk/Riassunty/API/convertiHtml2Pdf.php",
       //"http://localhost/~davidevitiello/Riassunty/API/convertiHtml2Pdf.php",
       {
@@ -48,6 +49,7 @@ function MyEditor() {
 
   function caricaRiassuntoTemporaneo(content) {
     let righe = content.split("\n");
+    debugger;
     if (numeroRighe === righe.length) {
       return;
     }
@@ -82,6 +84,7 @@ function MyEditor() {
       url:
         "https://vps.lellovitiello.tk/Riassunty/API/caricaTestoTemporaneo.php",
       //"http://localhost/~davidevitiello/Riassunty/API/caricaTestoTemporaneo.php",
+      //"http://192.168.1.130/Riassunty/API/caricaTestoTemporaneo.php",
       data: {
         token: token,
         nome: titolo,
@@ -150,6 +153,7 @@ function MyEditor() {
             type="button"
             value="Clicca caricare questo riassunto"
             onClick={async () => {
+              debugger;
               caricaRiassuntoTemporaneo(testo + "\n");
               cambiaMostra(mostra === true ? false : true);
               if (typeof sessionStorage.idRiassunto !== "undefined") {
@@ -208,7 +212,7 @@ function MyEditor() {
             renderNavBar="t"
             renderSelezionaFile="t"
             file={file}
-          />
+          />{" "}
         </div>
       ) : (
         <div> </div>

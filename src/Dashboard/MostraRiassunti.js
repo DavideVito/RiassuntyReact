@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState
+} from "react";
 
 import "../App.css";
 
@@ -13,6 +16,7 @@ function MostraRiassunti(props) {
       data.append("token", sessionStorage.token);
 
       let anteprime = await fetch(
+        //`http://192.168.1.130/Riassunty/API/anteprima.php?prendiProp=1&token=${sessionStorage.token}&normale=1`,
         `https://vps.lellovitiello.tk/Riassunty/API/anteprima.php?prendiProp=1&token=${sessionStorage.token}&normale=1`
         //`http://localhost/~davidevitiello/Riassunty/API/anteprima.php?prendiProp=1&token=${sessionStorage.token}&normale=1`
       );
@@ -47,42 +51,69 @@ function MostraRiassunti(props) {
     color: "white"
   };
 
-  return (
-    <React.Fragment>
-      {" "}
-      {anteprime.map(anteprima => {
-        return (
-          <div>
-            <div className="container-fluid row">
-              <div style={stile} className="col-md">
-                <p> {anteprima.Titolo} </p>{" "}
-                <img
-                  src={
-                    "https://vps.lellovitiello.tk/Riassunty/" +
-                    anteprima.URLImmagine
-                  }
-                  alt={anteprima.Titolo}
-                  width="300"
-                  height="300"
-                />
-              </div>{" "}
-              <div style={stile} className="col-md">
-                <p> Elimina </p>{" "}
-                <img
-                  alt={"Elimina"}
-                  id={anteprima.ID}
-                  style={{
-                    cursor: "pointer"
-                  }}
-                  src="https://img.icons8.com/flat_round/64/000000/delete-sign.png"
-                  onClick={eliminaRiassunto}
-                />{" "}
-              </div>{" "}
-            </div>{" "}
-          </div>
+  return ( <
+    React.Fragment > {
+      " "
+    } {
+      anteprime.map(anteprima => {
+        return ( <
+          div >
+          <
+          div className = "container-fluid row" >
+          <
+          div style = {
+            stile
+          }
+          className = "col-md" >
+          <
+          p > {
+            anteprima.Titolo
+          } < /p>{" "} <
+          img src = {
+            "https://vps.lellovitiello.tk/Riassunty/" +
+            anteprima.URLImmagine
+          }
+          alt = {
+            anteprima.Titolo
+          }
+          width = "300"
+          height = "300" /
+          >
+          <
+          /div>{" "} <
+          div style = {
+            stile
+          }
+          className = "col-md" >
+          <
+          p > Elimina < /p>{" "} <
+          img alt = {
+            "Elimina"
+          }
+          id = {
+            anteprima.ID
+          }
+          style = {
+            {
+              cursor: "pointer"
+            }
+          }
+          src = "https://img.icons8.com/flat_round/64/000000/delete-sign.png"
+          onClick = {
+            eliminaRiassunto
+          }
+          />{" "} < /
+          div > {
+            " "
+          } <
+          /div>{" "} < /
+          div >
         );
-      })}{" "}
-    </React.Fragment>
+      })
+    } {
+      " "
+    } <
+    /React.Fragment>
   );
 }
 

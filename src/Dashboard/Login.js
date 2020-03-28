@@ -8,6 +8,8 @@ import MostraRiassunti from "./MostraRiassunti";
 import TextEditor from "./TextEditor";
 import MostarRiassuntiTemporanei from "./MostraRiassuntiTemporanei";
 import { ContestoTesto, TestoProvider } from "../Util/Contesti/ContestoTesto";
+import InformazioniUtente from "./InfomazioniUtente";
+
 import A from "./A";
 
 function Login(props) {
@@ -33,6 +35,7 @@ function Login(props) {
       let risposta = await fetch(
         "https://vps.lellovitiello.tk/Riassunty/API/Utenti.php",
         //"http://localhost/~davidevitiello/Riassunty/API/Utenti.php",
+        //"http://192.168.1.130/Riassunty/API/Utenti.php",
         {
           method: "POST",
           body: data
@@ -55,93 +58,51 @@ function Login(props) {
     cambiaUDID(risposta.googleId);
   }
 
-  function logout() {
-    sessionStorage.clear();
-    window.location.href = "/Login";
-  }
-
   const stile = {
     marginTop: "-50%"
   };
 
   $("#loadingImage").fadeOut(500, "swing");
 
-  if (ok) {
-    $("#loadingImage").fadeOut(500, "swing");
-    return (
-      <React.Fragment>
-        <FullNavBar
-          elementi={[
-            {
-              nome: "Stai attento a quello che carichi, non ti conviene",
-              dati: []
-            }
-          ]}
-          noBar={true}
-        />{" "}
-        <div style={stile}>
-          <div
-            id="datiUtente"
-            style={{
-              marginBottom: "20%"
-            }}
-          >
-            <div id="nomePersona" className="row justify-content-center">
-              {" "}
-              {
-                <p
-                  style={{
-                    color: "white",
-                    fontSize: "xx-large"
-                  }}
-                >
-                  {" "}
-                  Bentornato {account.getName()}{" "}
-                </p>
-              }{" "}
-            </div>{" "}
-            <div id="immaginePersona" className="row justify-content-center">
-              {" "}
-              {
-                <img
-                  src={account.getImageUrl()}
-                  width="150"
-                  height="150"
-                  alt={"Immagine di " + account.getName()}
-                />
-              }{" "}
-            </div>{" "}
-          </div>{" "}
-          <div
-            id="bottoni"
-            style={{
-              marginTop: "20%"
-            }}
-          >
-            <div
-              className="row justify-content-center"
-              style={{
-                marginBottom: "20%"
+  $("#loadingImage").fadeOut(500, "swing");
+  return (
+    <React.Fragment>
+      <FullNavBar
+        elementi={[
+          {
+            nome: "Stai attento a quello che carichi, non ti conviene",
+            dati: []
+          }
+        ]}
+        noBar={true}
+      >
+        {ok ? (
+          <InformazioniUtente
+            nome={account.getName()}
+            linkImmagine={account.getImageUrl()}
+          />
+        ) : (
+          <div>
+            <GoogleLogin
+              clientId="757171675502-tn1k2bjmh123u729uqufjhg0nr8d1br1.apps.googleusercontent.com"
+              buttonText="Login"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              isSignedIn={true}
+              onLogoutSuccess={() => {
+                alert(1);
+                window.location.href = "/Login";
               }}
-            >
-              <GoogleLogout
-                clientId="757171675502-tn1k2bjmh123u729uqufjhg0nr8d1br1.apps.googleusercontent.com"
-                buttonText="Logout"
-                theme="dark"
-                width="260"
-                height="80"
-                onLogoutSuccess={logout}
-              />{" "}
-            </div>{" "}
-            <Bottone
-              TestoBottone="Per caricare"
-              link="/Login/CaricaRiassunto"
-            />
-            <Bottone
-              TestoBottone="Per approvare"
-              link="/Login/ApprovaRiassunto"
-            />
-          </div>{" "}
+              theme="dark"
+              width="260"
+              height="80"
+              cookiePolicy={"single_host_origin"}
+            />{" "}
+          </div>
+        )}{" "}
+      </FullNavBar>{" "}
+      {ok ? (
+        <React.Fragment>
           <div
             id="body"
             style={{
@@ -160,56 +121,22 @@ function Login(props) {
               </div>{" "}
             </section>{" "}
             <TestoProvider>
-              <section id="section2" className="sezione2">
+              <div id="section2" className="sezione2">
                 <MostarRiassuntiTemporanei account={udid} />{" "}
-              </section>{" "}
-              <section id="section3" className="sezione3">
+              </div>{" "}
+              <div id="section3" className="sezione3">
                 <div>
                   <TextEditor />
                 </div>{" "}
-              </section>{" "}
+              </div>{" "}
             </TestoProvider>{" "}
           </div>{" "}
-        </div>{" "}
-      </React.Fragment>
-    );
-  } else {
-    $("#loadingImage").fadeOut(500, "swing");
-    return (
-      <React.Fragment>
-        <FullNavBar
-          elementi={[
-            {
-              nome: "Stai attento a quello che carichi, non ti conviene",
-              dati: []
-            }
-          ]}
-        />{" "}
-        <div
-          className="row justify-content-center"
-          style={{
-            marginTop: "-20%"
-          }}
-        >
-          <GoogleLogin
-            clientId="757171675502-tn1k2bjmh123u729uqufjhg0nr8d1br1.apps.googleusercontent.com"
-            buttonText="Login"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            isSignedIn={true}
-            onLogoutSuccess={() => {
-              alert(1);
-              window.location.href = "/Login";
-            }}
-            theme="dark"
-            width="260"
-            height="80"
-            cookiePolicy={"single_host_origin"}
-          />{" "}
-        </div>{" "}
-      </React.Fragment>
-    );
-  }
+        </React.Fragment>
+      ) : (
+        <div> </div>
+      )}{" "}
+    </React.Fragment>
+  );
 }
 
 export default Login;

@@ -4,7 +4,7 @@ import "../App.css";
 import $ from "jquery";
 import Brand from "../NavBar/Foto/Brand";
 import MenuIcon from "../NavBar/Elementi/MenuIcon";
-import PDFViewer from "pdf-viewer-reactjs";
+//import PDFViewer from "pdf-viewer-reactjs";
 
 function MostraRiassunto(props) {
   let [linkFoto, cambiaLink] = useState("");
@@ -93,14 +93,7 @@ function MostraRiassunto(props) {
         {typeof riassunto.txt === "undefined" ? (
           <span> Caricamento </span>
         ) : (
-          <div>
-            <PDFViewer
-              document={{
-                base64: riassunto.txt
-              }}
-              sacle="1.1"
-            />{" "}
-          </div>
+          <div></div>
         )}{" "}
       </section>{" "}
     </React.Fragment>
@@ -109,7 +102,12 @@ function MostraRiassunto(props) {
 
 export default MostraRiassunto;
 /*
-
+ <PDFViewer
+              document={{
+                base64: riassunto.txt
+              }}
+              sacle="1.1"
+            />{" "}
       <div className="container-fluid">
         <label class="pure-material-slider" style={{ width: "100%" }}>
           <input
