@@ -49,7 +49,7 @@ function MyEditor() {
 
   function caricaRiassuntoTemporaneo(content) {
     let righe = content.split("\n");
-    debugger;
+
     if (numeroRighe === righe.length) {
       return;
     }
@@ -95,6 +95,7 @@ function MyEditor() {
       method: "POST",
       success: data => {
         sessionStorage.idRiassunto = data.idRiassunto;
+        sessionStorage.idFile = data.idFile;
       }
     });
   }
@@ -155,6 +156,7 @@ function MyEditor() {
             onClick={async () => {
               debugger;
               caricaRiassuntoTemporaneo(testo + "\n");
+
               cambiaMostra(mostra === true ? false : true);
               if (typeof sessionStorage.idRiassunto !== "undefined") {
                 if (typeof sessionStorage.idFile !== "undefined") {
