@@ -4,10 +4,11 @@ import "../App.css";
 import $ from "jquery";
 import Brand from "../NavBar/Foto/Brand";
 import MenuIcon from "../NavBar/Elementi/MenuIcon";
-import PDFViewer from "pdf-viewer-reactjs";
+import PDFViewer from "mgr-pdf-viewer-react";
 
 function MostraRiassunto(props) {
   let [linkFoto, cambiaLink] = useState("");
+  let [scala, cambiaScala] = useState(1);
 
   $(window, document).on("scroll", () => {
     try {
@@ -23,7 +24,6 @@ function MostraRiassunto(props) {
     }
   });
 
-  const [riassunto, cambiaRiassunto] = useState([]);
   const fetchRiassunto = () => {
     let riassuntoJSON = {};
     let idRiassunto = props.match.params.id;
@@ -35,12 +35,17 @@ function MostraRiassunto(props) {
 
       riassuntoJSON = await riassuntoJSON.json();
       riassuntoJSON = riassuntoJSON[0];
+
+      //riassuntoJSON.txt = dataURLtoFile(riassuntoJSON.txt);
+      //debugger;
       cambiaRiassunto(riassuntoJSON);
       $("#loadingImage").fadeOut(500);
     }
     $("#loadingImage").fadeIn(500);
     prendiRiassunto();
   };
+
+  const [riassunto, cambiaRiassunto] = useState([]);
 
   useEffect(fetchRiassunto, [props.location.pathname]);
 
@@ -87,21 +92,65 @@ function MostraRiassunto(props) {
             <ul> </ul>{" "}
           </div>{" "}
         </nav>{" "}
+        <div id="hero-section">
+          <p style={{ color: "white", fontSize: "1.2em", textAlign: "center" }}>
+            <h3>{riassunto.Titolo}</h3>
+            <br />
+            <br />
+            Caricato il {riassunto.DataPubblicazione}
+            <br />
+            <br />
+            Scorri per vedere
+            <br />
+            <br />
+            Clicca + per incrementare lo zoom, clicca - per diminuire lo zoom
+            <br />
+            <br />
+            Per una maggiore esperienza, gira il telefono
+          </p>
+        </div>{" "}
       </header>{" "}
       <section id={`section1`} className={`sezione1`}>
-        {" "}
         {typeof riassunto.txt === "undefined" ? (
           <span> Caricamento </span>
         ) : (
-          <div>
-            {" "}
-            <PDFViewer
-              document={{
-                base64: riassunto.txt
-              }}
-              sacle="1.1"
-            />{" "}
-          </div>
+          <React.Fragment>
+            <div className="row" style={{ paddingTop: "50px" }}>
+              <div className="col-md">
+                <PDFViewer
+                  document={{
+                    base64: riassunto.txt
+                  }}
+                  hideNavbar={false}
+                  scale={scala}
+                />
+              </div>{" "}
+              <div style={{ paddingLeft: "10px" }}>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={_ => {
+                    cambiaScala(scala + 0.01);
+                  }}
+                >
+                  &nbsp;+&nbsp;
+                </button>
+              </div>
+              <div style={{ paddingLeft: "10px" }}>
+                {" "}
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={_ => {
+                    cambiaScala(scala - 0.01);
+                  }}
+                >
+                  &nbsp;-&nbsp;
+                </button>
+              </div>
+              <div className="col-xs-2"></div>
+            </div>
+          </React.Fragment>
         )}{" "}
       </section>{" "}
     </React.Fragment>
@@ -109,31 +158,14 @@ function MostraRiassunto(props) {
 }
 
 export default MostraRiassunto;
-/*
+/*            <PDFViewer
+              document={{
+                base64: riassunto.txt
+              }}
+              sacle="1.1"
+            />{" "}
 
-      <div className="container-fluid">
-        <label class="pure-material-slider" style={{ width: "100%" }}>
-          <input
-            type="range"
-            min="0.1"
-            defaultValue="1"
-            step="0.01"
-            max="1.53"
-            onChange={e => {
-              let scala = e.target.value;
-              console.log(scala);
-
-              $("#iframe").css({
-                "-webkit-transform": `scale(${scala})`,
-                transform: `scale(${scala})`
-              });
-            }}
-          />
-          <span style={{ color: "white", textAlign: "center" }}>
-            Seleziona il livello di zoom
-          </span>
-        </label>
-      </div>
+      
 
 
 

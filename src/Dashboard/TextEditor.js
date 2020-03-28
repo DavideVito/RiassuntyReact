@@ -79,7 +79,6 @@ function MyEditor() {
       idFile = sessionStorage.idFile;
     }
 
-    console.log("carico");
     $.ajax({
       url:
         "https://vps.lellovitiello.tk/Riassunty/API/caricaTestoTemporaneo.php",
@@ -183,7 +182,12 @@ function MyEditor() {
       >
         {" "}
       </div>{" "}
-      <div className="row">
+      <div
+        className="row"
+        style={{
+          paddingBottom: "150px"
+        }}
+      >
         <div className="col-md-2"> </div>{" "}
         <div className="col-md">
           <Editor

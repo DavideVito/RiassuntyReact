@@ -5,60 +5,46 @@ function Footer() {
   return (
     <React.Fragment>
       <div id="footer">
-        <a href="mailto:moriste01@gmail.com">
+        <p> Una produzione: </p>
+        <small>
           {" "}
-          <p> Mail: moriste01 @gmail.com </p>{" "}
-        </a>{" "}
-        <small> In collaborazione con velarte </small>{" "}
+          <a
+            href="https://www.instagram.com/iamnotdavidevitiello/"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <i className="fab fa-instagram"> </i> Davide Vitiello,{" "}
+          </a>{" "}
+        </small>{" "}
+        <small>
+          <a
+            href="https://www.instagram.com/tommasovincioni/"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <i className="fab fa-instagram"> </i> Tommaso Vincioni,
+          </a>{" "}
+        </small>
+        <small> Stefano Mori, </small>
+        <small> Francesco Emolo, </small>
+        <small>
+          {" "}
+          <a
+            href="https://www.instagram.com/btw.sam/"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <i className="fab fa-instagram"> </i> Samuele Rosi{" "}
+          </a>
+        </small>
         <p
           style={{
             textAling: "center",
             fontSize: "13pt"
           }}
         >
-          Social:
+          Copyright ©: WmW (2019-2020-2021)
         </p>{" "}
-        <div
-          style={{
-            paddinghrefp: "10px"
-          }}
-        >
-          <a
-            href="https://it-it.facebook.com/adeccoitalia/"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <i className="fab fa-facebook-square"> </i>{" "}
-          </a>{" "}
-          <a
-            href="mailhref:moriste01@gmail.com"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <i className="fa fa-envelope"> </i>{" "}
-          </a>{" "}
-          <a
-            href="https://www.instagram.com/adeccoitaly/?hl=it"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <i className="fab fa-instagram"> </i>{" "}
-          </a>{" "}
-          <a
-            href="https://twitter.com/adeccogroupita"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <i className="fab fa-twitter-square"> </i>{" "}
-          </a>{" "}
-          <a
-            href="https://www.youtube.com/user/AdeccoItaliaTV"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <i className="fab fa-youtube"> </i>{" "}
-          </a>{" "}
-        </div>{" "}
       </div>{" "}
     </React.Fragment>
   );

@@ -25,9 +25,6 @@
         windowTop > 100 ? $('ul').css('top', '100px').css("backgroundColor", "black").css("color", "white") : $(
           'ul').css('top', '160px').css("backgroundColor", "white").css("color", "black");
       });
-
-      console.log($('a[href*="#"]'))
-
       $('li').on('click', () => {
         $('ul').removeClass('showMenu');
         $('#menu-toggle').removeClass('closeMenu');

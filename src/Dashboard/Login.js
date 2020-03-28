@@ -113,8 +113,8 @@ function Login(props) {
               <div
                 className="container-fluid"
                 style={{
-                  textAlign: "center"
-                  //marginTop: "100px"
+                  textAlign: "center",
+                  marginTop: "100px"
                 }}
               >
                 <MostraRiassunti account={udid} />{" "}

@@ -141,8 +141,8 @@ function MostraMaterie(props) {
         </div>{" "}
       </header>{" "}
       <main id="main">
+        {" "}
         {anni.map(anno => {
-          console.log("anno", anno);
           return <Indirizzi dati={anno} link={"/mostraRiassunto/:id"} />;
         })}{" "}
       </main>{" "}
