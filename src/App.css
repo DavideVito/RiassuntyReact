@@ -209,7 +209,7 @@ a:hover {
 #hero-section {
   background-color: #000;
   width: 100vw;
-  height: calc(100vh - 160px);
+  min-height: calc(100vh - 160px);
   display: inline-grid;
   justify-content: center;
   align-items: center;

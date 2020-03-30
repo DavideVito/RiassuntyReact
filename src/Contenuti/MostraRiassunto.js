@@ -93,29 +93,38 @@ function MostraRiassunto(props) {
           </div>{" "}
         </nav>{" "}
         <div id="hero-section">
-          <p style={{ color: "white", fontSize: "1.2em", textAlign: "center" }}>
-            <h3>{riassunto.Titolo}</h3>
+          <p
+            style={{
+              color: "white",
+              fontSize: "1.2em",
+              textAlign: "center"
+            }}
+          >
+            <h3> {riassunto.Titolo} </h3> <br />
+            <br />
+            Caricato il {riassunto.DataPubblicazione} <br />
+            <br />
+            Scorri per vedere <br />
+            <br />
+            Clicca + per incrementare lo zoom, clicca - per diminuire lo zoom{" "}
             <br />
             <br />
-            Caricato il {riassunto.DataPubblicazione}
-            <br />
-            <br />
-            Scorri per vedere
-            <br />
-            <br />
-            Clicca + per incrementare lo zoom, clicca - per diminuire lo zoom
-            <br />
-            <br />
-            Per una maggiore esperienza, gira il telefono
-          </p>
+            Per una maggiore esperienza, gira il telefono{" "}
+          </p>{" "}
         </div>{" "}
       </header>{" "}
       <section id={`section1`} className={`sezione1`}>
+        {" "}
         {typeof riassunto.txt === "undefined" ? (
           <span> Caricamento </span>
         ) : (
           <React.Fragment>
-            <div className="row" style={{ paddingTop: "50px" }}>
+            <div
+              className="row"
+              style={{
+                paddingTop: "50px"
+              }}
+            >
               <div className="col-md">
                 <PDFViewer
                   document={{
@@ -123,35 +132,58 @@ function MostraRiassunto(props) {
                   }}
                   hideNavbar={false}
                   scale={scala}
-                />
+                  navigation={{
+                    css: {
+                      previousPageBtn: "mr-2 mt-1 mb-1 btn btn-danger", // CSS Class for the previous page button
+                      nextPageBtn: "ml-2 mt-1 mb-1 btn btn-success", // CSS Class for the next page button
+                      wrapper:
+                        "bg-secondary border text-white rounded-lg border-primary"
+                    }
+                  }}
+                />{" "}
               </div>{" "}
-              <div style={{ paddingLeft: "10px" }}>
+              <div
+                style={{
+                  paddingLeft: "10px"
+                }}
+              >
                 <button
                   type="button"
                   className="btn btn-primary"
                   onClick={_ => {
-                    cambiaScala(scala + 0.01);
+                    cambiaScala(scala + 0.025);
                   }}
                 >
-                  &nbsp;+&nbsp;
-                </button>
-              </div>
-              <div style={{ paddingLeft: "10px" }}>
+                  &nbsp; + &nbsp;{" "}
+                </button>{" "}
+              </div>{" "}
+              <div
+                style={{
+                  paddingLeft: "10px"
+                }}
+              >
                 {" "}
                 <button
                   type="button"
                   className="btn btn-primary"
                   onClick={_ => {
-                    cambiaScala(scala - 0.01);
+                    cambiaScala(scala - 0.025);
                   }}
                 >
-                  &nbsp;-&nbsp;
-                </button>
-              </div>
-              <div className="col-xs-2"></div>
-            </div>
+                  &nbsp; - &nbsp;{" "}
+                </button>{" "}
+              </div>{" "}
+              <div className="col-xs-2"> </div>{" "}
+            </div>{" "}
           </React.Fragment>
         )}{" "}
+        <div
+          style={{
+            height: "80px"
+          }}
+        >
+          {" "}
+        </div>{" "}
       </section>{" "}
     </React.Fragment>
   );
