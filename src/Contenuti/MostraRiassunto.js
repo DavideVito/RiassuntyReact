@@ -31,8 +31,8 @@ function MostraRiassunto(props) {
 
     async function prendiRiassunto() {
       riassuntoJSON = await fetch(
-        //`https://vps.lellovitiello.tk/Riassunty/API/riassunto.php?id=${idRiassunto}`
-        `http://localhost/~davidevitiello/Riassunty/API/riassunto.php?id=${idRiassunto}`
+        `https://vps.lellovitiello.tk/Riassunty/API/riassunto.php?id=${idRiassunto}`
+        //`http://localhost/~davidevitiello/Riassunty/API/riassunto.php?id=${idRiassunto}`
       );
 
       riassuntoJSON = await riassuntoJSON.json();
@@ -155,7 +155,7 @@ function MostraRiassunto(props) {
             <br />
             Per una maggiore esperienza, gira il telefono{" "}
           </p>{" "}
-          <Valutazione idRiassunto={props.match.params.id} />
+          <Valutazione idRiassunto={props.match.params.id} />{" "}
         </div>{" "}
       </header>{" "}
       <section id={`section1`} className={`sezione1`}>

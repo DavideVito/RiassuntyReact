@@ -5,6 +5,7 @@ import ReactStars from "react-stars";
 
 function Valutazione(props) {
   let [valutazione, cambiaValutazione] = useState(0);
+
   function responseGoogle(risposta) {
     sessionStorage.clear();
     cambiaAccount(risposta.getBasicProfile());
@@ -14,7 +15,8 @@ function Valutazione(props) {
 
   const getValutazione = async () => {
     let risposta = await fetch(
-      `http://localhost/~davidevitiello/Riassunty/API/getValutazione.php?idRiassunto=${props.idRiassunto}`
+      `https://vps.lellovitiello.tk/Riassunty/API/getValutazione.php?idRiassunto=${props.idRiassunto}`
+      //`http://localhost/~davidevitiello/Riassunty/API/getValutazione.php?idRiassunto=${props.idRiassunto}`
     );
     risposta = await risposta.json();
     let valutazione = risposta.Valutazione;
@@ -36,7 +38,8 @@ function Valutazione(props) {
     let riassunto = props.idRiassunto;
     let valutazione = val;
     fetch(
-      `http://localhost/~davidevitiello/Riassunty/API/InserisciValutazione.php?idUtente=${id}&valutazione=${valutazione}&idRiassunto=${riassunto}`
+      `https://vps.lellovitiello.tk/Riassunty/API/InserisciValutazione.php?idUtente=${id}&valutazione=${valutazione}&idRiassunto=${riassunto}`
+      //`http://localhost/~davidevitiello/Riassunty/API/InserisciValutazione.php?idUtente=${id}&valutazione=${valutazione}&idRiassunto=${riassunto}`
     ).then((risposta) =>
       risposta.json().then((ris) => {
         console.log(ris.valutazione);
@@ -53,9 +56,15 @@ function Valutazione(props) {
           size={24}
           value={valutazione}
           color2={"#ffd700"}
-        />
-      </div>
-      <div style={{ height: "50px" }}></div>
+        />{" "}
+      </div>{" "}
+      <div
+        style={{
+          height: "50px",
+        }}
+      >
+        {" "}
+      </div>{" "}
       {ok ? (
         <div>
           <p
@@ -65,9 +74,8 @@ function Valutazione(props) {
               textAlign: "center",
             }}
           >
-            Bevenuto {account.getName()}
+            Bevenuto {account.getName()}{" "}
           </p>
-
           <div className="row justify-content-center">
             <GoogleLogout
               clientId="757171675502-tn1k2bjmh123u729uqufjhg0nr8d1br1.apps.googleusercontent.com"
@@ -78,8 +86,8 @@ function Valutazione(props) {
               onLogoutSuccess={() => {
                 cambiaOK(false);
               }}
-            />
-          </div>
+            />{" "}
+          </div>{" "}
         </div>
       ) : (
         <div className="row justify-content-center">
@@ -95,7 +103,7 @@ function Valutazione(props) {
             cookiePolicy={"single_host_origin"}
           />{" "}
         </div>
-      )}
+      )}{" "}
     </div>
   );
 }
