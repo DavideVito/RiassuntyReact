@@ -5,6 +5,7 @@ import $ from "jquery";
 import Brand from "../NavBar/Foto/Brand";
 import MenuIcon from "../NavBar/Elementi/MenuIcon";
 import PDFViewer from "mgr-pdf-viewer-react";
+import Valutazione from "../Util/Valutazione.js";
 
 function MostraRiassunto(props) {
   let [linkFoto, cambiaLink] = useState("");
@@ -30,7 +31,8 @@ function MostraRiassunto(props) {
 
     async function prendiRiassunto() {
       riassuntoJSON = await fetch(
-        `https://vps.lellovitiello.tk/Riassunty/API/riassunto.php?id=${idRiassunto}`
+        //`https://vps.lellovitiello.tk/Riassunty/API/riassunto.php?id=${idRiassunto}`
+        `http://localhost/~davidevitiello/Riassunty/API/riassunto.php?id=${idRiassunto}`
       );
 
       riassuntoJSON = await riassuntoJSON.json();
@@ -38,12 +40,54 @@ function MostraRiassunto(props) {
 
       //riassuntoJSON.txt = dataURLtoFile(riassuntoJSON.txt);
       //debugger;
+
+      let oggettoDaMettere = {
+        testo: riassuntoJSON,
+        data: new Date(),
+      };
       cambiaRiassunto(riassuntoJSON);
+      try {
+        localStorage.setItem(idRiassunto, JSON.stringify(oggettoDaMettere));
+      } catch (error) {
+        console.error("Impossibile inserire nel local storage", error);
+      }
+
       $("#loadingImage").fadeOut(500);
     }
     $("#loadingImage").fadeIn(500);
+
+    let a = localStorage.getItem(idRiassunto);
+
+    if (a !== null) {
+      a = JSON.parse(a);
+      cambiaRiassunto(a.testo);
+      $("#loadingImage").fadeOut(500);
+      //rimuoviRiassuntiVecchi();
+      return;
+    }
+
     prendiRiassunto();
   };
+
+  function rimuoviRiassuntiVecchi() {
+    let elementiLocali = allStorage();
+    let data = new Date();
+    for (let elemento of elementiLocali) {
+      let differenza = data.getTime() - elemento.getTime();
+    }
+  }
+
+  function allStorage() {
+    var values = [],
+      keys = Object.keys(localStorage),
+      i = keys.length;
+
+    while (i--) {
+      values.push(localStorage.getItem(keys[i]));
+    }
+
+    return values;
+  }
 
   const [riassunto, cambiaRiassunto] = useState([]);
 
@@ -68,7 +112,7 @@ function MostraRiassunto(props) {
                   $("#main").animate(
                     {
                       left: "85%",
-                      opacity: "0.7"
+                      opacity: "0.7",
                     },
                     300
                   );
@@ -76,7 +120,7 @@ function MostraRiassunto(props) {
                   $("#main").animate(
                     {
                       left: "0px",
-                      opacity: "1"
+                      opacity: "1",
                     },
                     300
                   );
@@ -97,7 +141,7 @@ function MostraRiassunto(props) {
             style={{
               color: "white",
               fontSize: "1.2em",
-              textAlign: "center"
+              textAlign: "center",
             }}
           >
             <h3> {riassunto.Titolo} </h3> <br />
@@ -111,6 +155,7 @@ function MostraRiassunto(props) {
             <br />
             Per una maggiore esperienza, gira il telefono{" "}
           </p>{" "}
+          <Valutazione idRiassunto={props.match.params.id} />
         </div>{" "}
       </header>{" "}
       <section id={`section1`} className={`sezione1`}>
@@ -122,13 +167,13 @@ function MostraRiassunto(props) {
             <div
               className="row"
               style={{
-                paddingTop: "50px"
+                paddingTop: "50px",
               }}
             >
               <div className="col-md">
                 <PDFViewer
                   document={{
-                    base64: riassunto.txt
+                    base64: riassunto.txt,
                   }}
                   hideNavbar={false}
                   scale={scala}
@@ -137,40 +182,40 @@ function MostraRiassunto(props) {
                       previousPageBtn: "mr-2 mt-1 mb-1 btn btn-danger", // CSS Class for the previous page button
                       nextPageBtn: "ml-2 mt-1 mb-1 btn btn-success", // CSS Class for the next page button
                       wrapper:
-                        "bg-secondary border text-white rounded-lg border-primary"
-                    }
+                        "bg-secondary border text-white rounded-lg border-primary",
+                    },
                   }}
                 />{" "}
               </div>{" "}
               <div
                 style={{
-                  paddingLeft: "10px"
+                  paddingLeft: "10px",
                 }}
               >
                 <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={_ => {
+                  onClick={(_) => {
                     cambiaScala(scala + 0.025);
                   }}
                 >
-                  &nbsp; + &nbsp;{" "}
+                  & nbsp; + & nbsp;{" "}
                 </button>{" "}
               </div>{" "}
               <div
                 style={{
-                  paddingLeft: "10px"
+                  paddingLeft: "10px",
                 }}
               >
                 {" "}
                 <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={_ => {
+                  onClick={(_) => {
                     cambiaScala(scala - 0.025);
                   }}
                 >
-                  &nbsp; - &nbsp;{" "}
+                  & nbsp; - & nbsp;{" "}
                 </button>{" "}
               </div>{" "}
               <div className="col-xs-2"> </div>{" "}
@@ -179,7 +224,7 @@ function MostraRiassunto(props) {
         )}{" "}
         <div
           style={{
-            height: "80px"
+            height: "80px",
           }}
         >
           {" "}
