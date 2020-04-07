@@ -3,9 +3,11 @@ import $ from "jquery";
 import ReCAPTCHA from "react-google-recaptcha";
 import "../App.css";
 import FullNavBar from "../NavBar/FullNavBar";
+import ProgressBar from "react-percent-bar";
 
 function CaricaRiassunto(props) {
   let anni = [];
+  let [percentualeCaricamento, cambiaPercentualeCaricamento] = useState(0);
   let [indirizzi, cambiaIndirizzi] = useState([]);
   let [materie, cambiaMaterie] = useState([]);
   let [ok, cambiaOK] = useState(false);
@@ -14,13 +16,13 @@ function CaricaRiassunto(props) {
     if (ok === false) {
       document.getElementById("bottoneSubmit").disabled = true;
       $("#bottoneSubmit").css({
-        cursor: "default"
+        cursor: "default",
       });
     } else {
       document.getElementById("bottoneSubmit").disabled = false;
 
       $("#bottoneSubmit").css({
-        cursor: "pointer"
+        cursor: "pointer",
       });
     }
   }, [window.location.href, ok]);
@@ -31,13 +33,13 @@ function CaricaRiassunto(props) {
       url: "https://vps.lellovitiello.tk/Riassunty/API/controllaValidita.php",
       method: "POST",
       data: {
-        token: sessionStorage.token
+        token: sessionStorage.token,
       },
-      success: data => {
+      success: (data) => {
         if (data.valido === false) {
           window.location.href = "/Login";
         }
-      }
+      },
     });
   };
 
@@ -72,7 +74,7 @@ function CaricaRiassunto(props) {
 
   useEffect(prendiIndirizzi, []);
 
-  const prendiMaterie = indirizzo => {
+  const prendiMaterie = (indirizzo) => {
     const getMaterie = async () => {
       let materie = await fetch(
         "https://vps.lellovitiello.tk/Riassunty/API/materie.php?indirizzo=" +
@@ -87,7 +89,7 @@ function CaricaRiassunto(props) {
 
   function onChange(value) {}
   $("#loadingImage").fadeOut(500, "swing");
-  const caricaFile = async e => {
+  const caricaFile = async (e) => {
     if (!ok) {
       alert("Conferma il capthca");
     } else {
@@ -123,10 +125,7 @@ function CaricaRiassunto(props) {
       if (token) {
         form.append("token", token);
       }
-      $("#loadingImage").fadeIn(500, "swing");
-      $("#loadingImage").css({
-        opacity: "0.8"
-      });
+
       $.ajax({
         //url: "http://localhost/~davidevitiello/Riassunty/API/caricaRiassunto.php", // point to server-side PHP script
         url: "https://vps.lellovitiello.tk/Riassunty/API/caricaRiassunto.php",
@@ -136,7 +135,7 @@ function CaricaRiassunto(props) {
         processData: false,
         data: form,
         type: "POST",
-        success: data => {
+        success: (data) => {
           if (data.shouldRedirect === "true") {
             window.location.href = "/Login";
           }
@@ -146,31 +145,48 @@ function CaricaRiassunto(props) {
               "Non è stato possibile caricare questo riassunto, probabilmente esiste gia"
             );
           }
-
-          $("#loadingImage").fadeOut(1000, "swing");
-          $("#loadingImage").css({
-            opacity: "0"
-          });
         },
-        error: data => {
-          $("#loadingImage").fadeOut(1000, "swing");
+        error: (data) => {
           alert(
             "Si è verficato un errore durante il caricamento del riassunto"
           );
-          $("#loadingImage").css({
-            opacity: "0"
-          });
-        }
+        },
+        xhr: function () {
+          var xhr = new window.XMLHttpRequest();
+          //Upload progress
+          xhr.upload.addEventListener(
+            "progress",
+            function (evt) {
+              if (evt.lengthComputable) {
+                var percentComplete = evt.loaded / evt.total;
+                cambiaPercentualeCaricamento(percentComplete * 100);
+              }
+            },
+            false
+          );
+          //Download progress
+          xhr.addEventListener(
+            "progress",
+            function (evt) {
+              debugger;
+              if (evt.lengthComputable) {
+                var percentComplete = evt.loaded / evt.total;
+              }
+            },
+            false
+          );
+          return xhr;
+        },
       });
     }
   };
 
   const stileDivisiore = {
-    marginBottom: "30px"
+    marginBottom: "30px",
   };
 
   let stile = {
-    color: "white"
+    color: "white",
   };
 
   return (
@@ -181,8 +197,8 @@ function CaricaRiassunto(props) {
           elementi={[
             {
               nome: "Stai attento a quello che carichi, non ti conviene",
-              dati: []
-            }
+              dati: [],
+            },
           ]}
         />
       ) : (
@@ -193,7 +209,7 @@ function CaricaRiassunto(props) {
           className="container-fluid"
           style={{
             textAlign: "center",
-            marginTop: "100px"
+            marginTop: "100px",
           }}
         >
           <form onSubmit={caricaFile}>
@@ -214,7 +230,7 @@ function CaricaRiassunto(props) {
                     style={{
                       width: "auto",
                       height: "auto",
-                      borderRadius: "0"
+                      borderRadius: "0",
                       //marginLeft: "50%"
                     }}
                   />{" "}
@@ -223,7 +239,7 @@ function CaricaRiassunto(props) {
             ) : (
               <div
                 style={{
-                  opacity: 0
+                  opacity: 0,
                 }}
               >
                 <React.Fragment>
@@ -240,7 +256,7 @@ function CaricaRiassunto(props) {
                       style={{
                         width: "auto",
                         height: "auto",
-                        borderRadius: "0"
+                        borderRadius: "0",
                         //marginLeft: "50%"
                       }}
                     />{" "}
@@ -255,7 +271,7 @@ function CaricaRiassunto(props) {
               </div>{" "}
               <div className="row justify-content-center">
                 <select
-                  onChange={e => {
+                  onChange={(e) => {
                     prendiMaterie(
                       e.currentTarget.options[e.currentTarget.selectedIndex]
                         .value
@@ -265,7 +281,7 @@ function CaricaRiassunto(props) {
                   required
                 >
                   {" "}
-                  {indirizzi.map(indirizzo => {
+                  {indirizzi.map((indirizzo) => {
                     return (
                       <option value={indirizzo.Indirizzo}>
                         {" "}
@@ -284,7 +300,7 @@ function CaricaRiassunto(props) {
               <div className="row justify-content-center">
                 <select required id="materia">
                   {" "}
-                  {materie.map(materia => {
+                  {materie.map((materia) => {
                     return (
                       <option value={materia.IDMateria}>
                         {" "}
@@ -303,7 +319,7 @@ function CaricaRiassunto(props) {
               <div className="row justify-content-center">
                 <select required id="anno">
                   {" "}
-                  {anni.map(anno => {
+                  {anni.map((anno) => {
                     return <option value={anno}> {anno} </option>;
                   })}{" "}
                 </select>{" "}
@@ -336,6 +352,14 @@ function CaricaRiassunto(props) {
               >
                 Carica{" "}
               </button>{" "}
+            </div>{" "}
+            <div style={{ height: "50px" }}> </div>{" "}
+            <div className="row justify-content-center">
+              <ProgressBar
+                colorShift={false}
+                fillColor="#007bff"
+                percent={percentualeCaricamento}
+              />
             </div>{" "}
           </form>{" "}
         </div>{" "}

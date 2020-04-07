@@ -10,6 +10,7 @@ import Valutazione from "../Util/Valutazione.js";
 function MostraRiassunto(props) {
   let [linkFoto, cambiaLink] = useState("");
   let [scala, cambiaScala] = useState(1);
+  let [byteScaricati, cambiabyteScaricati] = useState(0);
 
   $(window, document).on("scroll", () => {
     try {
@@ -26,49 +27,57 @@ function MostraRiassunto(props) {
   });
 
   const fetchRiassunto = () => {
-    let riassuntoJSON = {};
     let idRiassunto = props.match.params.id;
 
-    async function prendiRiassunto() {
-      riassuntoJSON = await fetch(
-        `https://vps.lellovitiello.tk/Riassunty/API/riassunto.php?id=${idRiassunto}`
-        //`http://localhost/~davidevitiello/Riassunty/API/riassunto.php?id=${idRiassunto}`
-      );
-
-      riassuntoJSON = await riassuntoJSON.json();
-      riassuntoJSON = riassuntoJSON[0];
-
-      //riassuntoJSON.txt = dataURLtoFile(riassuntoJSON.txt);
-      //debugger;
-
-      let oggettoDaMettere = {
-        testo: riassuntoJSON,
-        data: new Date(),
-      };
-      cambiaRiassunto(riassuntoJSON);
-      try {
-        localStorage.setItem(idRiassunto, JSON.stringify(oggettoDaMettere));
-      } catch (error) {
-        console.error("Impossibile inserire nel local storage", error);
-      }
-
-      $("#loadingImage").fadeOut(500);
-    }
-    $("#loadingImage").fadeIn(500);
-
     let a = localStorage.getItem(idRiassunto);
-
     if (a !== null) {
       a = JSON.parse(a);
       cambiaRiassunto(a.testo);
-      $("#loadingImage").fadeOut(500);
+      document.getElementById("scaricamento").innerHTML = "";
       //rimuoviRiassuntiVecchi();
       return;
     }
 
-    prendiRiassunto();
-  };
+    $.ajax({
+      url: `https://vps.lellovitiello.tk/Riassunty/API/riassunto.php?id=${idRiassunto}`,
+      //url:`http://localhost/~davidevitiello/Riassunty/API/riassunto.php?id=${idRiassunto}`
+      cache: false,
+      contentType: false,
+      processData: false,
 
+      type: "GET",
+      success: (data) => {
+        let riassuntoJSON = data[0];
+        let oggettoDaMettere = {
+          testo: riassuntoJSON,
+          data: new Date(),
+        };
+        cambiaRiassunto(riassuntoJSON);
+        document.getElementById("scaricamento").innerHTML = "";
+
+        try {
+          localStorage.setItem(idRiassunto, JSON.stringify(oggettoDaMettere));
+        } catch (error) {
+          console.error("Impossibile inserire nel local storage", error);
+        }
+      },
+
+      xhr: function () {
+        let xhr = new window.XMLHttpRequest();
+        //Download progress
+        xhr.addEventListener(
+          "progress",
+          function (evt) {
+            console.log(evt.loaded);
+            cambiabyteScaricati(evt.loaded);
+          },
+          false
+        );
+        return xhr;
+      },
+    });
+  };
+  $("#loadingImage").fadeOut(50);
   function rimuoviRiassuntiVecchi() {
     let elementiLocali = allStorage();
     let data = new Date();
@@ -156,6 +165,17 @@ function MostraRiassunto(props) {
             Per una maggiore esperienza, gira il telefono{" "}
           </p>{" "}
           <Valutazione idRiassunto={props.match.params.id} />{" "}
+          <p
+            style={{
+              color: "white",
+              fontSize: "1.2em",
+              textAlign: "center",
+            }}
+          >
+            <br />
+
+            <p id="scaricamento">Scaricati {byteScaricati} byte</p>
+          </p>
         </div>{" "}
       </header>{" "}
       <section id={`section1`} className={`sezione1`}>
@@ -199,7 +219,7 @@ function MostraRiassunto(props) {
                     cambiaScala(scala + 0.025);
                   }}
                 >
-                  & nbsp; + & nbsp;{" "}
+                  &nbsp; + &nbsp;{" "}
                 </button>{" "}
               </div>{" "}
               <div
@@ -215,7 +235,7 @@ function MostraRiassunto(props) {
                     cambiaScala(scala - 0.025);
                   }}
                 >
-                  & nbsp; - & nbsp;{" "}
+                  &nbsp; - &nbsp;{" "}
                 </button>{" "}
               </div>{" "}
               <div className="col-xs-2"> </div>{" "}

@@ -15,6 +15,7 @@
     "mgr-pdf-viewer-react": "^1.0.3",
     "pdf-viewer-reactjs": "^2.0.2",
     "pdfjs-dist": "^2.2.228",
+    "rc-progress": "^2.5.2",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
@@ -22,13 +23,15 @@
     "react-google-login": "^5.1.1",
     "react-google-recaptcha": "^2.0.1",
     "react-iframe": "^1.8.0",
+    "react-percent-bar": "0.0.2",
     "react-ratings-declarative": "^3.4.1",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "react-select": "^3.1.0",
     "react-star-rating-component": "^1.4.1",
-    "react-stars": "^2.2.5"
+    "react-stars": "^2.2.5",
+    "react-sweet-progress": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
