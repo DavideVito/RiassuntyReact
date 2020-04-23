@@ -16,10 +16,10 @@ function MostraRiassuntiTemporanei(props) {
       url: `https://vps.lellovitiello.tk/Riassunty/API/getRiassuntiTemporanei.php`,
       //url: "http://192.168.1.130/Riassunty/API/getRiassuntiTemporanei.php",
       data: {
-        token: sessionStorage.token
+        token: sessionStorage.token,
       },
       method: "POST",
-      success: data => {
+      success: (data) => {
         console.log(data);
         if (typeof data.shoudRedirect !== "undefined") {
           if (data.shoudRedirect === true) {
@@ -30,11 +30,11 @@ function MostraRiassuntiTemporanei(props) {
         for (let riassunto of data) {
           riassunto.versioni.unshift({
             UltimaModifica: "Seleziona una versione",
-            IDFile: ""
+            IDFile: "",
           });
         }
         cambiaRiassunti(data);
-      }
+      },
     });
   };
 
@@ -46,10 +46,10 @@ function MostraRiassuntiTemporanei(props) {
 
       data: {
         file: fileSezionato,
-        riassunto: riassuntoSelezionato
+        riassunto: riassuntoSelezionato,
       },
       method: "POST",
-      success: data => {
+      success: (data) => {
         sessionStorage.idRiassunto = riassuntoSelezionato;
         sessionStorage.idFile = fileSezionato;
         if (data.txt === false) {
@@ -57,7 +57,7 @@ function MostraRiassuntiTemporanei(props) {
           return;
         }
         cambiaTesto(data.txt);
-      }
+      },
     });
   };
 
@@ -71,7 +71,7 @@ function MostraRiassuntiTemporanei(props) {
     <React.Fragment>
       <div
         style={{
-          paddingTop: "80px"
+          paddingTop: "80px",
         }}
       ></div>
       <Container>
@@ -82,10 +82,10 @@ function MostraRiassuntiTemporanei(props) {
       </Container>
       <div
         style={{
-          paddingTop: "80px"
+          paddingTop: "80px",
         }}
       ></div>
-      {riassuntiTemporanei.map(riassuntoTemporaneo => {
+      {riassuntiTemporanei.map((riassuntoTemporaneo) => {
         return (
           <React.Fragment>
             <Container>
@@ -96,7 +96,7 @@ function MostraRiassuntiTemporanei(props) {
                 <Col md={3}>
                   <select
                     className="form-control"
-                    onChange={e => {
+                    onChange={(e) => {
                       let idFile = e.currentTarget.value;
                       if (idFile === "") {
                         idFile = e.currentTarget.options[1].value;
@@ -107,7 +107,7 @@ function MostraRiassuntiTemporanei(props) {
                     }}
                     name={riassuntoTemporaneo.IDRiassunto}
                   >
-                    {riassuntoTemporaneo.versioni.map(elemento => {
+                    {riassuntoTemporaneo.versioni.map((elemento) => {
                       return (
                         <option value={elemento.IDFile}>
                           {elemento.UltimaModifica}
@@ -121,7 +121,7 @@ function MostraRiassuntiTemporanei(props) {
             </Container>
             <div
               style={{
-                height: "20px"
+                height: "20px",
               }}
             ></div>
             <br />

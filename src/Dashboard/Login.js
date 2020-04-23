@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import FullNavBar from "../NavBar/FullNavBar";
-import Bottone from "../Util/Bottone";
+import RiassuntiDaApprovare from "./RiassuntiDaApprovare";
 import "../App.css";
 import $ from "jquery";
 import MostraRiassunti from "./MostraRiassunti";
@@ -38,7 +38,7 @@ function Login(props) {
         //"http://192.168.1.130/Riassunty/API/Utenti.php",
         {
           method: "POST",
-          body: data
+          body: data,
         }
       );
       risposta = await risposta.json();
@@ -59,7 +59,7 @@ function Login(props) {
   }
 
   const stile = {
-    marginTop: "-50%"
+    marginTop: "-50%",
   };
 
   $("#loadingImage").fadeOut(500, "swing");
@@ -71,8 +71,8 @@ function Login(props) {
         elementi={[
           {
             nome: "Stai attento a quello che carichi, non ti conviene",
-            dati: []
-          }
+            dati: [],
+          },
         ]}
         noBar={true}
       >
@@ -90,7 +90,6 @@ function Login(props) {
               onFailure={responseGoogle}
               isSignedIn={true}
               onLogoutSuccess={() => {
-                alert(1);
                 window.location.href = "/Login";
               }}
               theme="dark"
@@ -106,7 +105,7 @@ function Login(props) {
           <div
             id="body"
             style={{
-              marginTop: "30%"
+              marginTop: "30%",
             }}
           >
             <section id="section1" className="sezione1">
@@ -114,17 +113,18 @@ function Login(props) {
                 className="container-fluid"
                 style={{
                   textAlign: "center",
-                  marginTop: "100px"
+                  marginTop: "100px",
                 }}
               >
                 <MostraRiassunti account={udid} />{" "}
               </div>{" "}
             </section>{" "}
+            <RiassuntiDaApprovare token={sessionStorage.token} />{" "}
             <TestoProvider>
-              <div id="section2" className="sezione2">
+              <div id="section3" className="sezione3">
                 <MostarRiassuntiTemporanei account={udid} />{" "}
               </div>{" "}
-              <div id="section3" className="sezione3">
+              <div id="section4" className="sezione4">
                 <div>
                   <TextEditor />
                 </div>{" "}

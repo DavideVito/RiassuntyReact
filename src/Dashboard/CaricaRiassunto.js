@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState
+} from "react";
 import $ from "jquery";
 import ReCAPTCHA from "react-google-recaptcha";
 import "../App.css";
@@ -78,7 +81,7 @@ function CaricaRiassunto(props) {
     const getMaterie = async () => {
       let materie = await fetch(
         "https://vps.lellovitiello.tk/Riassunty/API/materie.php?indirizzo=" +
-          indirizzo
+        indirizzo
       );
 
       materie = await materie.json();
@@ -136,6 +139,7 @@ function CaricaRiassunto(props) {
         data: form,
         type: "POST",
         success: (data) => {
+          debugger
           if (data.shouldRedirect === "true") {
             window.location.href = "/Login";
           }
@@ -145,11 +149,16 @@ function CaricaRiassunto(props) {
               "Non è stato possibile caricare questo riassunto, probabilmente esiste gia"
             );
           }
+          cambiaPercentualeCaricamento(0)
         },
         error: (data) => {
-          alert(
-            "Si è verficato un errore durante il caricamento del riassunto"
-          );
+          debugger
+          if (data.responseText !== "OK") {
+            alert(
+              "Si è verficato un errore durante il caricamento del riassunto"
+            );
+          }
+          cambiaPercentualeCaricamento(0)
         },
         xhr: function () {
           var xhr = new window.XMLHttpRequest();
@@ -168,7 +177,6 @@ function CaricaRiassunto(props) {
           xhr.addEventListener(
             "progress",
             function (evt) {
-              debugger;
               if (evt.lengthComputable) {
                 var percentComplete = evt.loaded / evt.total;
               }
@@ -189,183 +197,302 @@ function CaricaRiassunto(props) {
     color: "white",
   };
 
-  return (
-    <React.Fragment>
-      {" "}
-      {typeof props.renderNavBar === "undefined" ? (
-        <FullNavBar
-          elementi={[
-            {
-              nome: "Stai attento a quello che carichi, non ti conviene",
-              dati: [],
-            },
-          ]}
+  return ( <
+    React.Fragment > {
+      " "
+    } {
+      typeof props.renderNavBar === "undefined" ? ( <
+        FullNavBar elementi = {
+          [{
+            nome: "Stai attento a quello che carichi, non ti conviene",
+            dati: [],
+          }, ]
+        }
         />
-      ) : (
-        <div> </div>
-      )}{" "}
-      <section id="section0" className="sezione0">
-        <div
-          className="container-fluid"
-          style={{
-            textAlign: "center",
-            marginTop: "100px",
-          }}
-        >
-          <form onSubmit={caricaFile}>
-            {" "}
-            {typeof props.renderSelezionaFile === "undefined" ? (
-              <React.Fragment>
-                <div className="row justify-content-center">
-                  <p> Seleziona il file </p>{" "}
-                </div>{" "}
-                <div className="row justify-content-center">
-                  <input
-                    className="form-control-file"
-                    type="file"
-                    id="file"
-                    name="pdfDaCaricare"
-                    accept=".pdf"
-                    required
-                    style={{
-                      width: "auto",
-                      height: "auto",
-                      borderRadius: "0",
-                      //marginLeft: "50%"
-                    }}
-                  />{" "}
-                </div>{" "}
-              </React.Fragment>
-            ) : (
-              <div
-                style={{
-                  opacity: 0,
-                }}
-              >
-                <React.Fragment>
-                  <div className="row justify-content-center">
-                    <p> Seleziona il file </p>{" "}
-                  </div>{" "}
-                  <div className="row justify-content-center">
-                    <input
-                      className="form-control-file"
-                      type="file"
-                      id="file"
-                      name="pdfDaCaricare"
-                      accept=".pdf"
-                      style={{
-                        width: "auto",
-                        height: "auto",
-                        borderRadius: "0",
-                        //marginLeft: "50%"
-                      }}
-                    />{" "}
-                  </div>{" "}
-                </React.Fragment>{" "}
-              </div>
-            )}{" "}
-            <div style={stileDivisiore}> </div>{" "}
-            <div style={stile}>
-              <div className="row justify-content-center">
-                <p> Seleziona l 'indirizzo</p>{" "}
-              </div>{" "}
-              <div className="row justify-content-center">
-                <select
-                  onChange={(e) => {
-                    prendiMaterie(
-                      e.currentTarget.options[e.currentTarget.selectedIndex]
-                        .value
-                    );
-                  }}
-                  id="indirizzo"
-                  required
-                >
-                  {" "}
-                  {indirizzi.map((indirizzo) => {
-                    return (
-                      <option value={indirizzo.Indirizzo}>
-                        {" "}
-                        {indirizzo.Indirizzo}{" "}
-                      </option>
-                    );
-                  })}{" "}
-                </select>{" "}
-              </div>{" "}
-            </div>{" "}
-            <div style={stileDivisiore}> </div>{" "}
-            <div style={stile}>
-              <div className="row justify-content-center">
-                <p> Seleziona la materia </p>{" "}
-              </div>{" "}
-              <div className="row justify-content-center">
-                <select required id="materia">
-                  {" "}
-                  {materie.map((materia) => {
-                    return (
-                      <option value={materia.IDMateria}>
-                        {" "}
-                        {materia.Materia}{" "}
-                      </option>
-                    );
-                  })}{" "}
-                </select>{" "}
-              </div>{" "}
-            </div>{" "}
-            <div style={stileDivisiore}> </div>{" "}
-            <div style={stile}>
-              <div className="row justify-content-center">
-                <p> Seleziona l 'anno</p>{" "}
-              </div>{" "}
-              <div className="row justify-content-center">
-                <select required id="anno">
-                  {" "}
-                  {anni.map((anno) => {
-                    return <option value={anno}> {anno} </option>;
-                  })}{" "}
-                </select>{" "}
-              </div>{" "}
-            </div>{" "}
-            <div style={stileDivisiore}> </div>{" "}
-            <div className="row justify-content-center">
-              <ReCAPTCHA
-                sitekey="6LfWBeAUAAAAACEmmY5bn5jkl5MPHpmQbyX6yohU"
-                onChange={onChange}
-                theme="dark"
-                badge="bottomright"
-                size="compact"
-                onChange={() => {
-                  cambiaOK(true);
-                }}
-                onExpired={() => {
-                  cambiaOK(false);
-                }}
-              />{" "}
-            </div>{" "}
-            <div style={stileDivisiore}> </div>{" "}
-            <div className="row justify-content-center">
-              <button
-                type="submit"
-                value="Carica"
-                className="btn btn-primary mb-2"
-                id="bottoneSubmit"
-                //onClick={caricaFile}
-              >
-                Carica{" "}
-              </button>{" "}
-            </div>{" "}
-            <div style={{ height: "50px" }}> </div>{" "}
-            <div className="row justify-content-center">
-              <ProgressBar
-                colorShift={false}
-                fillColor="#007bff"
-                percent={percentualeCaricamento}
-              />
-            </div>{" "}
-          </form>{" "}
-        </div>{" "}
-      </section>{" "}
-    </React.Fragment>
-  );
-}
+      ) : ( <
+        div > < /div>
+      )
+    } {
+      " "
+    } <
+    section id = "section0"
+    className = "sezione0" >
+    <
+    div className = "container-fluid"
+    style = {
+      {
+        textAlign: "center",
+        marginTop: "100px",
+      }
+    } >
+    <
+    form onSubmit = {
+      caricaFile
+    } > {
+      " "
+    } {
+      typeof props.renderSelezionaFile === "undefined" ? ( <
+        React.Fragment >
+        <
+        div className = "row justify-content-center" >
+        <
+        p > Seleziona il file < /p>{" "} < /
+        div > {
+          " "
+        } <
+        div className = "row justify-content-center" >
+        <
+        input className = "form-control-file"
+        type = "file"
+        id = "file"
+        name = "pdfDaCaricare"
+        accept = ".pdf"
+        required style = {
+          {
+            width: "auto",
+            height: "auto",
+            borderRadius: "0",
+            //marginLeft: "50%"
+          }
+        }
+        />{" "} < /
+        div > {
+          " "
+        } <
+        /React.Fragment>
+      ) : ( <
+        div style = {
+          {
+            opacity: 0,
+          }
+        } >
+        <
+        React.Fragment >
+        <
+        div className = "row justify-content-center" >
+        <
+        p > Seleziona il file < /p>{" "} < /
+        div > {
+          " "
+        } <
+        div className = "row justify-content-center" >
+        <
+        input className = "form-control-file"
+        type = "file"
+        id = "file"
+        name = "pdfDaCaricare"
+        accept = ".pdf"
+        style = {
+          {
+            width: "auto",
+            height: "auto",
+            borderRadius: "0",
+            //marginLeft: "50%"
+          }
+        }
+        />{" "} < /
+        div > {
+          " "
+        } <
+        /React.Fragment>{" "} < /
+        div >
+      )
+    } {
+      " "
+    } <
+    div style = {
+      stileDivisiore
+    } > < /div>{" "} <
+    div style = {
+      stile
+    } >
+    <
+    div className = "row justify-content-center" >
+    <
+    p > Seleziona l 'indirizzo</p>{" "} < /
+    div > {
+      " "
+    } <
+    div className = "row justify-content-center" >
+    <
+    select onChange = {
+      (e) => {
+        prendiMaterie(
+          e.currentTarget.options[e.currentTarget.selectedIndex]
+          .value
+        );
+      }
+    }
+    id = "indirizzo"
+    required > {
+      " "
+    } {
+      indirizzi.map((indirizzo) => {
+        return ( <
+          option value = {
+            indirizzo.Indirizzo
+          } > {
+            " "
+          } {
+            indirizzo.Indirizzo
+          } {
+            " "
+          } <
+          /option>
+        );
+      })
+    } {
+      " "
+    } <
+    /select>{" "} < /
+    div > {
+      " "
+    } <
+    /div>{" "} <
+    div style = {
+      stileDivisiore
+    } > < /div>{" "} <
+    div style = {
+      stile
+    } >
+    <
+    div className = "row justify-content-center" >
+    <
+    p > Seleziona la materia < /p>{" "} < /
+    div > {
+      " "
+    } <
+    div className = "row justify-content-center" >
+    <
+    select required id = "materia" > {
+      " "
+    } {
+      materie.map((materia) => {
+        return ( <
+          option value = {
+            materia.IDMateria
+          } > {
+            " "
+          } {
+            materia.Materia
+          } {
+            " "
+          } <
+          /option>
+        );
+      })
+    } {
+      " "
+    } <
+    /select>{" "} < /
+    div > {
+      " "
+    } <
+    /div>{" "} <
+    div style = {
+      stileDivisiore
+    } > < /div>{" "} <
+    div style = {
+      stile
+    } >
+    <
+    div className = "row justify-content-center" >
+    <
+    p > Seleziona l 'anno</p>{" "} < /
+    div > {
+      " "
+    } <
+    div className = "row justify-content-center" >
+    <
+    select required id = "anno" > {
+      " "
+    } {
+      anni.map((anno) => {
+        return <option value = {
+          anno
+        } > {
+          anno
+        } < /option>;
+      })
+    } {
+      " "
+    } <
+    /select>{" "} < /
+    div > {
+      " "
+    } <
+    /div>{" "} <
+    div style = {
+      stileDivisiore
+    } > < /div>{" "} <
+    div className = "row justify-content-center" >
+    <
+    ReCAPTCHA sitekey = "6LfWBeAUAAAAACEmmY5bn5jkl5MPHpmQbyX6yohU"
+    onChange = {
+      onChange
+    }
+    theme = "dark"
+    badge = "bottomright"
+    size = "compact"
+    onChange = {
+      () => {
+        cambiaOK(true);
+      }
+    }
+    onExpired = {
+      () => {
+        cambiaOK(false);
+      }
+    }
+    />{" "} < /
+    div > {
+      " "
+    } <
+    div style = {
+      stileDivisiore
+    } > < /div>{" "} <
+    div className = "row justify-content-center" >
+    <
+    button type = "submit"
+    value = "Carica"
+    className = "btn btn-primary mb-2"
+    id = "bottoneSubmit"
+    //onClick={caricaFile}
+    >
+    Carica {
+      " "
+    } <
+    /button>{" "} < /
+    div > {
+      " "
+    } <
+    div style = {
+      {
+        height: "50px"
+      }
+    } > < /div>{" "} <
+    div className = "row justify-content-center" > {
+      percentualeCaricamento !== 100 ? ( < ProgressBar colorShift = {
+          false
+        }
+        fillColor = "#007bff"
+        percent = {
+          percentualeCaricamento
+        }
+        />) : <p>Elaboro</p >
+      }
 
-export default CaricaRiassunto;
+      <
+      /div>{" "} < /
+      form > {
+        " "
+      } <
+      /div>{" "} < /
+      section > {
+        " "
+      } <
+      /React.Fragment>
+    );
+  }
+
+  export default CaricaRiassunto;

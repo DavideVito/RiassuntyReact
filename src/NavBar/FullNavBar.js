@@ -1,6 +1,4 @@
-import React, {
-  useState
-} from "react";
+import React, { useState } from "react";
 import Brand from "./Foto/Brand";
 import SearchBar from "../Util/SearchBar/SearchBar";
 import Bottone from "../Util/Bottone";
@@ -25,81 +23,65 @@ function FullNavBar(props) {
     }
   });
 
-  return ( <
-    header >
-    <
-    nav >
-    <
-    Brand link = {
-      linkFoto
-    }
-    />{" "} <
-    div id = "menu" >
-    <
-    div id = "menu-toggle"
-    onClick = {
-      () => {
-        $("#menu-toggle").toggleClass("closeMenu");
-        $("ul").toggleClass("showMenu");
+  return (
+    <header>
+      <nav>
+        <Brand link={linkFoto} />{" "}
+        <div id="menu">
+          <div
+            id="menu-toggle"
+            onClick={() => {
+              $("#menu-toggle").toggleClass("closeMenu");
+              $("ul").toggleClass("showMenu");
 
-        if ($("#menu-toggle").hasClass("closeMenu")) {
-          $("#main").animate({
-              left: "85%",
-              opacity: "0.7"
-            },
-            300
-          );
-        } else {
-          $("#main").animate({
-              left: "0px",
-              opacity: "1"
-            },
-            300
-          );
-        }
-        $("li").on("click", () => {
-          $("ul").removeClass("showMenu");
-          $("#menu-toggle").removeClass("closeMenu");
-          $("#main").animate({
-              left: "0px",
-              opacity: "1"
-            },
-            500
-          );
-        });
-      }
-    } >
-    <
-    MenuIcon / >
-    <
-    /div>{" "} <
-    ul > {
-      " "
-    } {
-      props.elementi.map((indirizzo, indice) => {
-        return ( <
-          NavBarItem key = {
-            indice
-          }
-          nome = {
-            indirizzo.nome
-          }
-          indice = {
-            indice
-          }
-          />
-        );
-      })
-    } {
-      " "
-    } <
-    /ul>{" "} <
-    /div>{" "} <
-    /nav>{" "} <
-    div id = "hero-section" > {
-      props.children
-    } < /div>{" "} <
-    /header>
+              if ($("#menu-toggle").hasClass("closeMenu")) {
+                $("#main").animate(
+                  {
+                    left: "85%",
+                    opacity: "0.7",
+                  },
+                  300
+                );
+              } else {
+                $("#main").animate(
+                  {
+                    left: "0px",
+                    opacity: "1",
+                  },
+                  300
+                );
+              }
+              $("li").on("click", () => {
+                $("ul").removeClass("showMenu");
+                $("#menu-toggle").removeClass("closeMenu");
+                $("#main").animate(
+                  {
+                    left: "0px",
+                    opacity: "1",
+                  },
+                  500
+                );
+              });
+            }}
+          >
+            <MenuIcon />
+          </div>{" "}
+          <ul>
+            {" "}
+            {props.elementi.map((indirizzo, indice) => {
+              return (
+                <NavBarItem
+                  key={indice}
+                  nome={indirizzo.nome}
+                  indice={indice}
+                />
+              );
+            })}{" "}
+          </ul>{" "}
+        </div>{" "}
+      </nav>{" "}
+      <div id="hero-section"> {props.children} </div>{" "}
+    </header>
   );
 }
 

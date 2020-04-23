@@ -26,7 +26,7 @@ function MostraRiassunti(props) {
 
   useEffect(prendiRiassunti, [props.account]);
 
-  const rimuoviDaArray = idRiassunto => {
+  const rimuoviDaArray = (idRiassunto) => {
     let riass = [];
     for (let riassunto of anteprime) {
       if (riassunto.ID === idRiassunto) {
@@ -47,7 +47,7 @@ function MostraRiassunti(props) {
       {
         method: "POST",
         body: data,
-        mode: "cors"
+        mode: "cors",
       }
     );
 
@@ -57,13 +57,21 @@ function MostraRiassunti(props) {
   }
 
   let stile = {
-    color: "white"
+    color: "white",
   };
 
   return (
     <React.Fragment>
-      {" "}
-      {anteprime.map(anteprima => {
+      <p
+        style={{
+          fontSize: "20pt",
+          fontWeight: "700",
+        }}
+      >
+        {" "}
+        Riassunti Caricati{" "}
+      </p>{" "}
+      {anteprime.map((anteprima) => {
         return (
           <div>
             <div className="container-fluid row">
@@ -85,7 +93,7 @@ function MostraRiassunti(props) {
                   alt={"Elimina"}
                   id={anteprima.ID}
                   style={{
-                    cursor: "pointer"
+                    cursor: "pointer",
                   }}
                   src="https://img.icons8.com/flat_round/64/000000/delete-sign.png"
                   onClick={eliminaRiassunto}
@@ -95,6 +103,13 @@ function MostraRiassunti(props) {
           </div>
         );
       })}{" "}
+      <div
+        style={{
+          height: "30px",
+        }}
+      >
+        {" "}
+      </div>{" "}
     </React.Fragment>
   );
 }

@@ -5,7 +5,7 @@ import $ from "jquery";
 function SearchBar() {
   let [riassunti, cambiaRiassunti] = useState([]);
 
-  const expand = e => {
+  const expand = (e) => {
     e.target.classNameList.toggle("close");
     document.getElementById("search-input").classNameList.toggle("square");
 
@@ -19,7 +19,7 @@ function SearchBar() {
     document.getElementById("search-input").focus();
   };
 
-  const cercaSulDB = async e => {
+  const cercaSulDB = async (e) => {
     let testoAccettato = /^[0-9a-zA-Z]+$/;
 
     if (e.target.value.match(testoAccettato) || e.key === "Backspace") {
@@ -43,7 +43,10 @@ function SearchBar() {
   return (
     <div>
       {" "}
-      <link rel="stylesheet" href="/stileSearchBar.css" />
+      <link
+        rel="stylesheet"
+        href="https://vps.lellovitiello.tk/stileSearchBar.css"
+      />
       <div class="search">
         <input
           type="search"
@@ -53,10 +56,8 @@ function SearchBar() {
         />{" "}
         <span
           class="search-button"
-          onClick={e => {
-            $(e.currentTarget)
-              .parent()
-              .toggleClass("open");
+          onClick={(e) => {
+            $(e.currentTarget).parent().toggleClass("open");
           }}
         >
           <span class="search-icon"> </span>{" "}
@@ -64,7 +65,7 @@ function SearchBar() {
       </div>{" "}
       <div id="rispostaRiassunti">
         {" "}
-        {riassunti.map(riassunto => {
+        {riassunti.map((riassunto) => {
           return (
             <React.Fragment>
               <div classNameName="row justify-content-center">
@@ -75,7 +76,7 @@ function SearchBar() {
               </div>{" "}
               <div
                 style={{
-                  height: "20px"
+                  height: "20px",
                 }}
               >
                 {" "}
