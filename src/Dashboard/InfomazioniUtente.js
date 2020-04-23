@@ -2,7 +2,7 @@ import React from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import Bottone from "../Util/Bottone";
 
-const InformazioniUtente = props => {
+const InformazioniUtente = (props) => {
   function logout() {
     sessionStorage.clear();
     window.location.href = "/Login";
@@ -12,22 +12,24 @@ const InformazioniUtente = props => {
       <div
         id="datiUtente"
         style={{
-          marginBottom: "20%"
+          marginBottom: "20%",
         }}
       >
         <div id="nomePersona" className="row justify-content-center">
+          {" "}
           {
             <p
               style={{
                 color: "white",
-                fontSize: "xx-large"
+                fontSize: "xx-large",
               }}
             >
-              Bentornato {props.nome}
+              Bentornato {props.nome}{" "}
             </p>
-          }
-        </div>
+          }{" "}
+        </div>{" "}
         <div id="immaginePersona" className="row justify-content-center">
+          {" "}
           {
             <img
               src={props.linkImmagine}
@@ -35,19 +37,19 @@ const InformazioniUtente = props => {
               height="150"
               alt={"Immagine di " + props.nome}
             />
-          }
-        </div>
-      </div>
+          }{" "}
+        </div>{" "}
+      </div>{" "}
       <div
         id="bottoni"
         style={{
-          marginTop: "20%"
+          marginTop: "20%",
         }}
       >
         <div
           className="row justify-content-center"
           style={{
-            marginBottom: "20%"
+            marginBottom: "20%",
           }}
         >
           <GoogleLogout
@@ -57,15 +59,15 @@ const InformazioniUtente = props => {
             width="260"
             height="80"
             onLogoutSuccess={logout}
-          />
-        </div>
-      </div>
+          />{" "}
+        </div>{" "}
+      </div>{" "}
       <div>
         <Bottone TestoBottone="Per caricare" link="/Login/CaricaRiassunto" />
-        <Bottone TestoBottone="Per approvare" link="/Login/ApprovaRiassunto" />
       </div>{" "}
     </div>
   );
 };
 
 export default InformazioniUtente;
+/*<Bottone TestoBottone="Per approvare" link="/Login/ApprovaRiassunto" />*/
