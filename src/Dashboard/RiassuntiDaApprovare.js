@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import FullNavBar from "../NavBar/FullNavBar";
+import { Link } from "react-router-dom";
+
 import $ from "jquery";
 import "../App.css";
 
@@ -63,6 +64,36 @@ function RiassuntiDaApprovare(props) {
     });
   };
 
+  const animaQuandoClicca = (elemento, approvato) => {
+    let colore = "red";
+    console.log($(elemento).children());
+    if (approvato) {
+      colore = "green";
+    }
+    $(elemento).css({
+      backgroundColor: colore,
+      opacity: 0,
+    });
+    $(elemento).animate(
+      {
+        opacity: 1,
+      },
+      750
+    );
+    $(elemento).slideUp(() => {
+      $(elemento).remove();
+    });
+    return;
+
+    /*
+
+    if (approvato) {
+      
+    }
+    $(elemento).slideDown(() => {
+      $(elemento).remove();
+    });*/
+  };
   async function eliminaRiassunto(id) {
     let data = new FormData();
 
@@ -106,25 +137,43 @@ function RiassuntiDaApprovare(props) {
           >
             <div>
               {" "}
-              <p style={{ fontSize: "20pt", fontWeight: "700" }}>
-                Riassunti Da approvare
-              </p>
-              <div style={{ height: "20px" }}></div>
+              <p
+                style={{
+                  fontSize: "20pt",
+                  fontWeight: "700",
+                }}
+              >
+                Riassunti Da approvare{" "}
+              </p>{" "}
+              <div
+                style={{
+                  height: "20px",
+                }}
+              >
+                {" "}
+              </div>{" "}
               {riassuntiNonApprovati.map((riassunto, indice) => {
                 return (
                   <div>
-                    <div className="container-fluid row">
+                    <div
+                      className="container-fluid row"
+                      style={{
+                        paddingBottom: "75px",
+                      }}
+                    >
                       <div style={stile} className="col-md">
                         <p> {riassunto.Titolo} </p>{" "}
-                        <img
-                          src={
-                            "https://vps.lellovitiello.tk/Riassunty/" +
-                            riassunto.URLImmagine
-                          }
-                          alt="riassunto.Titolo"
-                          width="300"
-                          height="300"
-                        />
+                        <Link to={`/MostraRiassunto/${riassunto.ID}`}>
+                          <img
+                            src={
+                              "https://vps.lellovitiello.tk/Riassunty/" +
+                              riassunto.URLImmagine
+                            }
+                            alt="riassunto.Titolo"
+                            width="300"
+                            height="300"
+                          />{" "}
+                        </Link>{" "}
                       </div>{" "}
                       <div style={stile} className="col-md">
                         <p> Elimina </p>{" "}
@@ -137,6 +186,11 @@ function RiassuntiDaApprovare(props) {
                           src="https://img.icons8.com/flat_round/64/000000/delete-sign.png"
                           onClick={(e) => {
                             eliminaRiassunto(e.currentTarget.id);
+                            let divPadre =
+                              e.target.parentElement.parentElement
+                                .parentElement;
+
+                            animaQuandoClicca(divPadre);
                           }}
                         />{" "}
                       </div>{" "}
@@ -153,6 +207,11 @@ function RiassuntiDaApprovare(props) {
                           height="50"
                           onClick={(e) => {
                             approvaRiassunto(e.currentTarget.id);
+                            let divPadre =
+                              e.target.parentElement.parentElement
+                                .parentElement;
+
+                            animaQuandoClicca(divPadre, true);
                           }}
                         />{" "}
                       </div>{" "}

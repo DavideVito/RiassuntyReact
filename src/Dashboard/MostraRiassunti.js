@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import "../App.css";
 
@@ -73,19 +74,27 @@ function MostraRiassunti(props) {
       </p>{" "}
       {anteprime.map((anteprima) => {
         return (
-          <div>
+          <div
+            style={{
+              paddingBottom: "50px",
+              paddingTop: "25px",
+            }}
+          >
             <div className="container-fluid row">
               <div style={stile} className="col-md">
                 <p> {anteprima.Titolo} </p>{" "}
-                <img
-                  src={
-                    "https://vps.lellovitiello.tk/Riassunty/" +
-                    anteprima.URLImmagine
-                  }
-                  alt={anteprima.Titolo}
-                  width="300"
-                  height="300"
-                />
+                <Link to={`/MostraRiassunto/${anteprima.ID}`}>
+                  <img
+                    src={
+                      "https://vps.lellovitiello.tk/Riassunty/" +
+                      anteprima.URLImmagine
+                    }
+                    style={{ cursor: "pointer" }}
+                    alt={anteprima.Titolo}
+                    width="300"
+                    height="300"
+                  />
+                </Link>
               </div>{" "}
               <div style={stile} className="col-md">
                 <p> Elimina </p>{" "}
