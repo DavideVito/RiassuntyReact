@@ -6,10 +6,7 @@ const CaricaAndCerca = () => {
   return (
     <div>
       <SearchBar />
-      <Bottone
-        TestoBottone="Per caricare un riassunto"
-        link="/Dashboard"
-      />{" "}
+      <Bottone TestoBottone="Per caricare un riassunto" link="/Login" />{" "}
     </div>
   );
 };
