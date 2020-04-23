@@ -78,6 +78,7 @@ function MostraRiassunto(props) {
     });
   };
   $("#loadingImage").fadeOut(50);
+
   function rimuoviRiassuntiVecchi() {
     let elementiLocali = allStorage();
     let data = new Date();
@@ -173,15 +174,22 @@ function MostraRiassunto(props) {
             }}
           >
             <br />
-
-            <p id="scaricamento">Scaricati {byteScaricati} byte</p>
-          </p>
+            <p id="scaricamento">
+              {" "}
+              Scaricati {byteScaricati}
+              byte{" "}
+            </p>{" "}
+          </p>{" "}
         </div>{" "}
       </header>{" "}
       <section id={`section1`} className={`sezione1`}>
         {" "}
         {typeof riassunto.txt === "undefined" ? (
-          <span> Caricamento </span>
+          <span>
+            {" "}
+            Scaricati {byteScaricati}
+            byte{" "}
+          </span>
         ) : (
           <React.Fragment>
             <div
