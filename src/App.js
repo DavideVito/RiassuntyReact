@@ -19,7 +19,7 @@ function App() {
           component={RiassuntiDaApprovare}
         />{" "}
         <Route
-          path="/Dashboard/CaricaRiassunto"
+          path="/Login/CaricaRiassunto"
           exact
           component={CaricaRiassunto}
         />{" "}
