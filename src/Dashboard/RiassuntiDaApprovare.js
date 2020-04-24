@@ -43,6 +43,8 @@ function RiassuntiDaApprovare(props) {
 
   useEffect(prendiRiassunti, [props.token]);
 
+  let stileBottone = { marginTop: "40px" };
+
   const approvaRiassunto = (id) => {
     $.ajax({
       url: "https://vps.lellovitiello.tk/Riassunty/API/approvaRiassunto.php", //"http://localhost/~davidevitiello/Riassunty/API/approvaRiassunto.php", //
@@ -65,34 +67,20 @@ function RiassuntiDaApprovare(props) {
   };
 
   const animaQuandoClicca = (elemento, approvato) => {
-    let colore = "red";
-    console.log($(elemento).children());
-    if (approvato) {
-      colore = "green";
-    }
-    $(elemento).css({
-      backgroundColor: colore,
-      opacity: 0,
+    $(elemento.firstElementChild.childNodes[2].lastElementChild).off();
+    $(elemento.firstElementChild.childNodes[2].lastElementChild).css({
+      cursor: "not-allowed",
     });
-    $(elemento).animate(
-      {
-        opacity: 1,
-      },
-      750
-    );
-    $(elemento).slideUp(() => {
+
+    $(elemento.firstElementChild.childNodes[4].lastElementChild).off();
+    $(elemento.firstElementChild.childNodes[4].lastElementChild).css({
+      cursor: "not-allowed",
+    });
+    let direzione = approvato ? "right" : "left";
+    $(elemento).toggle(direzione, () => {
       $(elemento).remove();
     });
     return;
-
-    /*
-
-    if (approvato) {
-      
-    }
-    $(elemento).slideDown(() => {
-      $(elemento).remove();
-    });*/
   };
   async function eliminaRiassunto(id) {
     let data = new FormData();
@@ -154,7 +142,7 @@ function RiassuntiDaApprovare(props) {
               </div>{" "}
               {riassuntiNonApprovati.map((riassunto, indice) => {
                 return (
-                  <div>
+                  <div style={{ backgroundColor: "inherit" }}>
                     <div
                       className="container-fluid row"
                       style={{
@@ -176,44 +164,38 @@ function RiassuntiDaApprovare(props) {
                         </Link>{" "}
                       </div>{" "}
                       <div style={stile} className="col-md">
-                        <p> Elimina </p>{" "}
-                        <img
+                        <button
+                          style={stileBottone}
+                          className="btn btn-danger"
                           id={riassunto.ID}
-                          style={{
-                            cursor: "pointer",
-                          }}
-                          alt="Elimina"
-                          src="https://img.icons8.com/flat_round/64/000000/delete-sign.png"
                           onClick={(e) => {
-                            eliminaRiassunto(e.currentTarget.id);
                             let divPadre =
                               e.target.parentElement.parentElement
                                 .parentElement;
+                            eliminaRiassunto(e.currentTarget.id);
 
                             animaQuandoClicca(divPadre);
                           }}
-                        />{" "}
+                        >
+                          Elimina
+                        </button>
                       </div>{" "}
                       <div style={stile} className="col-md">
-                        <p> Approva </p>{" "}
-                        <img
-                          alt="Approva"
+                        <button
+                          style={stileBottone}
+                          className="btn btn-success"
                           id={riassunto.ID}
-                          style={{
-                            cursor: "pointer",
-                          }}
-                          src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Green_tick.svg/1024px-Green_tick.svg.png"
-                          width="50"
-                          height="50"
                           onClick={(e) => {
-                            approvaRiassunto(e.currentTarget.id);
                             let divPadre =
                               e.target.parentElement.parentElement
                                 .parentElement;
+                            approvaRiassunto(e.currentTarget.id);
 
-                            animaQuandoClicca(divPadre, true);
+                            animaQuandoClicca(divPadre);
                           }}
-                        />{" "}
+                        >
+                          Approva
+                        </button>
                       </div>{" "}
                     </div>{" "}
                   </div>

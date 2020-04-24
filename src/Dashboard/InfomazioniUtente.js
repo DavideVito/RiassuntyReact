@@ -36,6 +36,9 @@ const InformazioniUtente = (props) => {
               width="150"
               height="150"
               alt={"Immagine di " + props.nome}
+              style={{
+                borderRadius: "50%",
+              }}
             />
           }{" "}
         </div>{" "}
@@ -61,9 +64,6 @@ const InformazioniUtente = (props) => {
             onLogoutSuccess={logout}
           />{" "}
         </div>{" "}
-      </div>{" "}
-      <div>
-        <Bottone TestoBottone="Per caricare" link="/Login/CaricaRiassunto" />
       </div>{" "}
     </div>
   );

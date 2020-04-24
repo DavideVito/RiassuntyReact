@@ -73,26 +73,26 @@ function MostraRiassuntiTemporanei(props) {
         style={{
           paddingTop: "80px",
         }}
-      ></div>
+      ></div>{" "}
       <Container>
         <Row>
-          <Col md={2}> </Col> <Col md={3}> Nome File </Col> <Col md={1}> </Col>
+          <Col md={2}> </Col> <Col md={3}> Nome File </Col> <Col md={1}> </Col>{" "}
           <Col md={3}> Ultima Modifica </Col> <Col md={2}> </Col>
-        </Row>
-      </Container>
+        </Row>{" "}
+      </Container>{" "}
       <div
         style={{
           paddingTop: "80px",
         }}
-      ></div>
+      ></div>{" "}
       {riassuntiTemporanei.map((riassuntoTemporaneo) => {
         return (
           <React.Fragment>
             <Container>
               <Row>
-                <Col md={2}> </Col>
-                <Col md={3}> {riassuntoTemporaneo.Nome} </Col>
-                <Col md={1}> </Col>
+                <Col md={2}> </Col>{" "}
+                <Col md={3}> {riassuntoTemporaneo.Nome} </Col>{" "}
+                <Col md={1}> </Col>{" "}
                 <Col md={3}>
                   <select
                     className="form-control"
@@ -107,27 +107,29 @@ function MostraRiassuntiTemporanei(props) {
                     }}
                     name={riassuntoTemporaneo.IDRiassunto}
                   >
+                    {" "}
                     {riassuntoTemporaneo.versioni.map((elemento) => {
                       return (
                         <option value={elemento.IDFile}>
-                          {elemento.UltimaModifica}
+                          {" "}
+                          {elemento.UltimaModifica}{" "}
                         </option>
                       );
-                    })}
-                  </select>
-                </Col>
-                <Col md={2}> </Col>
-              </Row>
-            </Container>
+                    })}{" "}
+                  </select>{" "}
+                </Col>{" "}
+                <Col md={2}> </Col>{" "}
+              </Row>{" "}
+            </Container>{" "}
             <div
               style={{
-                height: "20px",
+                height: "80px",
               }}
-            ></div>
+            ></div>{" "}
             <br />
           </React.Fragment>
         );
-      })}
+      })}{" "}
     </React.Fragment>
   );
 }

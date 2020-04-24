@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import FullNavBar from "../NavBar/FullNavBar";
 import RiassuntiDaApprovare from "./RiassuntiDaApprovare";
+import CaricaRiassunto from "./CaricaRiassunto";
 import "../App.css";
 import $ from "jquery";
 import MostraRiassunti from "./MostraRiassunti";
@@ -16,6 +17,13 @@ function Login(props) {
   let [ok, cambiaOk] = useState(false);
   let [udid, cambiaUDID] = useState();
   let [account, cambiaAccount] = useState({});
+  let [dimesioneFinestra, cambiaDimesioneFinestra] = useState(
+    window.innerWidth
+  );
+
+  window.addEventListener("resize", (e) => {
+    cambiaDimesioneFinestra(e.target.innerWidth);
+  });
 
   const esisteGia = () => {
     if (udid === 0 || typeof udid === "undefined") {
@@ -108,6 +116,7 @@ function Login(props) {
               marginTop: "30%",
             }}
           >
+            <CaricaRiassunto />
             <section id="section1" className="sezione1">
               <div
                 className="container-fluid"
@@ -120,16 +129,20 @@ function Login(props) {
               </div>{" "}
             </section>{" "}
             <RiassuntiDaApprovare token={sessionStorage.token} />{" "}
-            <TestoProvider>
-              <div id="section3" className="sezione3">
-                <MostarRiassuntiTemporanei account={udid} />{" "}
-              </div>{" "}
-              <div id="section4" className="sezione4">
-                <div>
-                  <TextEditor />
+            {dimesioneFinestra < 400 ? (
+              <div></div>
+            ) : (
+              <TestoProvider>
+                <div id="section3" className="sezione3">
+                  <MostarRiassuntiTemporanei account={udid} />
+                </div>
+                <div id="section4" className="sezione4">
+                  <div>
+                    <TextEditor />
+                  </div>{" "}
                 </div>{" "}
-              </div>{" "}
-            </TestoProvider>{" "}
+              </TestoProvider>
+            )}
           </div>{" "}
         </React.Fragment>
       ) : (

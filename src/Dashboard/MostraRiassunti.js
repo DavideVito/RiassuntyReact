@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../App.css";
+import $ from "jquery";
 
 function MostraRiassunti(props) {
   let [anteprime, cambiaAnteprime] = useState([]);
@@ -36,11 +37,13 @@ function MostraRiassunti(props) {
       riass.push(riassunto);
     }
     cambiaAnteprime(riass);
+    console.log(riass);
   };
 
   async function eliminaRiassunto(evento) {
     let data = new FormData();
     let id = evento.currentTarget.id;
+
     data.append("id", id);
     let rispostaFetch = await fetch(
       "https://vps.lellovitiello.tk/Riassunty/API/eliminaRiassunto.php",
@@ -51,8 +54,12 @@ function MostraRiassunti(props) {
         mode: "cors",
       }
     );
-
     rimuoviDaArray(id);
+
+    /* 
+        $(elemento).toggle("slow", () => {
+          $(elemento).remove();
+        });*/
 
     // console.log(rispostaFetch);
   }
@@ -89,24 +96,24 @@ function MostraRiassunti(props) {
                       "https://vps.lellovitiello.tk/Riassunty/" +
                       anteprima.URLImmagine
                     }
-                    style={{ cursor: "pointer" }}
+                    style={{
+                      cursor: "pointer",
+                    }}
                     alt={anteprima.Titolo}
                     width="300"
                     height="300"
                   />
-                </Link>
+                </Link>{" "}
               </div>{" "}
               <div style={stile} className="col-md">
-                <p> Elimina </p>{" "}
-                <img
-                  alt={"Elimina"}
+                <button
                   id={anteprima.ID}
-                  style={{
-                    cursor: "pointer",
-                  }}
-                  src="https://img.icons8.com/flat_round/64/000000/delete-sign.png"
+                  className="btn btn-danger"
                   onClick={eliminaRiassunto}
-                />{" "}
+                  style={{ marginTop: "20px" }}
+                >
+                  Elimina
+                </button>
               </div>{" "}
             </div>{" "}
           </div>
