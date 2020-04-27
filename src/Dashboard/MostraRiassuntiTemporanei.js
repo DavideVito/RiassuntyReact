@@ -50,8 +50,9 @@ function MostraRiassuntiTemporanei(props) {
       },
       method: "POST",
       success: (data) => {
-        sessionStorage.idRiassunto = riassuntoSelezionato;
-        sessionStorage.idFile = fileSezionato;
+        debugger;
+        localStorage.setItem("idRiassunto", riassuntoSelezionato);
+        localStorage.setItem("idFile", fileSezionato);
         if (data.txt === false) {
           cambiaTesto("");
           return;

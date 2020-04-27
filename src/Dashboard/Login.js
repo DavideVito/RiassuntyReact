@@ -42,7 +42,7 @@ function Login(props) {
 
       let risposta = await fetch(
         "https://vps.lellovitiello.tk/Riassunty/API/Utenti.php",
-        //"http://localhost/~davidevitiello/Riassunty/API/Utenti.php",
+        // "http://localhost/~davidevitiello/Riassunty/API/Utenti.php",
         //"http://192.168.1.130/Riassunty/API/Utenti.php",
         {
           method: "POST",
@@ -84,6 +84,7 @@ function Login(props) {
         ]}
         noBar={true}
       >
+        {" "}
         {ok ? (
           <InformazioniUtente
             nome={account.getName()}
@@ -130,19 +131,19 @@ function Login(props) {
             </section>{" "}
             <RiassuntiDaApprovare token={sessionStorage.token} />{" "}
             {dimesioneFinestra < 400 ? (
-              <div></div>
+              <div> </div>
             ) : (
               <TestoProvider>
                 <div id="section3" className="sezione3">
-                  <MostarRiassuntiTemporanei account={udid} />
-                </div>
+                  <MostarRiassuntiTemporanei account={udid} />{" "}
+                </div>{" "}
                 <div id="section4" className="sezione4">
                   <div>
                     <TextEditor />
                   </div>{" "}
                 </div>{" "}
               </TestoProvider>
-            )}
+            )}{" "}
           </div>{" "}
         </React.Fragment>
       ) : (

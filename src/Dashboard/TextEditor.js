@@ -24,7 +24,7 @@ function MyEditor() {
     }
 
     return new File([u8arr], filename, {
-      type: mime
+      type: mime,
     });
   }
 
@@ -39,7 +39,7 @@ function MyEditor() {
       //"http://localhost/~davidevitiello/Riassunty/API/convertiHtml2Pdf.php",
       {
         method: "post",
-        body: data
+        body: data,
       }
     );
 
@@ -69,15 +69,6 @@ function MyEditor() {
     } else {
       idRiassunto = sessionStorage.idRiassunto;
     }
-    let idFile = "";
-    if (
-      typeof sessionStorage.idFile === "undefined" ||
-      sessionStorage.idFile === ""
-    ) {
-      idFile = "no";
-    } else {
-      idFile = sessionStorage.idFile;
-    }
 
     $.ajax({
       url:
@@ -89,13 +80,12 @@ function MyEditor() {
         nome: titolo,
         contenuto: contenuto,
         idRiassunto: idRiassunto,
-        idFile: idFile
       },
       method: "POST",
-      success: data => {
+      success: (data) => {
         sessionStorage.idRiassunto = data.idRiassunto;
         sessionStorage.idFile = data.idFile;
-      }
+      },
     });
   }
 
@@ -107,7 +97,7 @@ function MyEditor() {
     <React.Fragment>
       <div
         style={{
-          height: "150px"
+          height: "150px",
         }}
       >
         {" "}
@@ -123,7 +113,7 @@ function MyEditor() {
       </div>{" "}
       <div
         style={{
-          height: "50px"
+          height: "50px",
         }}
       >
         {" "}
@@ -162,8 +152,8 @@ function MyEditor() {
                   if (sessionStorage.idFile !== "") {
                     if (sessionStorage.idRiassunto !== "") {
                       let file = await convertiFile(
-                        sessionStorage.idRiassunto,
-                        sessionStorage.idFile
+                        localStorage.idRiassunto,
+                        localStorage.idFile
                       );
                       cambiaFile(file);
                     }
@@ -177,7 +167,7 @@ function MyEditor() {
       </div>{" "}
       <div
         style={{
-          height: "50px"
+          height: "50px",
         }}
       >
         {" "}
@@ -185,7 +175,7 @@ function MyEditor() {
       <div
         className="row"
         style={{
-          paddingBottom: "150px"
+          paddingBottom: "150px",
         }}
       >
         <div className="col-md-2"> </div>{" "}
@@ -200,12 +190,12 @@ function MyEditor() {
               plugins: [
                 "advlist format autolink lists link image charmap print preview anchor",
                 "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table paste code help wordcount save"
+                "insertdatetime media table paste code help wordcount save",
               ],
               toolbar:
                 "undo redo | formatselect | bold italic forecolor | \
              alignleft aligncenter alignright alignjustify | \
-             bullist numlist outdent indent | help"
+             bullist numlist outdent indent | help",
             }}
             onEditorChange={handleEditorChange}
           />{" "}

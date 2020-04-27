@@ -12,8 +12,8 @@ function RiassuntiDaApprovare(props) {
       $.ajax({
         url:
           "https://vps.lellovitiello.tk/Riassunty/API/riassuntiNonApprovati.php",
-        //"http://localhost/~davidevitiello/Riassunty/API/riassuntiNonApprovati.php",
-
+        //url: "http://localhost/~davidevitiello/Riassunty/API/riassuntiNonApprovati.php",
+        //url: "http://192.168.1.130/Riassunty/API/riassuntiNonApprovati.php",
         data: {
           token: props.token,
         },
@@ -43,11 +43,15 @@ function RiassuntiDaApprovare(props) {
 
   useEffect(prendiRiassunti, [props.token]);
 
-  let stileBottone = { marginTop: "40px" };
+  let stileBottone = {
+    marginTop: "40px",
+  };
 
   const approvaRiassunto = (id) => {
     $.ajax({
-      url: "https://vps.lellovitiello.tk/Riassunty/API/approvaRiassunto.php", //"http://localhost/~davidevitiello/Riassunty/API/approvaRiassunto.php", //
+      url: "https://vps.lellovitiello.tk/Riassunty/API/approvaRiassunto.php",
+      //url: "http://localhost/~davidevitiello/Riassunty/API/approvaRiassunto.php", //
+      //url: "http://192.168.1.130/Riassunty/API/riassuntiNonApprovati.php",
       data: {
         id: id,
         token: sessionStorage.token,
@@ -142,7 +146,11 @@ function RiassuntiDaApprovare(props) {
               </div>{" "}
               {riassuntiNonApprovati.map((riassunto, indice) => {
                 return (
-                  <div style={{ backgroundColor: "inherit" }}>
+                  <div
+                    style={{
+                      backgroundColor: "inherit",
+                    }}
+                  >
                     <div
                       className="container-fluid row"
                       style={{
@@ -177,8 +185,8 @@ function RiassuntiDaApprovare(props) {
                             animaQuandoClicca(divPadre);
                           }}
                         >
-                          Elimina
-                        </button>
+                          Elimina{" "}
+                        </button>{" "}
                       </div>{" "}
                       <div style={stile} className="col-md">
                         <button
@@ -194,8 +202,8 @@ function RiassuntiDaApprovare(props) {
                             animaQuandoClicca(divPadre);
                           }}
                         >
-                          Approva
-                        </button>
+                          Approva{" "}
+                        </button>{" "}
                       </div>{" "}
                     </div>{" "}
                   </div>

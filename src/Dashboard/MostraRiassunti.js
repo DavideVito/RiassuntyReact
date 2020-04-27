@@ -15,7 +15,7 @@ function MostraRiassunti(props) {
       data.append("token", sessionStorage.token);
 
       let anteprime = await fetch(
-        //`http://192.168.1.130/Riassunty/API/anteprima.php?prendiProp=1&token=${sessionStorage.token}&normale=1`,
+        //`http://192.168.1.130/Riassunty/API/anteprima.php?prendiProp=1&token=${sessionStorage.token}&normale=1`
         `https://vps.lellovitiello.tk/Riassunty/API/anteprima.php?prendiProp=1&token=${sessionStorage.token}&normale=1`
         //`http://localhost/~davidevitiello/Riassunty/API/anteprima.php?prendiProp=1&token=${sessionStorage.token}&normale=1`
       );
@@ -110,10 +110,12 @@ function MostraRiassunti(props) {
                   id={anteprima.ID}
                   className="btn btn-danger"
                   onClick={eliminaRiassunto}
-                  style={{ marginTop: "20px" }}
+                  style={{
+                    marginTop: "20px",
+                  }}
                 >
-                  Elimina
-                </button>
+                  Elimina{" "}
+                </button>{" "}
               </div>{" "}
             </div>{" "}
           </div>
