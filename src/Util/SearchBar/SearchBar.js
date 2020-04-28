@@ -5,20 +5,6 @@ import $ from "jquery";
 function SearchBar() {
   let [riassunti, cambiaRiassunti] = useState([]);
 
-  const expand = (e) => {
-    e.target.classNameList.toggle("close");
-    document.getElementById("search-input").classNameList.toggle("square");
-
-    if (!$("#search-input").hasclassName("square")) {
-      $("#search-input").blur();
-
-      document.getElementById("search-input").value = "";
-      return;
-    }
-
-    document.getElementById("search-input").focus();
-  };
-
   const cercaSulDB = async (e) => {
     let testoAccettato = /^[0-9a-zA-Z]+$/;
 

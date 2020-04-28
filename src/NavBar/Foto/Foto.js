@@ -13,22 +13,15 @@ function Foto(props) {
   };
 
   let link = "https://riassunty.altervista.org/logoBIANCO.jpg";
-  if (props.link) {
-    link = props.link;
-  }
-
   return (
     <React.Fragment>
       <Link
         onClick={(e) => {
           animateScrollTo(0);
-          if (window.location.pathname === "/") {
-            e.preventDefault();
-          } else {
-            props.history.goBack();
-            $("#loadingImage").fadeIn(0);
-          }
+
+          $("#loadingImage").fadeIn(0);
         }}
+        to="/"
       >
         <img src={link} alt="Logo ITIS" style={style} />{" "}
       </Link>{" "}

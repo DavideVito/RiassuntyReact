@@ -79,26 +79,6 @@ function MostraRiassunto(props) {
   };
   $("#loadingImage").fadeOut(50);
 
-  function rimuoviRiassuntiVecchi() {
-    let elementiLocali = allStorage();
-    let data = new Date();
-    for (let elemento of elementiLocali) {
-      let differenza = data.getTime() - elemento.getTime();
-    }
-  }
-
-  function allStorage() {
-    var values = [],
-      keys = Object.keys(localStorage),
-      i = keys.length;
-
-    while (i--) {
-      values.push(localStorage.getItem(keys[i]));
-    }
-
-    return values;
-  }
-
   const [riassunto, cambiaRiassunto] = useState([]);
 
   useEffect(fetchRiassunto, [props.location.pathname]);
@@ -227,7 +207,7 @@ function MostraRiassunto(props) {
                     cambiaScala(scala + 0.025);
                   }}
                 >
-                  &nbsp; + &nbsp;{" "}
+                  & nbsp; + & nbsp;{" "}
                 </button>{" "}
               </div>{" "}
               <div
@@ -243,7 +223,7 @@ function MostraRiassunto(props) {
                     cambiaScala(scala - 0.025);
                   }}
                 >
-                  &nbsp; - &nbsp;{" "}
+                  & nbsp; - & nbsp;{" "}
                 </button>{" "}
               </div>{" "}
               <div className="col-xs-2"> </div>{" "}

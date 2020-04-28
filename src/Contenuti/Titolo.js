@@ -3,12 +3,8 @@ import Bottoni from "./Bottoni";
 import "../App.css";
 
 function Titolo(props) {
-  const stile = {
-    marginTop: "125px"
-  };
-
   const stileTitolo = {
-    marginBottom: "80px"
+    marginBottom: "80px",
   };
 
   return (

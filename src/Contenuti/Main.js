@@ -47,16 +47,17 @@ function Main(props) {
           );
           delete ind[i]["Indirizzo"];
           Object.assign(ind[i], {
-            dati: materie
+            dati: materie,
           });
           Object.assign(ind[i], {
-            id: i
+            id: i,
           });
         }
 
         await prendiMaterie();
       }
       $("#loadingImage").fadeOut(500, "swing");
+      console.log("Ind", ind);
       cambiaIndirizzi(ind);
     }
     prendiIndirizzi();

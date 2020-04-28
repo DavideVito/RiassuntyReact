@@ -7,11 +7,13 @@ import Main from "./Contenuti/Main";
 import MostraRiassunto from "./Contenuti/MostraRiassunto";
 import Login from "./Dashboard/Login";
 import CaricaRiassunto from "./Dashboard/CaricaRiassunto";
+import ApiReference from "./Util/ApiReference/ApiReference";
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/API" exact component={ApiReference} />{" "}
         <Route path="/Login" exact component={Login} />{" "}
         <Route
           path="/Login/ApprovaRiassunto"

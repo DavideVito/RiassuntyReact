@@ -5,7 +5,7 @@ import React, {
 import $ from "jquery";
 import ReCAPTCHA from "react-google-recaptcha";
 import "../App.css";
-import FullNavBar from "../NavBar/FullNavBar";
+
 import ProgressBar from "react-percent-bar";
 
 function CaricaRiassunto(props) {

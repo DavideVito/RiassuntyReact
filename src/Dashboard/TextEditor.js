@@ -62,12 +62,22 @@ function MyEditor() {
     let token = sessionStorage.token;
     let idRiassunto = "";
     if (
-      typeof sessionStorage.idRiassunto === "undefined" ||
-      sessionStorage.idRiassunto === ""
+      typeof localStorage.idRiassunto === "undefined" ||
+      localStorage.idRiassunto === ""
     ) {
       idRiassunto = "no";
     } else {
-      idRiassunto = sessionStorage.idRiassunto;
+      idRiassunto = localStorage.idRiassunto;
+    }
+
+    let idFile = "";
+    if (
+      typeof localStorage.idFile === "undefined" ||
+      localStorage.idFile === ""
+    ) {
+      idFile = "no";
+    } else {
+      idFile = localStorage.idFile;
     }
 
     $.ajax({
@@ -83,8 +93,8 @@ function MyEditor() {
       },
       method: "POST",
       success: (data) => {
-        sessionStorage.idRiassunto = data.idRiassunto;
-        sessionStorage.idFile = data.idFile;
+        localStorage.idRiassunto = data.idRiassunto;
+        localStorage.idFile = data.idFile;
       },
     });
   }
@@ -128,8 +138,8 @@ function MyEditor() {
             type="button"
             value="Clicca per creare un nuovo riassunto"
             onClick={() => {
-              sessionStorage.removeItem("idRiassunto");
-              sessionStorage.removeItem("idFile");
+              localStorage.removeItem("idRiassunto");
+              localStorage.removeItem("idFile");
               cambiaTesto("");
             }}
           />{" "}
@@ -147,10 +157,10 @@ function MyEditor() {
               caricaRiassuntoTemporaneo(testo + "\n");
 
               cambiaMostra(mostra === true ? false : true);
-              if (typeof sessionStorage.idRiassunto !== "undefined") {
-                if (typeof sessionStorage.idFile !== "undefined") {
-                  if (sessionStorage.idFile !== "") {
-                    if (sessionStorage.idRiassunto !== "") {
+              if (typeof localStorage.idRiassunto !== "undefined") {
+                if (typeof localStorage.idFile !== "undefined") {
+                  if (localStorage.idFile !== "") {
+                    if (localStorage.idRiassunto !== "") {
                       let file = await convertiFile(
                         localStorage.idRiassunto,
                         localStorage.idFile

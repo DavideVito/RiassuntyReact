@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function DropDownMenu(props) {
   return (
@@ -14,7 +14,7 @@ function DropDownMenu(props) {
         {props.nome}
       </button>
       <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        {props.elementi.map(elemento => {
+        {props.elementi.map((elemento) => {
           return (
             <a className="dropdown-item" href="#">
               {elemento.UltimaModifica}
