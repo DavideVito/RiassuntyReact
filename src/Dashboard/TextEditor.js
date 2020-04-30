@@ -154,7 +154,6 @@ function MyEditor() {
             type="button"
             value="Clicca caricare questo riassunto"
             onClick={async () => {
-              debugger;
               await caricaRiassuntoTemporaneo(testo + "\n");
 
               cambiaMostra(mostra === true ? false : true);
