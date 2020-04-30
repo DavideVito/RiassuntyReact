@@ -83,7 +83,7 @@ function MyEditor() {
     $.ajax({
       url:
         "https://vps.lellovitiello.tk/Riassunty/API/caricaTestoTemporaneo.php",
-      //"http://localhost/~davidevitiello/Riassunty/API/caricaTestoTemporaneo.php",
+      //url: "http://localhost/~davidevitiello/Riassunty/API/caricaTestoTemporaneo.php",
       //"http://192.168.1.130/Riassunty/API/caricaTestoTemporaneo.php",
       data: {
         token: token,
@@ -91,6 +91,7 @@ function MyEditor() {
         contenuto: contenuto,
         idRiassunto: idRiassunto,
       },
+      async: false,
       method: "POST",
       success: (data) => {
         localStorage.idRiassunto = data.idRiassunto;
@@ -154,7 +155,7 @@ function MyEditor() {
             value="Clicca caricare questo riassunto"
             onClick={async () => {
               debugger;
-              caricaRiassuntoTemporaneo(testo + "\n");
+              await caricaRiassuntoTemporaneo(testo + "\n");
 
               cambiaMostra(mostra === true ? false : true);
               if (typeof localStorage.idRiassunto !== "undefined") {

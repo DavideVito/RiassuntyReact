@@ -33,7 +33,7 @@ function CaricaRiassunto(props) {
   const controllaValidita = () => {
     $.ajax({
 
-      // url:"http://localhost/~davidevitiello/Riassunty/API/controllaValidita.php",
+      //url: "http://localhost/~davidevitiello/Riassunty/API/controllaValidita.php",
       url: "https://vps.lellovitiello.tk/Riassunty/API/controllaValidita.php",
       //url: "http://192.168.1.130/Riassunty/API/controllaValidita.php",
       method: "POST",

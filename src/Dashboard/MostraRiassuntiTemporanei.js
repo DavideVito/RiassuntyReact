@@ -1,9 +1,19 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, {
+  useEffect,
+  useState,
+  useContext
+} from "react";
 import "../Util/DropDownMenu/DropDownMenu";
 import "../App.css";
 import $ from "jquery";
-import { ContestoTesto } from "../Util/Contesti/ContestoTesto";
-import { Col, Row, Container } from "react-bootstrap";
+import {
+  ContestoTesto
+} from "../Util/Contesti/ContestoTesto";
+import {
+  Col,
+  Row,
+  Container
+} from "react-bootstrap";
 
 function MostraRiassuntiTemporanei(props) {
   let [riassuntiTemporanei, cambiaRiassunti] = useState([]);
@@ -68,71 +78,125 @@ function MostraRiassuntiTemporanei(props) {
   useEffect(prendiFile, [riassuntoSelezionato, fileSezionato]);
   useEffect(prendiRiassunti, [props.account]);
 
-  return (
-    <React.Fragment>
-      <div
-        style={{
+  return ( <
+      React.Fragment >
+      <
+      div style = {
+        {
           paddingTop: "80px",
-        }}
-      ></div>{" "}
-      <Container>
-        <Row>
-          <Col md={2}> </Col> <Col md={3}> Nome File </Col> <Col md={1}> </Col>{" "}
-          <Col md={3}> Ultima Modifica </Col> <Col md={2}> </Col>
-        </Row>{" "}
-      </Container>{" "}
-      <div
-        style={{
+        }
+      } >
+      <
+      /div>{" "} <
+      Container >
+      <
+      Row >
+      <
+      Col md = {
+        2
+      } > < /Col> <Col md={3}> Nome File </Col > < Col md = {
+        1
+      } > < /Col>{" "} <
+      Col md = {
+        3
+      } > Ultima Modifica < /Col> <Col md={2}> </Col >
+      <
+      /Row>{" "} < /
+      Container > {
+        " "
+      } <
+      div style = {
+        {
           paddingTop: "80px",
-        }}
-      ></div>{" "}
-      {riassuntiTemporanei.map((riassuntoTemporaneo) => {
-        return (
-          <React.Fragment>
-            <Container>
-              <Row>
-                <Col md={2}> </Col>{" "}
-                <Col md={3}> {riassuntoTemporaneo.Nome} </Col>{" "}
-                <Col md={1}> </Col>{" "}
-                <Col md={3}>
-                  <select
-                    className="form-control"
-                    onChange={(e) => {
-                      let idFile = e.currentTarget.value;
-                      if (idFile === "") {
-                        idFile = e.currentTarget.options[1].value;
-                      }
-                      let idRiassunto = e.target.name;
-                      cambiaRiassuntoSelezionato(idRiassunto);
-                      cambiaFileSelezioanto(idFile);
-                    }}
-                    name={riassuntoTemporaneo.IDRiassunto}
-                  >
-                    {" "}
-                    {riassuntoTemporaneo.versioni.map((elemento) => {
-                      return (
-                        <option value={elemento.IDFile}>
-                          {" "}
-                          {elemento.UltimaModifica}{" "}
-                        </option>
-                      );
-                    })}{" "}
-                  </select>{" "}
-                </Col>{" "}
-                <Col md={2}> </Col>{" "}
-              </Row>{" "}
-            </Container>{" "}
-            <div
-              style={{
-                height: "80px",
-              }}
-            ></div>{" "}
-            <br />
-          </React.Fragment>
+        }
+      } >
+      <
+      /div>{" "} {
+      riassuntiTemporanei.map((riassuntoTemporaneo) => {
+        return ( <
+          React.Fragment >
+          <
+          Container >
+          <
+          Row >
+          <
+          Col md = {
+            2
+          } > < /Col>{" "} <
+          Col md = {
+            3
+          } > {
+            riassuntoTemporaneo.Nome
+          } < /Col>{" "} <
+          Col md = {
+            1
+          } > < /Col>{" "} <
+          Col md = {
+            3
+          } >
+          <
+          select className = "form-control"
+          onChange = {
+            (e) => {
+              let idFile = e.currentTarget.value;
+              if (idFile === "") {
+                idFile = e.currentTarget.options[1].value;
+              }
+              let idRiassunto = e.target.name;
+              cambiaRiassuntoSelezionato(idRiassunto);
+              cambiaFileSelezioanto(idFile);
+            }
+          }
+          name = {
+            riassuntoTemporaneo.IDRiassunto
+          } > {
+            " "
+          } {
+            riassuntoTemporaneo.versioni.map((elemento) => {
+              return ( <
+                option value = {
+                  elemento.IDFile
+                } > {
+                  " "
+                } {
+                  elemento.UltimaModifica
+                } {
+                  " "
+                } <
+                /option>
+              );
+            })
+          } {
+            " "
+          } <
+          /select>{" "} < /
+          Col > {
+            " "
+          } <
+          Col md = {
+            2
+          } > < /Col>{" "} < /
+          Row > {
+            " "
+          } <
+          /Container>{" "} <
+          div style = {
+            {
+              height: "80px",
+            }
+          } >
+          <
+          /div>{" "} <
+          br / >
+          <
+          /React.Fragment>
         );
-      })}{" "}
-    </React.Fragment>
-  );
+      })
+    } {
+      " "
+    } <
+    /React.Fragment>
+);
 }
 
 export default MostraRiassuntiTemporanei;
