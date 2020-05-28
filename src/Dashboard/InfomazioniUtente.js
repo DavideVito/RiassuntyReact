@@ -1,6 +1,5 @@
 import React from "react";
-import GoogleLogin, { GoogleLogout } from "react-google-login";
-import Bottone from "../Util/Bottone";
+import { esci } from "../FirebaseStuff/auth";
 
 const InformazioniUtente = (props) => {
   function logout() {
@@ -55,14 +54,17 @@ const InformazioniUtente = (props) => {
             marginBottom: "20%",
           }}
         >
-          <GoogleLogout
-            clientId="757171675502-tn1k2bjmh123u729uqufjhg0nr8d1br1.apps.googleusercontent.com"
-            buttonText="Logout"
-            theme="dark"
-            width="260"
-            height="80"
-            onLogoutSuccess={logout}
-          />{" "}
+          <div class="google-btn" onClick={esci}>
+            <div class="google-icon-wrapper">
+              <img
+                class="google-icon"
+                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+              />
+            </div>
+            <p class="btn-text">
+              <p>Esci </p>
+            </p>
+          </div>
         </div>{" "}
       </div>{" "}
     </div>

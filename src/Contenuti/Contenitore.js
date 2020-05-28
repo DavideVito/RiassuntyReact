@@ -4,11 +4,11 @@ import "../App.css";
 
 function Contenitore(props) {
   const stileHeading = {
-    marginTop: "125px"
+    marginTop: "125px",
   };
 
   const stileContenitore = {
-    textAlign: "center"
+    textAlign: "center",
   };
 
   return (

@@ -5,9 +5,12 @@ import Footer from "../Util/Footer";
 import "../App.css";
 import FullNavBar from "../NavBar/FullNavBar";
 import CaricaAndCerca from "./CaricaAndCerca";
+import { getIndirizziAndMaterie } from "../FirebaseStuff/db";
 
 function Main(props) {
   const [indirizzi, cambiaIndirizzi] = useState([]);
+
+  sessionStorage.clear();
 
   const fetchIndirizzi = () => {
     async function prendiIndirizzi() {
@@ -54,13 +57,25 @@ function Main(props) {
           });
         }
 
+        //debugger;
+
         await prendiMaterie();
       }
       $("#loadingImage").fadeOut(500, "swing");
       console.log("Ind", ind);
+
+      let as = await getIndirizziAndMaterie();
+      debugger;
       cambiaIndirizzi(ind);
     }
-    prendiIndirizzi();
+    getIndirizziAndMaterie().then((indirizzi) => {
+      console.log("ind", indirizzi);
+      cambiaIndirizzi(indirizzi);
+      localStorage.setItem("indirizzi", JSON.stringify(indirizzi));
+      $("#loadingImage").fadeOut(500, "swing");
+    });
+
+    //prendiIndirizzi();
   };
   useEffect(fetchIndirizzi, [props.location.pathname]);
 

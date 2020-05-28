@@ -6,8 +6,10 @@ import "../App.css";
 function Bottone(props) {
   let link =
     typeof props.link === "string" ? props.link.replace(":id", props.id) : "/";
+
+  //debugger;
   //props.link = props.link.replace(/(\d)/gm, props.idMateria);
-  const mostraMateria = async event => {
+  const mostraMateria = async (event) => {
     if (
       event.currentTarget.parentNode.innerText.toLowerCase() ===
       props.TestoBottone.toLowerCase()
@@ -18,7 +20,12 @@ function Bottone(props) {
   };
 
   return (
-    <Link to={link}>
+    <Link
+      to={link}
+      onClick={() => {
+        sessionStorage.setItem("in", props.indirizzo);
+      }}
+    >
       <div className="row justify-content-center" onClick={mostraMateria}>
         <div className="nostroButton bottonaccio" id="button-3">
           <div id="circle"> </div> <a> {props.TestoBottone} </a> <div> </div>{" "}

@@ -6,11 +6,15 @@ import Brand from "../NavBar/Foto/Brand";
 import MenuIcon from "../NavBar/Elementi/MenuIcon";
 import PDFViewer from "mgr-pdf-viewer-react";
 import Valutazione from "../Util/Valutazione.js";
+import { storageRef } from "../FirebaseStuff/config";
+import { accediGoogle } from "../FirebaseStuff/auth";
 
 function MostraRiassunto(props) {
   let [linkFoto, cambiaLink] = useState("");
   let [scala, cambiaScala] = useState(1);
   let [byteScaricati, cambiabyteScaricati] = useState(0);
+  let [utente, cambiaUtente] = useState();
+  let [ok, cambiaOk] = useState(false);
 
   $(window, document).on("scroll", () => {
     try {
@@ -80,8 +84,32 @@ function MostraRiassunto(props) {
   $("#loadingImage").fadeOut(50);
 
   const [riassunto, cambiaRiassunto] = useState([]);
+  let [url, cambiaUrl] = useState("");
 
-  useEffect(fetchRiassunto, [props.location.pathname]);
+  function fetchRiassuntoFirebase() {
+    let utente = localStorage.getItem("utente");
+
+    try {
+      utente = JSON.parse(utente);
+    } catch (error) {
+      return;
+    }
+
+    cambiaUtente(utente);
+    cambiaOk(true);
+
+    let nomeRiassunto = props.match.params.id;
+    storageRef
+      .child(nomeRiassunto)
+      .getDownloadURL()
+      .then((a) => {
+        cambiaUrl(a);
+      });
+  }
+
+  function blobToBase64(blob) {}
+
+  useEffect(fetchRiassuntoFirebase, [props.location.pathname]);
 
   if (typeof riassunto === "undefined") {
     return <Redirect to="/" />;
@@ -90,7 +118,7 @@ function MostraRiassunto(props) {
     <React.Fragment>
       <header>
         <nav>
-          <Brand link={linkFoto} />{" "}
+          <Brand link={linkFoto} />
           <div id="menu">
             <div
               id="menu-toggle"
@@ -122,10 +150,10 @@ function MostraRiassunto(props) {
               }}
             >
               <MenuIcon />
-            </div>{" "}
-            <ul> </ul>{" "}
-          </div>{" "}
-        </nav>{" "}
+            </div>
+            <ul> </ul>
+          </div>
+        </nav>
         <div id="hero-section">
           <p
             style={{
@@ -140,12 +168,28 @@ function MostraRiassunto(props) {
             <br />
             Scorri per vedere <br />
             <br />
-            Clicca + per incrementare lo zoom, clicca - per diminuire lo zoom{" "}
+            Clicca + per incrementare lo zoom, clicca - per diminuire lo zoom
             <br />
             <br />
-            Per una maggiore esperienza, gira il telefono{" "}
-          </p>{" "}
-          <Valutazione idRiassunto={props.match.params.id} />{" "}
+            Per una maggiore esperienza, gira il telefono
+          </p>
+          <div>
+            {!ok ? (
+              <button onClick={accediGoogle}>Accedi</button>
+            ) : (
+              <>
+                <p
+                  style={{
+                    color: "white",
+                    fontSize: "1.2em",
+                    textAlign: "center",
+                  }}
+                >
+                  Ciao {utente.displayName}
+                </p>
+              </>
+            )}
+          </div>
           <p
             style={{
               color: "white",
@@ -154,22 +198,12 @@ function MostraRiassunto(props) {
             }}
           >
             <br />
-            <p id="scaricamento">
-              {" "}
-              Scaricati {byteScaricati}
-              byte{" "}
-            </p>{" "}
-          </p>{" "}
-        </div>{" "}
-      </header>{" "}
+          </p>
+        </div>
+      </header>
       <section id={`section1`} className={`sezione1`}>
-        {" "}
-        {typeof riassunto.txt === "undefined" ? (
-          <span>
-            {" "}
-            Scaricati {byteScaricati}
-            byte{" "}
-          </span>
+        {url === "" ? (
+          <span>Carico...</span>
         ) : (
           <React.Fragment>
             <div
@@ -181,7 +215,7 @@ function MostraRiassunto(props) {
               <div className="col-md">
                 <PDFViewer
                   document={{
-                    base64: riassunto.txt,
+                    url: url,
                   }}
                   hideNavbar={false}
                   scale={scala}
@@ -193,8 +227,8 @@ function MostraRiassunto(props) {
                         "bg-secondary border text-white rounded-lg border-primary",
                     },
                   }}
-                />{" "}
-              </div>{" "}
+                />
+              </div>
               <div
                 style={{
                   paddingLeft: "10px",
@@ -207,15 +241,14 @@ function MostraRiassunto(props) {
                     cambiaScala(scala + 0.025);
                   }}
                 >
-                  & nbsp; + & nbsp;{" "}
-                </button>{" "}
-              </div>{" "}
+                  &nbsp; + &nbsp;
+                </button>
+              </div>
               <div
                 style={{
                   paddingLeft: "10px",
                 }}
               >
-                {" "}
                 <button
                   type="button"
                   className="btn btn-primary"
@@ -223,21 +256,19 @@ function MostraRiassunto(props) {
                     cambiaScala(scala - 0.025);
                   }}
                 >
-                  & nbsp; - & nbsp;{" "}
-                </button>{" "}
-              </div>{" "}
-              <div className="col-xs-2"> </div>{" "}
-            </div>{" "}
+                  &nbsp; - &nbsp;
+                </button>
+              </div>
+              <div className="col-xs-2"> </div>
+            </div>
           </React.Fragment>
-        )}{" "}
+        )}
         <div
           style={{
             height: "80px",
           }}
-        >
-          {" "}
-        </div>{" "}
-      </section>{" "}
+        ></div>
+      </section>
     </React.Fragment>
   );
 }
@@ -248,7 +279,7 @@ export default MostraRiassunto;
                 base64: riassunto.txt
               }}
               sacle="1.1"
-            />{" "}
+            />
 
       
 

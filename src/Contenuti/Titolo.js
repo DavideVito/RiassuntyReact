@@ -7,6 +7,8 @@ function Titolo(props) {
     marginBottom: "80px",
   };
 
+  //console.log("Titolo", props.dati);
+
   return (
     <React.Fragment>
       <div id="nostroHeading" className="row">
@@ -16,7 +18,11 @@ function Titolo(props) {
         </div>{" "}
       </div>{" "}
       <div className="row justify-content-center">
-        <Bottoni dati={props.dati.dati} link={props.link} />{" "}
+        <Bottoni
+          dati={props.dati.dati}
+          link={props.link}
+          indirizzo={props.dati.nome}
+        />{" "}
       </div>{" "}
     </React.Fragment>
   );
