@@ -3,7 +3,15 @@ import "firebase/firestore";
 import "firebase/auth";
 import "firebase/storage";
 
-var firebaseConfig = {};
+var firebaseConfig = {
+  apiKey: "AIzaSyCI9RBTgge8Zs1QRqEmGgvxuwyCAYGhUiA",
+  authDomain: "riassuntyreact.firebaseapp.com",
+  databaseURL: "https://riassuntyreact.firebaseio.com",
+  projectId: "riassuntyreact",
+  storageBucket: "riassuntyreact.appspot.com",
+  messagingSenderId: "463114148371",
+  appId: "1:463114148371:web:d2e481a893cad902577de6",
+};
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 

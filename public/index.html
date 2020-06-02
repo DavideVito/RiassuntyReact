@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta id="viewport" name="viewport"
-    content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  <meta name="google-site-verification" content="8UaHm9Xd2PMWTVkcQa2YFBy26DlQU__N5ueKrAQq1sA" />
-  <meta name="apple-mobile-web-app-title" content="Riassunty PWA" />
-  <link rel="apple-touch-icon" href="https://vps.lellovitiello.tk/logoBIANCO.jpg" />
-  <meta name="description" content="L'applicazione per eccellezza" />
-  <meta name="theme-color" content="#0e111e" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script>
-    $(() => {
-      //On Scroll Functionality
-      $(window).scroll(() => {
-        //alert(1)
-        var windowTop = $(window).scrollTop();
-        windowTop > 100 ?
-          $("nav").addClass("navShadow") :
-          $("nav").removeClass("navShadow");
-        windowTop > 100 ?
-          $("ul")
-          .css("top", "100px")
-          .css("backgroundColor", "black")
-          .css("color", "white") :
-          $("ul")
-          .css("top", "160px")
-          .css("backgroundColor", "white")
-          .css("color", "black");
+  <head>
+    <meta
+      id="viewport"
+      name="viewport"
+      content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta
+      name="google-site-verification"
+      content="8UaHm9Xd2PMWTVkcQa2YFBy26DlQU__N5ueKrAQq1sA"
+    />
+    <meta name="apple-mobile-web-app-title" content="Riassunty PWA" />
+    <link
+      rel="apple-touch-icon"
+      href="https://vps.lellovitiello.tk/logoBIANCO.jpg"
+    />
+    <meta name="description" content="L'applicazione per eccellezza" />
+    <meta name="theme-color" content="#0e111e" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      $(() => {
+        //On Scroll Functionality
+        $(window).scroll(() => {
+          //alert(1)
+          var windowTop = $(window).scrollTop();
+          windowTop > 100
+            ? $("nav").addClass("navShadow")
+            : $("nav").removeClass("navShadow");
+          windowTop > 100
+            ? $("ul")
+                .css("top", "100px")
+                .css("backgroundColor", "black")
+                .css("color", "white")
+            : $("ul")
+                .css("top", "160px")
+                .css("backgroundColor", "white")
+                .css("color", "black");
+        });
+        $("li").on("click", () => {
+          $("ul").removeClass("showMenu");
+          $("#menu-toggle").removeClass("closeMenu");
+        });
       });
-      $("li").on("click", () => {
-        $("ul").removeClass("showMenu");
-        $("#menu-toggle").removeClass("closeMenu");
-      });
-    });
 
-    // });
-  </script>
-  <meta charset="utf-8" />
-  <!--
+      // });
+    </script>
+    <meta charset="utf-8" />
+    <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <link rel="icon" type="image/ico" href="%PUBLIC_URL%/favico.ico" />
-  <!--
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="icon" type="image/ico" href="%PUBLIC_URL%/favico.ico" />
+    <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -55,25 +63,27 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-  <title>Riassunty</title>
-</head>
+    <title>Riassunty</title>
+  </head>
 
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="loadingImage"></div>
-  <style>
-    #loadingImage {
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      background: #0e111e url("https://vps.lellovitiello.tk/immagineCaricamento.gif") no-repeat center center;
-      z-index: 9999;
-    }
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="loadingImage"></div>
+    <style>
+      #loadingImage {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #0e111e url("immagineCaricamento.gif") no-repeat center
+          center;
+        z-index: 9999;
+      }
 
-    body {}
-  </style>
-  <div id="root"></div>
-  <!--
+      body {
+      }
+    </style>
+    <div id="root"></div>
+    <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -83,6 +93,5 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-</body>
-
+  </body>
 </html>

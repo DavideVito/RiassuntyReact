@@ -97,3 +97,35 @@ export async function inserisciNelDB(nome, materia, anno, indirizzo) {
     .collection("Riassunti")
     .add({ anno, materia, nome, indirizzo });
 }
+
+export async function cercaRiassunto(nome) {
+  const text = nome;
+  const end = text.replace(/.$/, (c) =>
+    String.fromCharCode(c.charCodeAt(0) + 1)
+  );
+
+  let riass = await firestore
+    .collection("Riassunti")
+    .where("nome", ">=", text)
+    .where("nome", "<", end)
+    .get();
+
+  riass = riass.docs;
+
+  let b = riass.map((ri) => {
+    return ri.data();
+  });
+
+  return b;
+}
+
+export async function getIndirizzi() {
+  let a = await firestore.collection("Indirizzi").get();
+  a = a.docs;
+
+  let b = a.map((i, ind) => {
+    return { indirizzo: a[ind].id, materie: i.data().Materie };
+  });
+
+  return b;
+}

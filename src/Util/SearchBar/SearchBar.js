@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Bottone from "../Bottone";
 import $ from "jquery";
+import debounce from "debounce";
+import { cercaRiassunto } from "../../FirebaseStuff/db";
 
 function SearchBar() {
   let [riassunti, cambiaRiassunti] = useState([]);
@@ -14,32 +16,26 @@ function SearchBar() {
 
         return;
       }
-      let rispostaDB = await fetch(
-        "https://vps.lellovitiello.tk/Riassunty/API/anteprima.php?nome=" +
-          e.target.value
-      );
 
-      rispostaDB = await rispostaDB.json();
+      let a = await cercaRiassunto(e.target.value);
 
-      cambiaRiassunti(rispostaDB);
+      cambiaRiassunti(a);
     } else {
     }
   };
 
+  useEffect(() => {
+    document.getElementById("searchBox").onkeypress = debounce((e) => {
+      cercaSulDB(e);
+    }, 200);
+  }, []);
+
   return (
     <div>
       {" "}
-      <link
-        rel="stylesheet"
-        href="https://vps.lellovitiello.tk/stileSearchBar.css"
-      />
+      <link rel="stylesheet" href="stileSearchBar.css" />
       <div class="search">
-        <input
-          type="search"
-          id="searchBox"
-          class="search-box"
-          onKeyPress={cercaSulDB}
-        />{" "}
+        <input type="search" id="searchBox" class="search-box" />{" "}
         <span
           class="search-button"
           onClick={(e) => {
@@ -56,8 +52,8 @@ function SearchBar() {
             <React.Fragment>
               <div classNameName="row justify-content-center">
                 <Bottone
-                  TestoBottone={riassunto.Titolo}
-                  link={`/mostraRiassunto/${riassunto.ID}`}
+                  TestoBottone={riassunto.nome}
+                  link={`/mostraRiassunto/${riassunto.nome}`}
                 />{" "}
               </div>{" "}
               <div

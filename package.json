@@ -11,6 +11,7 @@
     "animated-scroll-to": "^2.0.5",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "debounce": "^1.2.0",
     "firebase": "^7.14.5",
     "jquery": "^3.5.1",
     "mgr-pdf-viewer-react": "^1.0.3",
