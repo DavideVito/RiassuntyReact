@@ -3,6 +3,7 @@ import Bottone from "../Bottone";
 import $ from "jquery";
 import debounce from "debounce";
 import { cercaRiassunto } from "../../FirebaseStuff/db";
+import "./stileSearchBar.css";
 
 function SearchBar() {
   let [riassunti, cambiaRiassunti] = useState([]);
@@ -33,7 +34,6 @@ function SearchBar() {
   return (
     <div>
       {" "}
-      <link rel="stylesheet" href="stileSearchBar.css" />
       <div class="search">
         <input type="search" id="searchBox" class="search-box" />{" "}
         <span

@@ -66,7 +66,7 @@ function FullNavBar(props) {
           >
             <MenuIcon />
           </div>{" "}
-          <ul>
+          <ul className="myUL">
             {" "}
             {props.elementi.map((indirizzo, indice) => {
               return (

@@ -89,20 +89,17 @@ function MostraRiassunto(props) {
   function fetchRiassuntoFirebase() {
     let utente = localStorage.getItem("utente");
 
-    try {
-      utente = JSON.parse(utente);
-    } catch (error) {
-      return;
+    if (utente !== null) {
+      cambiaUtente(utente);
+      cambiaOk(true);
     }
-
-    cambiaUtente(utente);
-    cambiaOk(true);
 
     let nomeRiassunto = props.match.params.id;
     storageRef
       .child(nomeRiassunto)
       .getDownloadURL()
       .then((a) => {
+        console.log(a);
         cambiaUrl(a);
       });
   }
@@ -164,18 +161,27 @@ function MostraRiassunto(props) {
           >
             <h3> {riassunto.Titolo} </h3> <br />
             <br />
-            Caricato il {riassunto.DataPubblicazione} <br />
             <br />
             Scorri per vedere <br />
             <br />
             Clicca + per incrementare lo zoom, clicca - per diminuire lo zoom
             <br />
             <br />
-            Per una maggiore esperienza, gira il telefono
+            Per una migliore esperienza, gira il telefono
           </p>
           <div>
             {!ok ? (
-              <button onClick={accediGoogle}>Accedi</button>
+              <>
+                <p
+                  style={{
+                    color: "white",
+                    fontSize: "1.2em",
+                    textAlign: "center",
+                  }}
+                >
+                  Ciao Anonimo #{Math.floor(Math.random() * 10000)}
+                </p>
+              </>
             ) : (
               <>
                 <p

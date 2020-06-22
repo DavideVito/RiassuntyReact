@@ -12,7 +12,7 @@ function Foto(props) {
     borderRadius: "45%",
   };
 
-  let link = "https://riassunty.altervista.org/logoBIANCO.jpg";
+  let link = "/logoBIANCO.jpg";
   return (
     <React.Fragment>
       <Link

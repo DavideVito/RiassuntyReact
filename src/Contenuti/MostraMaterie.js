@@ -145,11 +145,7 @@ function MostraMaterie(props) {
               {" "}
               {anni.map((anno, indice) => {
                 return (
-                  <NavBarItem
-                    key={indice}
-                    nome={anno.nome}
-                    indice={indice + 1}
-                  />
+                  <NavBarItem key={indice} nome={anno.nome} indice={indice} />
                 );
               })}{" "}
             </ul>{" "}

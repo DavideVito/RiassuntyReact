@@ -13,10 +13,7 @@
       content="8UaHm9Xd2PMWTVkcQa2YFBy26DlQU__N5ueKrAQq1sA"
     />
     <meta name="apple-mobile-web-app-title" content="Riassunty PWA" />
-    <link
-      rel="apple-touch-icon"
-      href="https://vps.lellovitiello.tk/logoBIANCO.jpg"
-    />
+    <link rel="apple-touch-icon" href="logoBIANCO.jpg" />
     <meta name="description" content="L'applicazione per eccellezza" />
     <meta name="theme-color" content="#0e111e" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -30,17 +27,17 @@
             ? $("nav").addClass("navShadow")
             : $("nav").removeClass("navShadow");
           windowTop > 100
-            ? $("ul")
+            ? $("myUL")
                 .css("top", "100px")
                 .css("backgroundColor", "black")
                 .css("color", "white")
-            : $("ul")
+            : $("myUL")
                 .css("top", "160px")
                 .css("backgroundColor", "white")
                 .css("color", "black");
         });
         $("li").on("click", () => {
-          $("ul").removeClass("showMenu");
+          $("myUL").removeClass("showMenu");
           $("#menu-toggle").removeClass("closeMenu");
         });
       });

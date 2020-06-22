@@ -92,10 +92,32 @@ export async function getAnniMaterieAndRiassunti(nomeMateria, indirizzo) {
   return a;
 }
 
-export async function inserisciNelDB(nome, materia, anno, indirizzo) {
-  await firestore
+export async function riassuntiCaricatiDa(idUtente) {
+  let a = await firestore
     .collection("Riassunti")
-    .add({ anno, materia, nome, indirizzo });
+    .where("idUtente", "==", idUtente)
+    .get();
+
+  let b = a.docs.map((v) => v.data());
+
+  return b;
+}
+
+export async function togliRiassunto(idRiassunto) {
+  firestore.collection("Riassunti").doc(idRiassunto).delete();
+}
+
+export async function inserisciNelDB(nome, materia, anno, indirizzo, idUtente) {
+  firestore
+    .collection("Riassunti")
+    .doc(`${nome}`)
+    .set({ anno, materia, nome, indirizzo, idUtente })
+    .then(() => {
+      console.log("ok");
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 }
 
 export async function cercaRiassunto(nome) {

@@ -4,13 +4,23 @@ import $ from "jquery";
 import animateScrollTo, { EasingFunction } from "animated-scroll-to";
 
 function NavBarItem(props) {
+  console.clear();
   const quandoClicca = () => {
     let a;
+
     try {
-      a = document.getElementById(`section${props.indice - 1}`);
+      a = document.getElementById(`section${props.indice}`);
     } catch (error) {
       a = document.getElementById(`section${props.indice}`);
     }
+
+    $("#main").animate(
+      {
+        left: "0px",
+        opacity: "1",
+      },
+      300
+    );
 
     animateScrollTo(a, {
       speed: 1000,
