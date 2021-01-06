@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@tinymce/tinymce-react": "^3.5.0",
     "animated-scroll-to": "^2.0.5",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "mgr-pdf-viewer-react": "^1.0.3",
